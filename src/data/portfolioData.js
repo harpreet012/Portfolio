@@ -76,12 +76,12 @@ export const projects = [
   {
     title: 'Personal Portfolio Website',
     description:
-      'Developed a highly responsive portfolio website with custom layouts. Designed a clean User Interface and optimized rendering performance.',
+      'Developed a highly responsive portfolio website with custom layout. Designed a clean User Interface and optimized rendering performance.',
     tech: ['HTML', 'CSS', 'JavaScript', 'React.js'],
     image:
       'https://images.unsplash.com/photo-1518773553398-650c184e0bb3?auto=format&fit=crop&w=1200&q=80',
     github: 'https://github.com/harpreet012',
-    demo: '#',
+    demo: 'https://portfolio-three-sooty-vc3uh18hp7.vercel.app/#projects',
     category: 'React',
   },
 ]
