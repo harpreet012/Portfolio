@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { FaDownload } from 'react-icons/fa'
 import SectionHeading from '../components/common/SectionHeading'
-import profileImage from '../assets/hero.png'
+import profileImage from '../assets/WhatsApp Image 2026-04-24 at 9.59.40 PM.jpeg'
 
 const About = () => {
   return (
