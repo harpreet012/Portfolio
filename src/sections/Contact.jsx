@@ -48,7 +48,7 @@ const Contact = () => {
       window.location.href = `mailto:${RECIPIENT_EMAIL}?subject=${subject}&body=${body}`
       setStatus({
         type: 'success',
-        message: `Opening your email app to send this message to ${RECIPIENT_EMAIL}.`,
+        message: `Opening your email app to send this message.`,
       })
       return
     }
@@ -69,31 +69,37 @@ const Contact = () => {
       setFormData(initialForm)
       setStatus({ type: 'success', message: 'Message sent successfully. Thank you!' })
     } catch {
-      setStatus({ type: 'error', message: 'Unable to send message right now. Please try again later.' })
+      setStatus({ type: 'error', message: 'Unable to send message right now.' })
     } finally {
       setSending(false)
     }
   }
 
   return (
-    <section id="contact" className="px-6 py-20 sm:px-10">
-      <div className="mx-auto max-w-6xl">
-        <SectionHeading title="Contact" subtitle="Let us Build Something" />
+    <section id="contact" className="relative px-6 py-32 sm:px-10 overflow-hidden">
+      {/* Giant Background Text */}
+      <div className="absolute top-[20%] left-1/2 -translate-x-1/2 -translate-y-1/2 text-[15vw] font-black text-white pointer-events-none select-none z-10 leading-none tracking-tighter whitespace-nowrap mix-blend-difference">
+        LET'S
+      </div>
+      <div className="absolute top-[20%] left-1/2 -translate-x-1/2 -translate-y-1/2 text-[15vw] font-black text-outline opacity-20 pointer-events-none select-none z-0 leading-none tracking-widest whitespace-nowrap ml-[30vw]">
+        TALK
+      </div>
 
-        <div className="grid gap-8 lg:grid-cols-2">
+      <div className="mx-auto max-w-5xl relative z-10 mt-[10vw]">
+
+        <div className="grid gap-12 lg:grid-cols-5">
           <motion.div
-            data-reveal="card"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.4 }}
-            className="modern-card rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur"
+            className="lg:col-span-2 space-y-6"
           >
-            <h3 className="text-2xl font-semibold text-white">Get in Touch</h3>
-            <p className="mt-3 text-white/70">
-              Open to internships, collaborations, and impactful product opportunities.
+            <h3 className="text-3xl font-semibold text-gray-100">Let's connect</h3>
+            <p className="text-gray-400 text-sm leading-relaxed">
+              Whether you have a question, a project opportunity, or just want to say hi, I'll try my best to get back to you!
             </p>
 
-            <div className="mt-8 flex gap-3">
+            <div className="pt-6 flex flex-col gap-4">
               {socialLinks.map((link) => {
                 const iconMap = {
                   LinkedIn: FaLinkedin,
@@ -107,9 +113,9 @@ const Contact = () => {
                     href={link.href}
                     target={link.label === 'Email' ? '_self' : '_blank'}
                     rel="noreferrer"
-                    className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm text-white transition hover:border-cyan-300/60"
+                    className="flex items-center gap-3 text-sm font-mono text-gray-300 hover:text-amber-400 transition"
                   >
-                    <Icon /> {link.label}
+                    <Icon size={18} className="text-amber-400"/> {link.label}
                   </a>
                 )
               })}
@@ -117,19 +123,18 @@ const Contact = () => {
           </motion.div>
 
           <motion.form
-            data-reveal="card"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.4 }}
             onSubmit={sendEmail}
-            className="modern-card space-y-4 rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur"
+            className="lg:col-span-3 modern-card p-6 md:p-8 space-y-5"
           >
             <input
               name="name"
               value={formData.name}
               onChange={handleChange}
               placeholder="Your Name"
-              className="w-full rounded-xl border border-white/15 bg-slate-900/70 px-4 py-3 text-sm text-white outline-none placeholder:text-white/40 focus:border-cyan-300/60"
+              className="modern-input w-full px-5 py-4 text-sm"
             />
             <input
               name="email"
@@ -137,7 +142,7 @@ const Contact = () => {
               value={formData.email}
               onChange={handleChange}
               placeholder="Your Email"
-              className="w-full rounded-xl border border-white/15 bg-slate-900/70 px-4 py-3 text-sm text-white outline-none placeholder:text-white/40 focus:border-cyan-300/60"
+              className="modern-input w-full px-5 py-4 text-sm"
             />
             <textarea
               name="message"
@@ -145,19 +150,19 @@ const Contact = () => {
               onChange={handleChange}
               rows={5}
               placeholder="Your Message"
-              className="w-full rounded-xl border border-white/15 bg-slate-900/70 px-4 py-3 text-sm text-white outline-none placeholder:text-white/40 focus:border-cyan-300/60"
+              className="modern-input w-full px-5 py-4 text-sm resize-none"
             />
 
-            {status.message ? (
-              <p className={`text-sm ${status.type === 'success' ? 'text-emerald-300' : 'text-rose-300'}`}>
+            {status.message && (
+              <p className={`text-sm ${status.type === 'success' ? 'text-amber-400' : 'text-red-400'}`}>
                 {status.message}
               </p>
-            ) : null}
+            )}
 
             <button
               type="submit"
               disabled={sending}
-              className="w-full rounded-xl bg-gradient-to-r from-fuchsia-500 via-blue-500 to-cyan-400 px-5 py-3 text-sm font-semibold text-white transition hover:scale-[1.01] disabled:cursor-not-allowed disabled:opacity-70"
+              className="minimal-btn w-full bg-amber-400/10 hover:bg-amber-400/20 text-amber-400 border-amber-400/50 py-3 disabled:opacity-50"
             >
               {sending ? 'Sending...' : 'Send Message'}
             </button>

@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harpreet Jakhar - Resume</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-base: #050505;
+            --surface: rgba(255, 255, 255, 0.04);
+            --border: rgba(255, 255, 255, 0.08);
+            --accent: #fbbf24; /* Amber/Gold */
+            --accent-glow: rgba(251, 191, 36, 0.15);
+            --text-primary: #ffffff;
+            --text-secondary: #9ca3af;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .resume-wrapper {
+            max-width: 1050px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 30px;
+            position: relative;
+        }
+
+        /* Subtle Background Glow */
+        .resume-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            left: -100px;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            z-index: -1;
+            filter: blur(60px);
+        }
+
+        .glass-panel {
+            background: var(--surface);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 35px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 35px;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 5px;
+            background: linear-gradient(to right, #fbbf24, #fcd34d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header h2 {
+            font-size: 15px;
+            font-weight: 400;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .contact-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-item i {
+            color: var(--accent);
+            font-size: 16px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .contact-item:hover {
+            color: var(--accent);
+        }
+
+        .section-heading {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-heading i {
+            color: var(--accent);
+        }
+
+        .skills-category {
+            margin-bottom: 20px;
+        }
+
+        .skills-category h3 {
+            font-size: 13px;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .skills-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .skill-tag {
+            background: rgba(251, 191, 36, 0.1);
+            border: 1px solid rgba(251, 191, 36, 0.2);
+            color: #fbbf24;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: rgba(251, 191, 36, 0.2);
+            border-color: rgba(251, 191, 36, 0.4);
+            transform: translateY(-1px);
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 35px;
+        }
+
+        .summary-text {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .summary-text strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 25px;
+            border-left: 2px solid var(--border);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 6px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--accent);
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .timeline-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .timeline-subtitle {
+            font-size: 15px;
+            color: var(--accent);
+            font-weight: 500;
+            margin-top: 2px;
+        }
+
+        .timeline-date {
+            font-size: 13px;
+            color: var(--text-secondary);
+            background: rgba(255,255,255,0.05);
+            padding: 4px 10px;
+            border-radius: 12px;
+        }
+
+        .timeline-details {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-top: 10px;
+        }
+
+        .timeline-details ul {
+            padding-left: 20px;
+            list-style-type: none;
+        }
+
+        .timeline-details li {
+            position: relative;
+            margin-bottom: 6px;
+        }
+
+        .timeline-details li::before {
+            content: '▹';
+            position: absolute;
+            left: -18px;
+            color: var(--accent);
+        }
+
+        .tech-stack {
+            font-size: 13px;
+            color: var(--text-primary);
+            margin-top: 10px;
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+        
+        .tech-stack span {
+            color: var(--accent);
+        }
+
+        /* Certifications Grid */
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 15px;
+        }
+
+        .cert-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--border);
+            padding: 15px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        .cert-card:hover {
+            border-color: rgba(251, 191, 36, 0.4);
+            transform: translateY(-2px);
+            background: rgba(255,255,255,0.04);
+        }
+
+        .cert-card i {
+            color: var(--accent);
+            font-size: 20px;
+        }
+
+        .cert-info h4 {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 3px;
+        }
+
+        .cert-info p {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 768px) {
+            .resume-wrapper {
+                grid-template-columns: 1fr;
+            }
+            .timeline-header {
+                flex-direction: column;
+            }
+            .timeline-date {
+                margin-top: 5px;
+            }
+        }
+
+        @media print {
+            body {
+                padding: 0;
+            }
+            .resume-wrapper {
+                gap: 20px;
+            }
+            .glass-panel {
+                box-shadow: none;
+                border: 1px solid rgba(255, 255, 255, 0.2);
+            }
+            .resume-wrapper::before {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="resume-wrapper">
+        
+        <!-- Sidebar -->
+        <aside class="sidebar glass-panel">
+            <div class="header">
+                <h1>Harpreet Jakhar</h1>
+                <h2>Computer Science Engineer</h2>
+            </div>
+
+            <div class="contact-list">
+                <div class="contact-item">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span>Rohtak, Haryana, India</span>
+                </div>
+                <a href="tel:+919812597899" class="contact-item">
+                    <i class="fa-solid fa-phone"></i>
+                    <span>+91-9812597899</span>
+                </a>
+                <a href="mailto:jakharharpreet93@gmail.com" class="contact-item">
+                    <i class="fa-solid fa-envelope"></i>
+                    <span>jakharharpreet93@gmail.com</span>
+                </a>
+                <a href="https://www.linkedin.com/in/harpreet-jakhar-9b8398364" target="_blank" rel="noopener noreferrer" class="contact-item">
+                    <i class="fa-brands fa-linkedin"></i>
+                    <span>linkedin.com/in/harpreet-jakhar</span>
+                </a>
+                <a href="https://github.com/harpreet012" target="_blank" class="contact-item">
+                    <i class="fa-brands fa-github"></i>
+                    <span>github.com/harpreet012</span>
+                </a>
+            </div>
+
+            <div>
+                <h2 class="section-heading"><i class="fa-solid fa-code"></i> Skills</h2>
+                
+                <div class="skills-category">
+                    <h3>Technical Skills</h3>
+                    <div class="skills-tags">
+                        <span class="skill-tag">Java</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">C++</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">React.js</span>
+                    </div>
+                </div>
+
+                <div class="skills-category">
+                    <h3>Web Technologies</h3>
+                    <div class="skills-tags">
+                        <span class="skill-tag">HTML5</span>
+                        <span class="skill-tag">CSS3</span>
+                        <span class="skill-tag">JavaScript</span>
+                    </div>
+                </div>
+
+                <div class="skills-category">
+                    <h3>Databases</h3>
+                    <div class="skills-tags">
+                        <span class="skill-tag">MySQL</span>
+                        <span class="skill-tag">MongoDB</span>
+                    </div>
+                </div>
+
+                <div class="skills-category">
+                    <h3>Tools & Libraries</h3>
+                    <div class="skills-tags">
+                        <span class="skill-tag">Git & GitHub</span>
+                        <span class="skill-tag">Pandas</span>
+                        <span class="skill-tag">Scikit-learn</span>
+                        <span class="skill-tag">Power BI</span>
+                        <span class="skill-tag">VS Code</span>
+                    </div>
+                </div>
+
+                <div class="skills-category">
+                    <h3>Soft Skills</h3>
+                    <div class="skills-tags">
+                        <span class="skill-tag">Problem Solving</span>
+                        <span class="skill-tag">Teamwork</span>
+                        <span class="skill-tag">Adaptability</span>
+                        <span class="skill-tag">Time Management</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content glass-panel">
+            
+            <section>
+                <h2 class="section-heading"><i class="fa-solid fa-user-astronaut"></i> Professional Summary</h2>
+                <p class="summary-text">
+                    Motivated Computer Science Engineering student with experience in web development and machine learning. Skilled in building <strong>scalable applications</strong> using modern technologies such as <strong>React, Node.js, and Python</strong>. Strong problem-solving abilities with a focus on real-world, data-driven solutions and highly collaborative teamwork.
+                </p>
+            </section>
+
+            <section>
+                <h2 class="section-heading"><i class="fa-solid fa-briefcase"></i> Experience</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-header">
+                            <div>
+                                <h3 class="timeline-title">Front-End Developer Intern</h3>
+                                <div class="timeline-subtitle">Intrac Systems Pvt. Ltd. (Fastrackerz) — Noida</div>
+                            </div>
+                            <span class="timeline-date">June 2025 – July 2025</span>
+                        </div>
+                        <div class="timeline-details">
+                            <ul>
+                                <li>Developed and designed responsive UI components using HTML, CSS, and JavaScript.</li>
+                                <li>Significantly improved overall UI/UX and web performance for client-facing dashboards.</li>
+                                <li>Applied modern design practices and collaborated closely with the design team.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="section-heading"><i class="fa-solid fa-rocket"></i> Projects</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-header">
+                            <h3 class="timeline-title">AI-Powered Predictive Maintenance System</h3>
+                        </div>
+                        <div class="timeline-details">
+                            <ul>
+                                <li>Engineered an ML-driven system to predict equipment failures using rich sensor data.</li>
+                                <li>Built a robust anomaly detection pipeline integrated with a real-time analytics dashboard.</li>
+                            </ul>
+                            <div class="tech-stack">
+                                <strong>Tech Stack:</strong> <span>Python, ML, HTML, CSS, JavaScript, PHP</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-header">
+                            <h3 class="timeline-title">Adult Salary Prediction Model</h3>
+                        </div>
+                        <div class="timeline-details">
+                            <ul>
+                                <li>Developed a comprehensive Machine Learning model for income level classification.</li>
+                                <li>Performed extensive data preprocessing, feature engineering, and model evaluation to boost accuracy.</li>
+                            </ul>
+                            <div class="tech-stack">
+                                <strong>Tech Stack:</strong> <span>Python, Scikit-learn, Pandas</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-header">
+                            <h3 class="timeline-title">Personal Portfolio Website</h3>
+                        </div>
+                        <div class="timeline-details">
+                            <ul>
+                                <li>Created a fully responsive, visually dynamic personal portfolio using modern web technologies.</li>
+                                <li>Implemented a clean, futuristic glassmorphism UI with optimized performance metrics.</li>
+                            </ul>
+                            <div class="tech-stack">
+                                <strong>Tech Stack:</strong> <span>HTML, CSS, JavaScript, React</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="section-heading"><i class="fa-solid fa-graduation-cap"></i> Education</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-header">
+                            <div>
+                                <h3 class="timeline-title">B.Tech Computer Science Engineering</h3>
+                                <div class="timeline-subtitle">K.R. Mangalam University</div>
+                            </div>
+                            <span class="timeline-date">2023 – Present</span>
+                        </div>
+                        <div class="timeline-details">
+                            <p><strong>CGPA:</strong> 7.5</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-header">
+                            <div>
+                                <h3 class="timeline-title">Class 12 (CBSE)</h3>
+                            </div>
+                            <span class="timeline-date">2023</span>
+                        </div>
+                        <div class="timeline-details">
+                            <p><strong>Percentage:</strong> 81%</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-header">
+                            <div>
+                                <h3 class="timeline-title">Class 10 (CBSE)</h3>
+                            </div>
+                            <span class="timeline-date">2021</span>
+                        </div>
+                        <div class="timeline-details">
+                            <p><strong>Percentage:</strong> 79%</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="section-heading"><i class="fa-solid fa-certificate"></i> Certifications</h2>
+                <div class="cert-grid">
+                    <div class="cert-card">
+                        <i class="fa-solid fa-brain"></i>
+                        <div class="cert-info">
+                            <h4>Machine Learning</h4>
+                            <p>2024</p>
+                        </div>
+                    </div>
+                    <div class="cert-card">
+                        <i class="fa-solid fa-chart-pie"></i>
+                        <div class="cert-info">
+                            <h4>Power BI Certification</h4>
+                            <p>2024</p>
+                        </div>
+                    </div>
+                    <div class="cert-card">
+                        <i class="fa-solid fa-network-wired"></i>
+                        <div class="cert-info">
+                            <h4>IoT Workshop</h4>
+                            <p>2024</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+        </main>
+    </div>
+
+</body>
+</html>

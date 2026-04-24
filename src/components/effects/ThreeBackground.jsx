@@ -103,14 +103,16 @@ const ThreeBackground = () => {
   return (
     <div className="pointer-events-none fixed inset-0 -z-20 opacity-85" data-parallax="bg">
       <div className="three-bg-vignette" />
+      <div className="cyber-grid" />
+      <div className="cyber-particles" />
       <Canvas camera={{ position: [0, 0, 6.2], fov: 58 }} dpr={[1, 1.7]}>
-        <ambientLight intensity={0.7} />
-        <pointLight position={[5.5, 4.5, 3]} intensity={20} color="#22d3ee" />
-        <pointLight position={[-5, -2.2, -1]} intensity={14} color="#a855f7" />
+        <ambientLight intensity={0.62} />
+        <pointLight position={[5.5, 4.5, 3]} intensity={18} color="#00f5ff" />
+        <pointLight position={[-5, -2.2, -1]} intensity={13} color="#8b5cf6" />
         <GradientFog />
         <RibbonRings />
         <OrbField />
-        <Stars radius={100} depth={58} count={2400} factor={4.5} saturation={0} fade speed={1} />
+        <Stars radius={100} depth={58} count={1600} factor={4.5} saturation={0} fade speed={1} />
       </Canvas>
     </div>
   )

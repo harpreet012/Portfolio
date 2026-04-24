@@ -1,146 +1,140 @@
-import { motion } from 'framer-motion'
-import { FaCode, FaDatabase, FaTools } from 'react-icons/fa'
-import { useRef, useState } from 'react'
-import {
-  SiExpress, SiGit, SiGithub, SiHtml5, SiJavascript,
-  SiNodedotjs, SiPostman, SiPython, SiReact, SiTailwindcss,
-} from 'react-icons/si'
-import { FaJava } from 'react-icons/fa6'
-import { VscVscode } from 'react-icons/vsc'
-import SectionHeading from '../components/common/SectionHeading'
-import SkillBar from '../components/common/SkillBar'
+import { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { FaCode, FaServer, FaTools } from 'react-icons/fa'
 import { skills } from '../data/portfolioData'
 
-const groups = [
-  { key: 'frontend', title: 'Frontend', icon: FaCode, accent: 'from-fuchsia-500/20 to-blue-500/20', dot: 'bg-fuchsia-400', glowColor: 'rgba(232,121,249,0.25)' },
-  { key: 'backend', title: 'Backend', icon: FaDatabase, accent: 'from-blue-500/20 to-cyan-400/20', dot: 'bg-blue-400', glowColor: 'rgba(96,165,250,0.25)' },
-  { key: 'tools', title: 'Tools', icon: FaTools, accent: 'from-cyan-400/20 to-emerald-400/20', dot: 'bg-cyan-400', glowColor: 'rgba(34,211,238,0.25)' },
-]
-
-const skillIcons = {
-  HTML: SiHtml5,
-  'CSS / Tailwind': SiTailwindcss,
-  JavaScript: SiJavascript,
-  React: SiReact,
-  'Node.js': SiNodedotjs,
-  'Express.js': SiExpress,
-  Python: SiPython,
-  Java: FaJava,
-  Git: SiGit,
-  GitHub: SiGithub,
-  'VS Code': VscVscode,
-  Postman: SiPostman,
+const groupIcons = {
+  frontend: FaCode,
+  backend: FaServer,
+  tools: FaTools,
 }
 
-const containerVariants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.12 } },
-}
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 32 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
-}
-
-const SkillGroupCard = ({ group }) => {
-  const cardRef = useRef(null)
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
-  const [isHovering, setIsHovering] = useState(false)
-  const Icon = group.icon
-
-  const handleMouseMove = (e) => {
-    if (!cardRef.current) return
-    const rect = cardRef.current.getBoundingClientRect()
-    setMousePos({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-    })
-  }
+const SkillCard = ({ title, items, index, isExpanded, onToggle }) => {
+  const Icon = groupIcons[title] || FaCode
 
   return (
     <motion.div
-      data-reveal="card"
-      ref={cardRef}
-      variants={cardVariants}
-      whileHover={{ y: -8, scale: 1.015 }}
-      transition={{ type: 'spring', stiffness: 260, damping: 22 }}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={() => setIsHovering(true)}
-      onMouseLeave={() => setIsHovering(false)}
-      className="modern-card group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur transition-shadow duration-300 hover:shadow-[0_24px_60px_rgba(12,17,42,0.55)]"
+      layout
+      onClick={onToggle}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.6, delay: index * 0.1 }}
+      whileHover={{ scale: 1.02, rotateX: 2, rotateY: -2 }}
+      className="cursor-pointer relative overflow-hidden rounded-2xl modern-card border-none bg-white/[0.03] backdrop-blur-md hover:bg-white/[0.05] p-6 flex flex-col transition-all duration-300 group"
+      style={{ perspective: 1000 }}
     >
-      {/* Mouse-follow light effect */}
-      {isHovering && (
-        <motion.div
-          className="pointer-events-none absolute h-48 w-48 rounded-full opacity-0 blur-3xl"
-          style={{
-            left: mousePos.x - 96,
-            top: mousePos.y - 96,
-            background: `radial-gradient(circle, ${group.glowColor}, transparent)`,
-            opacity: 0.35,
-          }}
-        />
-      )}
+        {/* Header */}
+        <motion.div layout className="flex items-center gap-4">
+          <div className="h-12 w-12 rounded-xl bg-amber-400/10 flex items-center justify-center border border-amber-400/20 text-amber-400 group-hover:bg-amber-400/20 transition-all">
+            <Icon size={24} />
+          </div>
+          <h3 className="text-xl font-bold text-gray-100 capitalize tracking-wide font-sans">{title}</h3>
+        </motion.div>
 
-      {/* Animated top-edge gradient - enhanced */}
-      <motion.span
-        className={`absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r ${group.accent} opacity-60 transition-opacity duration-300 group-hover:opacity-100`}
-        whileHover={{ opacity: 1 }}
-      />
-
-      {/* Ambient glow blob - larger and more vibrant */}
-      <motion.span
-        className={`pointer-events-none absolute -top-8 left-1/2 h-24 w-24 -translate-x-1/2 rounded-full ${group.dot} opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-40`}
-        whileHover={{ scale: 1.2 }}
-      />
-
-      {/* Header */}
-      <div className="mb-5 flex items-center gap-3">
-        <motion.span
-          className={`flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br ${group.accent} backdrop-blur`}
-          whileHover={{ scale: 1.1, rotate: 5 }}
-        >
-          <Icon className="text-white" />
-        </motion.span>
-        <h3 className="text-base font-semibold text-white">{group.title}</h3>
-      </div>
-
-      <div className="space-y-4">
-        {skills[group.key].map((skill, si) => (
-          <motion.div
-            key={skill.name}
-            initial={{ opacity: 0, x: -12 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: si * 0.07 }}
-            className="space-y-2 rounded-xl border border-white/8 bg-slate-900/40 p-3 transition-colors group-hover:border-white/12"
-          >
-            <SkillBar name={skill.name} level={skill.level} icon={skillIcons[skill.name]} />
-            <p className="text-xs text-white/55">{skill.projects}</p>
-          </motion.div>
-        ))}
-      </div>
+        {/* Expanding Content */}
+        <AnimatePresence>
+          {isExpanded && (
+            <motion.div
+              layout
+              initial={{ opacity: 0, height: 0, marginTop: 0 }}
+              animate={{ opacity: 1, height: 'auto', marginTop: 24 }}
+              exit={{ opacity: 0, height: 0, marginTop: 0 }}
+              transition={{ duration: 0.4, ease: "easeInOut" }}
+              className="flex flex-col gap-5 overflow-hidden"
+            >
+              {items.map((skill, idx) => (
+                <div key={skill.name} className="flex flex-col gap-2">
+                  <div className="flex justify-between items-center text-sm font-sans">
+                    <span className="text-gray-300 font-medium">{skill.name}</span>
+                    <span className="text-amber-400 font-mono text-xs">{skill.level}%</span>
+                  </div>
+                  <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden shadow-[inset_0_1px_3px_rgba(0,0,0,0.5)] border border-white/5">
+                    <motion.div
+                      initial={{ width: 0 }}
+                      animate={{ width: `${skill.level}%` }}
+                      transition={{ duration: 1, delay: idx * 0.1, type: "spring", stiffness: 50 }}
+                      className="h-full rounded-full bg-amber-400 shadow-[0_0_10px_rgba(251,191,36,0.6)]"
+                    />
+                  </div>
+                  <div className="text-[10px] text-gray-500 uppercase tracking-widest">{skill.projects}</div>
+                </div>
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
     </motion.div>
   )
 }
 
 const Skills = () => {
-  return (
-    <section id="skills" className="px-6 py-20 sm:px-10">
-      <div className="mx-auto max-w-6xl">
-        <SectionHeading title="Skills" subtitle="Tech Toolbox" />
+  const [typedText, setTypedText] = useState('')
+  const [expandedCard, setExpandedCard] = useState('frontend')
+  
+  const command = "> harpreet setup --install-skills"
 
+  useEffect(() => {
+    let index = 0
+    const interval = setInterval(() => {
+      setTypedText(command.slice(0, index + 1))
+      index++
+      if (index === command.length) clearInterval(interval)
+    }, 60)
+    return () => clearInterval(interval)
+  }, [])
+
+  return (
+    <section id="skills" className="relative px-6 py-24 sm:px-10 min-h-screen flex items-center">
+      
+      {/* Giant Background Number */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[40vw] font-black text-outline opacity-[0.03] pointer-events-none select-none z-0 leading-none">
+        03
+      </div>
+
+      <div className="mx-auto max-w-5xl w-full z-10 relative">
+        
+        {/* Terminal Header */}
         <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          className="grid gap-7 lg:grid-cols-3"
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mb-12 rounded-xl overflow-hidden border border-white/10 bg-white/[0.03] backdrop-blur-md shadow-[0_10px_30px_rgba(0,0,0,0.5)]"
         >
-          {groups.map((group) => (
-            <SkillGroupCard key={group.key} group={group} />
-          ))}
+          <div className="bg-white/[0.05] px-4 py-3 flex items-center gap-2 border-b border-white/10">
+            <div className="flex gap-2">
+              <div className="w-3 h-3 rounded-full bg-red-500/80 shadow-[0_0_5px_rgba(239,68,68,0.5)]"></div>
+              <div className="w-3 h-3 rounded-full bg-yellow-500/80 shadow-[0_0_5px_rgba(234,179,8,0.5)]"></div>
+              <div className="w-3 h-3 rounded-full bg-green-500/80 shadow-[0_0_5px_rgba(34,197,94,0.5)]"></div>
+            </div>
+            <div className="ml-4 text-xs font-mono text-gray-400">
+              Terminal - Installation
+            </div>
+          </div>
+          <div className="p-6 font-mono text-sm sm:text-base text-amber-300">
+            <span>{typedText}</span>
+            <motion.span
+              animate={{ opacity: [1, 0] }}
+              transition={{ repeat: Infinity, duration: 0.8 }}
+              className="inline-block w-2.5 h-4 bg-amber-400 ml-1 translate-y-1"
+            ></motion.span>
+          </div>
         </motion.div>
+
+        {/* Dynamic Expanding Cards */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
+          {Object.entries(skills).map(([category, items], idx) => (
+            <SkillCard
+              key={category}
+              title={category}
+              items={items}
+              index={idx}
+              isExpanded={expandedCard === category}
+              onToggle={() => setExpandedCard(expandedCard === category ? null : category)}
+            />
+          ))}
+        </div>
+
       </div>
     </section>
   )

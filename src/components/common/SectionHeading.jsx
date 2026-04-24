@@ -6,28 +6,24 @@ const SectionHeading = ({ title, subtitle }) => (
     initial={{ opacity: 0, y: 30 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true, amount: 0.4 }}
-    transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-    className="mb-12 text-center"
+    transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+    className="mb-16 md:mb-20"
   >
-    <motion.p
-      initial={{ opacity: 0, letterSpacing: '0.1em' }}
-      whileInView={{ opacity: 1, letterSpacing: '0.32em' }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.8, delay: 0.1 }}
-      className="mb-3 text-xs font-semibold uppercase text-cyan-300/90"
-    >
-      {subtitle}
-    </motion.p>
-
-    <h2 className="relative inline-block text-balance text-3xl font-bold text-white sm:text-4xl">
-      {title}
-      <motion.span
-        initial={{ scaleX: 0 }}
-        whileInView={{ scaleX: 1 }}
+    <div className="flex items-center gap-4 mb-4">
+      <motion.p
+        initial={{ opacity: 0, x: -20 }}
+        whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.6, delay: 0.35, ease: 'easeOut' }}
-        className="absolute -bottom-2 left-1/2 block h-[3px] w-16 origin-center -translate-x-1/2 rounded-full bg-gradient-to-r from-fuchsia-400 via-blue-400 to-cyan-400"
-      />
+        transition={{ duration: 0.6, delay: 0.1 }}
+        className="text-xs font-mono font-medium uppercase tracking-[0.25em] text-amber-500"
+      >
+        {subtitle}
+      </motion.p>
+      <div className="h-[1px] w-12 bg-amber-500/30"></div>
+    </div>
+
+    <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-gray-100">
+      {title}
     </h2>
   </motion.div>
 )

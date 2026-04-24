@@ -19,13 +19,13 @@ const SkillBar = ({ name, level, icon: Icon }) => {
       ref={barRef}
     >
       <div className="flex items-center justify-between text-sm">
-        <span className="flex items-center gap-2 font-medium text-white/90">
+        <span className="flex items-center gap-2 font-medium text-[color:var(--text-soft)]">
           {Icon ? (
             <motion.span
               animate={{ rotate: [0, 8, -8, 0] }}
               transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut', repeatDelay: 2 }}
             >
-              <Icon className="text-cyan-300 drop-shadow-[0_0_6px_rgba(34,211,238,0.7)]" />
+              <Icon className="text-cyan-300 drop-shadow-[0_0_8px_rgba(0,245,255,0.8)]" />
             </motion.span>
           ) : null}
           {name}
@@ -41,18 +41,21 @@ const SkillBar = ({ name, level, icon: Icon }) => {
         </motion.span>
       </div>
 
-      <div className="relative h-[6px] overflow-hidden rounded-full bg-white/10">
+        <div
+          className="relative h-[8px] overflow-hidden border border-cyan-300/10 bg-[#081325]"
+          style={{ clipPath: 'polygon(4% 0, 96% 0, 100% 50%, 96% 100%, 4% 100%, 0 50%)' }}
+        >
         <motion.div
           initial={{ width: 0 }}
           whileInView={{ width: `${level}%` }}
           viewport={{ once: true }}
           transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
-          className="relative h-full rounded-full bg-gradient-to-r from-fuchsia-500 via-blue-500 to-cyan-400"
+          className="relative h-full bg-gradient-to-r from-cyan-400 via-sky-500 to-violet-500"
         >
           {/* Animated glow dot at end */}
           <motion.span
             style={{ opacity: glowOpacity }}
-            className="absolute right-0 top-1/2 h-3 w-3 -translate-y-1/2 translate-x-1/2 rounded-full bg-cyan-300 shadow-[0_0_10px_4px_rgba(34,211,238,0.7)]"
+            className="absolute right-0 top-1/2 h-3 w-3 -translate-y-1/2 translate-x-1/2 rounded-full bg-cyan-300 shadow-[0_0_12px_5px_rgba(0,245,255,0.75)]"
           />
           {/* Shimmer */}
           <span className="absolute inset-0 animate-[barShimmer_2.2s_ease_infinite] bg-gradient-to-r from-transparent via-white/30 to-transparent" />

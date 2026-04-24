@@ -5,17 +5,40 @@ const Loader = ({ loading }) => {
     <AnimatePresence>
       {loading ? (
         <motion.div
-          initial={{ opacity: 1 }}
-          exit={{ opacity: 0, transition: { duration: 0.6 } }}
-          className="fixed inset-0 z-[100] grid place-items-center bg-slate-950"
+           initial={{ opacity: 1 }}
+           exit={{ opacity: 0, transition: { duration: 0.8, ease: 'easeInOut' } }}
+           className="fixed inset-0 z-[100] grid place-items-center bg-[#030014]"
         >
-          <div className="space-y-4 text-center">
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ repeat: Infinity, duration: 1.5, ease: 'linear' }}
-              className="mx-auto h-16 w-16 rounded-full border-2 border-fuchsia-400 border-t-cyan-300"
-            />
-            <p className="text-xs uppercase tracking-[0.35em] text-cyan-300">Loading Portfolio</p>
+          <div className="relative flex flex-col items-center">
+            {/* Elegant Orbital Spinner */}
+            <div className="relative flex h-24 w-24 items-center justify-center">
+              <motion.div
+                 animate={{ rotate: 360 }}
+                 transition={{ repeat: Infinity, duration: 3, ease: 'linear' }}
+                 className="absolute inset-0 rounded-full border border-slate-800"
+              />
+               <motion.div
+                 animate={{ rotate: -360 }}
+                 transition={{ repeat: Infinity, duration: 2, ease: 'linear' }}
+                 className="absolute inset-2 rounded-full border border-transparent border-t-amber-400 border-b-amber-400 opacity-80"
+              />
+              <motion.div
+                 animate={{ rotate: 360 }}
+                 transition={{ repeat: Infinity, duration: 4, ease: 'linear' }}
+                 className="absolute inset-4 rounded-full border border-dashed border-amber-600/50"
+              />
+            </div>
+
+            {/* Loading text */}
+            <div className="mt-8">
+              <motion.div 
+                animate={{ opacity: [0.4, 1, 0.4] }}
+                transition={{ repeat: Infinity, duration: 1.5 }}
+                className="text-[10px] uppercase font-mono tracking-[0.4em] text-amber-400/80"
+              >
+                Initializing
+              </motion.div>
+            </div>
           </div>
         </motion.div>
       ) : null}

@@ -8,28 +8,28 @@ export default function FuturisticSkillCard({ title, percent, icon: Icon, color 
 
   const colorConfig = {
     purple: {
-      from: 'from-purple-500',
-      via: 'via-blue-500',
-      to: 'to-cyan-400',
-      bg: 'bg-purple-500/10',
-      border: 'border-purple-500/30',
-      glow: 'rgba(168, 85, 247, 0.3)',
+      from: 'from-violet-500',
+      via: 'via-sky-500',
+      to: 'to-cyan-300',
+      bg: 'bg-violet-500/10',
+      border: 'border-cyan-300/20',
+      glow: 'rgba(139, 92, 246, 0.28)',
     },
     blue: {
-      from: 'from-blue-500',
-      via: 'via-cyan-400',
-      to: 'to-emerald-400',
-      bg: 'bg-blue-500/10',
-      border: 'border-blue-500/30',
-      glow: 'rgba(59, 130, 246, 0.3)',
+      from: 'from-sky-500',
+      via: 'via-cyan-300',
+      to: 'to-violet-400',
+      bg: 'bg-sky-500/10',
+      border: 'border-sky-300/20',
+      glow: 'rgba(37, 99, 235, 0.3)',
     },
     cyan: {
-      from: 'from-cyan-400',
-      via: 'via-emerald-400',
-      to: 'to-teal-500',
+      from: 'from-cyan-300',
+      via: 'via-sky-400',
+      to: 'to-violet-400',
       bg: 'bg-cyan-400/10',
-      border: 'border-cyan-400/30',
-      glow: 'rgba(34, 211, 238, 0.3)',
+      border: 'border-cyan-300/30',
+      glow: 'rgba(0, 245, 255, 0.32)',
     },
   }
 
@@ -60,13 +60,12 @@ export default function FuturisticSkillCard({ title, percent, icon: Icon, color 
       onMouseLeave={() => setIsHovering(false)}
       whileHover={{ scale: 1.05 }}
       transition={{ type: 'spring', stiffness: 200 }}
-      className={`group relative p-[2px] rounded-2xl overflow-hidden`}
+      className="cyber-card group relative overflow-hidden p-[2px]"
       style={{
-        background: `linear-gradient(135deg, #a855f7 0%, #3b82f6 50%, #22d3ee 100%)`,
+        background: `linear-gradient(135deg, rgba(0,245,255,0.55) 0%, rgba(139,92,246,0.45) 50%, rgba(37,99,235,0.55) 100%)`,
       }}
     >
-      {/* Inner card */}
-      <div className={`relative ${cfg.bg} backdrop-blur-xl rounded-2xl p-5 shadow-xl overflow-hidden`}>
+      <div className={`cyber-card__content relative overflow-hidden ${cfg.bg} p-5 backdrop-blur-xl`}>
         {/* Mouse-follow glow effect */}
         {isHovering && (
           <motion.div
@@ -83,7 +82,7 @@ export default function FuturisticSkillCard({ title, percent, icon: Icon, color 
 
         {/* Top glow accent */}
         <motion.div
-          className={`pointer-events-none absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition duration-500`}
+          className="pointer-events-none absolute inset-0 opacity-0 transition duration-500 group-hover:opacity-100"
           style={{
             background: `radial-gradient(circle at 50% 0%, ${cfg.glow}, transparent 70%)`,
           }}
@@ -100,27 +99,27 @@ export default function FuturisticSkillCard({ title, percent, icon: Icon, color 
               <Icon />
             </motion.div>
           )}
-          <h3 className="text-white font-semibold flex-1">{title}</h3>
+          <h3 className="text-cyan-100 font-semibold flex-1">{title}</h3>
         </div>
 
         {/* Animated progress bar */}
         <div className="mt-4 space-y-2">
-          <div className="h-2.5 bg-slate-900/40 rounded-full overflow-hidden border border-white/10">
+          <div className="h-2.5 overflow-hidden border border-cyan-300/10 bg-[#07101f]">
             <motion.div
               variants={progressVariants}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
-              className={`h-full bg-gradient-to-r ${cfg.from} ${cfg.via} ${cfg.to} rounded-full shadow-lg`}
+              className={`h-full bg-gradient-to-r ${cfg.from} ${cfg.via} ${cfg.to}`}
               style={{
-                boxShadow: `0 0 20px ${cfg.glow}`,
+                boxShadow: `0 0 22px ${cfg.glow}`,
               }}
             />
           </div>
           <div className="flex justify-between items-center">
-            <p className="text-xs text-gray-400">Proficiency</p>
+            <p className="text-xs text-[color:var(--text-muted)]">Proficiency</p>
             <motion.p
-              className="text-sm font-mono text-white font-semibold"
+              className="text-sm font-mono text-cyan-100 font-semibold"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
@@ -132,9 +131,7 @@ export default function FuturisticSkillCard({ title, percent, icon: Icon, color 
         </div>
 
         {/* Bottom shimmer line */}
-        <motion.span
-          className={`absolute inset-x-0 bottom-0 h-[1px] bg-gradient-to-r ${cfg.from} to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
-        />
+        <motion.span className={`absolute inset-x-0 bottom-0 h-[1px] bg-gradient-to-r ${cfg.from} to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100`} />
       </div>
     </motion.div>
   )

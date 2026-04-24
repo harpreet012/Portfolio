@@ -26,7 +26,7 @@ const Navbar = ({ theme, onToggleTheme }) => {
     }
 
     onScroll()
-    window.addEventListener('scroll', onScroll)
+    window.addEventListener('scroll', onScroll, { passive: true })
 
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
@@ -37,23 +37,23 @@ const Navbar = ({ theme, onToggleTheme }) => {
   }
 
   return (
-    <header className="fixed inset-x-0 top-4 z-50 mx-auto w-full max-w-6xl px-4 py-4">
-      <nav className="rounded-[2rem] border border-white/10 bg-slate-950/60 px-4 py-3 shadow-[0_10px_45px_rgba(8,15,35,0.45)] backdrop-blur-xl">
+    <header className="fixed inset-x-0 top-4 z-50 mx-auto w-full max-w-5xl px-4 lg:px-8">
+      <nav className="modern-card px-6 py-3 bg-[#0a0520]/80 border border-amber-400/10">
         <div className="flex items-center justify-between gap-4">
           <button
             onClick={() => scrollToSection('hero')}
-            className="text-sm font-semibold tracking-[0.25em] text-cyan-300"
+            className="text-lg font-bold tracking-widest text-amber-400 uppercase font-mono"
           >
-            HJ
+            HJ<span className="text-gray-500 text-xs">.dev</span>
           </button>
 
-          <ul className="hidden items-center gap-5 lg:flex">
+          <ul className="hidden items-center gap-8 lg:flex">
             {navLinks.map((link) => (
               <li key={link.id}>
                 <button
                   onClick={() => scrollToSection(link.id)}
-                  className={`text-sm transition hover:text-cyan-300 hover:drop-shadow-[0_0_12px_rgba(34,211,238,0.65)] ${
-                    activeSection === link.id ? 'text-cyan-300' : 'text-white/80'
+                  className={`text-xs font-mono uppercase tracking-[0.1em] transition-colors ${
+                    activeSection === link.id ? 'text-amber-400 drop-shadow-[0_0_8px_rgba(251,191,36,0.5)]' : 'text-gray-400 hover:text-amber-200'
                   }`}
                 >
                   {link.label}
@@ -62,35 +62,27 @@ const Navbar = ({ theme, onToggleTheme }) => {
             ))}
           </ul>
 
-          <div className="flex items-center gap-2">
-            <button
-              onClick={onToggleTheme}
-              className="grid h-10 w-10 place-items-center rounded-full border border-white/15 bg-white/5 text-white transition hover:border-cyan-300/50"
-              aria-label="Toggle theme"
-            >
-              {theme === 'dark' ? <FaSun /> : <FaMoon />}
-            </button>
-
+          <div className="flex items-center gap-4">
             <button
               onClick={() => setOpenMenu((prev) => !prev)}
-              className="grid h-10 w-10 place-items-center rounded-full border border-white/15 bg-white/5 text-white transition hover:border-cyan-300/50 lg:hidden"
+              className="lg:hidden text-gray-300 hover:text-amber-400 transition"
               aria-label="Toggle mobile menu"
             >
-              {openMenu ? <FaTimes /> : <FaBars />}
+              {openMenu ? <FaTimes size={20} /> : <FaBars size={20} />}
             </button>
           </div>
         </div>
 
         <div
-          className={`overflow-hidden transition-all duration-300 lg:hidden ${openMenu ? 'max-h-96 pt-4' : 'max-h-0'}`}
+          className={`overflow-hidden transition-all duration-300 lg:hidden ${openMenu ? 'max-h-96 pt-6 pb-2' : 'max-h-0'}`}
         >
-          <ul className="grid gap-2 rounded-2xl border border-white/10 bg-white/5 p-3">
+          <ul className="grid gap-4">
             {navLinks.map((link) => (
               <li key={link.id}>
                 <button
                   onClick={() => scrollToSection(link.id)}
-                  className={`w-full rounded-xl px-3 py-2 text-left text-sm transition hover:bg-cyan-300/10 hover:text-cyan-200 ${
-                    activeSection === link.id ? 'bg-cyan-300/10 text-cyan-200' : 'text-white/85'
+                  className={`w-full text-left text-xs font-mono uppercase tracking-[0.1em] transition-colors ${
+                    activeSection === link.id ? 'text-amber-400' : 'text-gray-400 hover:text-amber-200'
                   }`}
                 >
                   {link.label}
