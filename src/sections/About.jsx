@@ -24,19 +24,16 @@ const About = () => {
             className="order-2 lg:order-1 flex flex-col space-y-5"
           >
             <p className="leading-relaxed text-lg text-gray-400">
-              I started my journey by building small web pages out of curiosity, which gradually evolved into a passion for creating polished, high-performance digital experiences.
+              What started as curiosity for web development evolved into a passion for building scalable and impactful digital experiences.
             </p>
             <p className="leading-relaxed text-lg text-gray-400">
-              Currently, I am a B.Tech Computer Science student with a strong focus on <span className="gold-accent-text font-medium">Full Stack Development, Data Analytics, and Machine Learning</span>. I specialize in building scalable web applications using modern technologies, while also working with data to extract meaningful insights through interactive and visually appealing dashboards.
+              I’m currently pursuing a B.Tech in Computer Science with a strong focus on <span className="gold-accent-text font-medium">Full Stack Development, Data Analytics, and Machine Learning</span>. I enjoy developing modern web applications, designing intuitive user interfaces, and transforming complex data into meaningful insights through interactive dashboards.
             </p>
             <p className="leading-relaxed text-lg text-gray-400">
-              My experience includes developing end-to-end applications, designing intuitive user interfaces, and implementing machine learning models to solve real-world problems. I enjoy transforming complex data into clear, actionable insights and combining engineering with creativity to build products that are both functional and engaging.
-            </p>
-            <p className="leading-relaxed text-lg text-gray-400">
-              I am constantly exploring new technologies and improving my skill set to stay ahead in this fast-evolving tech landscape. My goal is to create impactful solutions that not only perform efficiently but also deliver a seamless and memorable user experience.
+              My experience includes building end-to-end applications, working with data-driven solutions, and creating products that combine performance, creativity, and seamless user experiences.
             </p>
             <p className="leading-relaxed text-lg text-gray-300">
-              Let&apos;s build something innovative and meaningful together.
+              I’m passionate about continuously learning new technologies and building innovative solutions that create real-world impact.
             </p>
 
             <div className="pt-2">
