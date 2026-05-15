@@ -52,6 +52,17 @@ export const skills = {
 
 export const projects = [
   {
+    title: 'HR Diversity & Inclusion Dashboard',
+    description:
+      'Developed an interactive HR analytics dashboard to monitor workforce diversity, employee inclusion, promotions, turnover rates, and gender balance across multiple departments and regions. Designed visually rich KPI reports and dynamic charts to help organizations make data-driven HR decisions and improve workplace diversity strategies.',
+    tech: ['Power BI', 'Data Analytics', 'DAX', 'HR Reporting'],
+    image:
+      'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80',
+    github: 'https://github.com/harpreet012/HR-Analytics-Dashboard-using-PowerBI',
+    demo: '#',
+    category: 'Data Analytics',
+  },
+  {
     title: 'AI-Powered Predictive Maintenance System',
     description:
       'Developed a system to predict equipment failures using sensor data and machine learning. Implemented anomaly detection and built a real-time monitoring dashboard.',
