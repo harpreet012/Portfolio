@@ -3,6 +3,8 @@ import { FaDownload } from 'react-icons/fa'
 import SectionHeading from '../components/common/SectionHeading'
 import profileImage from '../assets/WhatsApp Image 2026-04-24 at 9.59.40 PM.jpeg'
 
+const aboutStats = ['1+ Years Experience', '10+ Projects Built', '5+ Technologies']
+
 const About = () => {
   return (
     <section id="about" className="relative px-6 py-24 sm:px-10 overflow-hidden">
@@ -12,7 +14,11 @@ const About = () => {
       </div>
 
       <div className="mx-auto max-w-6xl relative z-10">
-        <SectionHeading title="About Me" subtitle="Who I Am" />
+        <SectionHeading
+          title="About Me"
+          subtitle="Who I Am"
+          titleClassName="about-premium-heading"
+        />
 
         <div className="grid gap-12 lg:grid-cols-2 items-center">
           {/* Left Area */}
@@ -21,20 +27,31 @@ const About = () => {
             whileInView={{ opacity: 1, y: 0, rotateX: 0, scale: 1 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.8, type: 'spring', bounce: 0.4 }}
-            className="order-2 lg:order-1 flex flex-col space-y-5"
+            className="about-copy order-2 lg:order-1"
           >
-            <p className="leading-relaxed text-lg text-gray-400">
+            <p className="text-lg text-gray-400">
               What started as curiosity for web development evolved into a passion for building scalable and impactful digital experiences.
             </p>
-            <p className="leading-relaxed text-lg text-gray-400">
-              I’m currently pursuing a B.Tech in Computer Science with a strong focus on <span className="gold-accent-text font-medium">Full Stack Development, Data Analytics, and Machine Learning</span>. I enjoy developing modern web applications, designing intuitive user interfaces, and transforming complex data into meaningful insights through interactive dashboards.
+            <p className="text-lg text-gray-400">
+              I’m currently pursuing a B.Tech in Computer Science with a strong focus on{' '}
+              <span className="about-highlight font-medium">Full Stack Development</span>,{' '}
+              <span className="about-highlight font-medium">Data Analytics</span>, and{' '}
+              <span className="about-highlight font-medium">Machine Learning</span>. I enjoy developing modern web applications, designing intuitive user interfaces, and transforming complex data into meaningful insights through interactive dashboards.
             </p>
-            <p className="leading-relaxed text-lg text-gray-400">
+            <p className="text-lg text-gray-400">
               My experience includes building end-to-end applications, working with data-driven solutions, and creating products that combine performance, creativity, and seamless user experiences.
             </p>
-            <p className="leading-relaxed text-lg text-gray-300">
+            <p className="text-lg text-gray-300">
               I’m passionate about continuously learning new technologies and building innovative solutions that create real-world impact.
             </p>
+
+            <div className="mb-7 flex flex-wrap gap-3">
+              {aboutStats.map((item) => (
+                <span key={item} className="about-stat-badge">
+                  {item}
+                </span>
+              ))}
+            </div>
 
             <div className="pt-2">
               <a
@@ -63,7 +80,7 @@ const About = () => {
               className="relative w-full max-w-[340px] sm:max-w-[380px]"
             >
               <div className="absolute -inset-8 rounded-full bg-[radial-gradient(circle,rgba(250,204,21,0.28),rgba(250,204,21,0.08)_45%,transparent_75%)] blur-2xl" />
-              <div className="modern-card relative rounded-[2rem] border border-amber-300/35 bg-white/[0.04] backdrop-blur-xl p-3 shadow-[0_16px_40px_rgba(0,0,0,0.45),0_0_24px_rgba(250,204,21,0.2)] transition-all duration-500 hover:border-amber-300/60 hover:shadow-[0_20px_50px_rgba(0,0,0,0.55),0_0_38px_rgba(250,204,21,0.38)]">
+              <div className="about-image-card modern-card relative border border-amber-300/35 bg-white/[0.04] p-3 transition-all duration-500 hover:border-amber-300/60 hover:shadow-[0_20px_50px_rgba(0,0,0,0.55),0_0_38px_rgba(250,204,21,0.38)]">
                 <div className="overflow-hidden rounded-[1.6rem] border border-white/10">
                   <img
                     src={profileImage}

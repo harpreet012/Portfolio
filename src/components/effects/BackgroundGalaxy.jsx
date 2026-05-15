@@ -58,7 +58,7 @@ function ParticleSwarm({ count = 8000 }) {
         sizeAttenuation={true}
         depthWrite={false}
         blending={THREE.AdditiveBlending}
-        opacity={0.6}
+        opacity={0.35}
       />
     </Points>
   )

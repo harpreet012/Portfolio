@@ -52,11 +52,14 @@ const Navbar = ({ theme, onToggleTheme }) => {
               <li key={link.id}>
                 <button
                   onClick={() => scrollToSection(link.id)}
-                  className={`text-xs font-mono uppercase tracking-[0.1em] transition-colors ${
-                    activeSection === link.id ? 'text-amber-400 drop-shadow-[0_0_8px_rgba(251,191,36,0.5)]' : 'text-gray-400 hover:text-amber-200'
+                  className={`nav-link text-xs font-mono uppercase tracking-[0.1em] transition-colors ${
+                    activeSection === link.id
+                      ? 'nav-link-active text-amber-400 drop-shadow-[0_0_8px_rgba(251,191,36,0.5)]'
+                      : 'text-gray-400 hover:text-amber-200'
                   }`}
                 >
                   {link.label}
+                  <span className="nav-link-underline" aria-hidden="true" />
                 </button>
               </li>
             ))}
@@ -81,11 +84,14 @@ const Navbar = ({ theme, onToggleTheme }) => {
               <li key={link.id}>
                 <button
                   onClick={() => scrollToSection(link.id)}
-                  className={`w-full text-left text-xs font-mono uppercase tracking-[0.1em] transition-colors ${
-                    activeSection === link.id ? 'text-amber-400' : 'text-gray-400 hover:text-amber-200'
+                  className={`nav-link w-full text-left text-xs font-mono uppercase tracking-[0.1em] transition-colors ${
+                    activeSection === link.id
+                      ? 'nav-link-active text-amber-400 drop-shadow-[0_0_8px_rgba(251,191,36,0.45)]'
+                      : 'text-gray-400 hover:text-amber-200'
                   }`}
                 >
                   {link.label}
+                  <span className="nav-link-underline" aria-hidden="true" />
                 </button>
               </li>
             ))}
