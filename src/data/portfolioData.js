@@ -123,28 +123,6 @@ export const projects = [
     demo: 'https://portfolio-three-sooty-vc3uh18hp7.vercel.app/#projects',
     category: 'React',
   },
-  {
-    title: 'Real-Time Chat Application',
-    description:
-      'Built a real-time messaging platform with WebSocket integration for instant communication. Features include user authentication, group chats, message history, and typing indicators. Deployed on cloud infrastructure with database optimization.',
-    tech: ['React.js', 'Node.js', 'WebSocket', 'MongoDB', 'Express.js'],
-    image:
-      'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80',
-    github: 'https://github.com/harpreet012',
-    demo: '#',
-    category: 'Full Stack',
-  },
-  {
-    title: 'Weather Analytics Dashboard',
-    description:
-      'Created a comprehensive weather analytics platform that fetches real-time weather data and predicts weather patterns using ML algorithms. Integrated third-party APIs and built interactive visualizations for weather trends.',
-    tech: ['Python', 'Flask', 'React.js', 'Machine Learning', 'REST APIs'],
-    image:
-      'https://images.unsplash.com/photo-1618519035001-e7e7eaf0001c?auto=format&fit=crop&w=1200&q=80',
-    github: 'https://github.com/harpreet012',
-    demo: '#',
-    category: 'ML & Web',
-  },
 ]
 
 export const experience = [
@@ -154,20 +132,6 @@ export const experience = [
     period: 'June 2025 - July 2025',
     details:
       'Developed responsive user interfaces using HTML, CSS, and JavaScript. Collaborated with team members to improve UI/UX and application performance, applying modern design practices to enhance usability.',
-  },
-  {
-    role: 'ML/Data Analyst Intern',
-    company: 'DataInsight Solutions, Remote',
-    period: 'August 2025 - October 2025',
-    details:
-      'Analyzed large datasets using Python, Pandas, and Scikit-learn to build predictive models. Created data visualizations and dashboards using Power BI to communicate insights to stakeholders.',
-  },
-  {
-    role: 'Junior Developer',
-    company: 'Tech Innovations Lab, Freelance',
-    period: 'November 2025 - December 2025',
-    details:
-      'Built responsive web applications using React.js and Node.js. Implemented RESTful APIs and optimized frontend performance, reducing load times by 35%.',
   },
 ]
 
