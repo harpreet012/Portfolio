@@ -181,7 +181,7 @@ const spacingPresets = [
 ]
 
 const Skills = () => {
-  const [activeSkill, setActiveSkill] = useState(skillList[0])
+  const [selectedSkill, setSelectedSkill] = useState(skillList[0])
   const [pausedSkill, setPausedSkill] = useState(null)
 
   const titleStats = useMemo(
@@ -328,19 +328,16 @@ const Skills = () => {
                 const gridPoint = placementGrid[index]
                 const drift = spacingPresets[index % spacingPresets.length]
                 const category = skillMeta[skill.name]?.category ?? 'Skill'
-                const description = skillMeta[skill.name]?.description ?? skill.projects
-                const isActive = activeSkill.name === skill.name
+                const isActive = selectedSkill.name === skill.name
 
                 return (
                   <motion.button
                     key={skill.name}
                     type="button"
-                    onMouseEnter={() => {
-                      setActiveSkill(skill)
-                      setPausedSkill(skill.name)
-                    }}
+                    onClick={() => setSelectedSkill(skill)}
+                    onMouseEnter={() => setPausedSkill(skill.name)}
                     onMouseLeave={() => setPausedSkill(null)}
-                    onFocus={() => setActiveSkill(skill)}
+                    onFocus={() => setPausedSkill(skill.name)}
                     onBlur={() => setPausedSkill(null)}
                     className="absolute left-0 top-0 outline-none"
                     style={{ left: gridPoint.x, top: gridPoint.y }}
@@ -375,54 +372,55 @@ const Skills = () => {
                 )
               })}
 
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeSkill.name}
-                  initial={{ opacity: 0, y: 12, scale: 0.98 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: 12, scale: 0.98 }}
-                  transition={{ duration: 0.25 }}
-                  className="absolute left-1/2 bottom-8 z-30 w-[min(92vw,22rem)] -translate-x-1/2"
-                >
-                  <div className="rounded-2xl border border-white/10 bg-[rgba(8,10,15,0.88)] px-4 py-4 shadow-[0_18px_35px_rgba(0,0,0,0.28)] backdrop-blur-2xl">
-                    <div className="flex items-start gap-3">
-                      <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.06] text-amber-100 shadow-[0_0_14px_rgba(212,169,55,0.08)]">
-                        <activeSkill.icon size={18} />
-                      </div>
-                      <div className="min-w-0 flex-1">
-                        <div className="text-[10px] uppercase tracking-[0.38em] text-amber-100/70">
-                          Hover Focus
-                        </div>
-                        <div className="mt-1 text-lg font-semibold text-white">
-                          {activeSkill.name}
-                        </div>
-                        <div className="mt-1 text-xs uppercase tracking-[0.28em] text-white/45">
-                          {skillMeta[activeSkill.name]?.category ?? 'Skill'}
-                        </div>
-                      </div>
-                    </div>
-                    <p className="mt-3 text-sm leading-6 text-white/64">
-                      {skillMeta[activeSkill.name]?.description ?? activeSkill.projects}
-                    </p>
-                    <div className="mt-4 flex items-center justify-between text-[11px] text-white/50">
-                      <span>{activeSkill.projects}</span>
-                      <span>{activeSkill.level}%</span>
-                    </div>
-                    <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-white/10">
-                      <motion.div
-                        key={activeSkill.name}
-                        initial={{ width: 0 }}
-                        animate={{ width: `${activeSkill.level}%` }}
-                        transition={{ duration: 0.75, ease: 'easeOut' }}
-                        className="h-full rounded-full bg-amber-200 shadow-[0_0_12px_rgba(212,169,55,0.28)]"
-                      />
-                    </div>
-                  </div>
-                </motion.div>
-              </AnimatePresence>
             </div>
           </div>
         </motion.div>
+
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={selectedSkill.name}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 10 }}
+            transition={{ duration: 0.25 }}
+            className="mx-auto mt-6 w-full max-w-3xl"
+          >
+            <div className="rounded-2xl border border-white/10 bg-[rgba(8,10,15,0.82)] px-5 py-4 shadow-[0_18px_35px_rgba(0,0,0,0.22)] backdrop-blur-2xl">
+              <div className="flex items-start gap-3">
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.06] text-amber-100 shadow-[0_0_14px_rgba(212,169,55,0.08)]">
+                  <selectedSkill.icon size={18} />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <div className="text-[10px] uppercase tracking-[0.38em] text-amber-100/70">
+                    Click Focus
+                  </div>
+                  <div className="mt-1 text-lg font-semibold text-white">
+                    {selectedSkill.name}
+                  </div>
+                  <div className="mt-1 text-xs uppercase tracking-[0.28em] text-white/45">
+                    {skillMeta[selectedSkill.name]?.category ?? 'Skill'}
+                  </div>
+                </div>
+              </div>
+              <p className="mt-3 text-sm leading-6 text-white/64">
+                {skillMeta[selectedSkill.name]?.description ?? selectedSkill.projects}
+              </p>
+              <div className="mt-4 flex items-center justify-between text-[11px] text-white/50">
+                <span>{selectedSkill.projects}</span>
+                <span>{selectedSkill.level}%</span>
+              </div>
+              <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-white/10">
+                <motion.div
+                  key={selectedSkill.name}
+                  initial={{ width: 0 }}
+                  animate={{ width: `${selectedSkill.level}%` }}
+                  transition={{ duration: 0.75, ease: 'easeOut' }}
+                  className="h-full rounded-full bg-amber-200 shadow-[0_0_12px_rgba(212,169,55,0.26)]"
+                />
+              </div>
+            </div>
+          </motion.div>
+        </AnimatePresence>
       </div>
     </section>
   )
