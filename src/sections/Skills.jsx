@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { FaCode, FaServer, FaTools, FaReact, FaPython, FaNode, FaGitAlt, FaJava, FaJs, FaHtml5, FaCss3Alt, FaCube, FaLeaf, FaDatabase, FaGithub, FaChartBar, FaBrain, FaChartPie } from 'react-icons/fa'
-import { skills, techIcons } from '../data/portfolioData'
+import { FaCode, FaServer, FaTools } from 'react-icons/fa'
+import { skills } from '../data/portfolioData'
 
 const groupIcons = {
   frontend: FaCode,
@@ -248,18 +248,6 @@ const Skills = () => {
         </div>
 
         {/* Floating Tech Symbols Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="mt-16"
-        >
-          <h3 className="text-2xl font-bold text-gray-100 mb-8 text-center tracking-wide">
-            My <span className="text-amber-400">Tech Stack</span>
-          </h3>
-          <FloatingTechSymbols />
-        </motion.div>
 
       </div>
     </section>

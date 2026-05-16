@@ -1,15 +1,7 @@
 import { motion } from 'framer-motion'
 import { heroRoles } from '../data/portfolioData'
-import { FaReact, FaPython, FaNode, FaGitAlt, FaJava } from 'react-icons/fa'
 
 const Hero = () => {
-  const techSymbols = [
-    { Icon: FaReact, label: 'React', color: '#61dafb' },
-    { Icon: FaPython, label: 'Python', color: '#3776ab' },
-    { Icon: FaNode, label: 'Node.js', color: '#68a063' },
-    { Icon: FaGitAlt, label: 'Git', color: '#f1502f' },
-    { Icon: FaJava, label: 'Java', color: '#007396' },
-  ]
 
   return (
     <section
@@ -77,25 +69,6 @@ const Hero = () => {
           transition={{ duration: 0.8, delay: 1.2 }}
           className="mt-16 flex justify-center gap-8 flex-wrap max-w-2xl"
         >
-          {techSymbols.map((tech, index) => (
-            <motion.div
-              key={tech.label}
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 1.3 + index * 0.1 }}
-              whileHover={{ scale: 1.2, rotate: 10 }}
-              className="flex flex-col items-center gap-2 cursor-pointer"
-            >
-              <tech.Icon 
-                size={40} 
-                style={{ color: tech.color }}
-                className="drop-shadow-lg transition-all duration-300"
-              />
-              <span className="text-[10px] font-mono text-gray-400 uppercase tracking-wider">{tech.label}</span>
-            </motion.div>
-          ))}
-        </motion.div>
-
         {/* Bottom Left Status */}
         <motion.div
           initial={{ opacity: 0 }}
