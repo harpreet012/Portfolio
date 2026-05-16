@@ -1,12 +1,112 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { FaCode, FaServer, FaTools } from 'react-icons/fa'
-import { skills } from '../data/portfolioData'
+import { FaCode, FaServer, FaTools, FaReact, FaPython, FaNode, FaGitAlt, FaJava, FaJs, FaHtml5, FaCss3Alt } from 'react-icons/fa'
+import { skills, techIcons } from '../data/portfolioData'
 
 const groupIcons = {
   frontend: FaCode,
   backend: FaServer,
   tools: FaTools,
+}
+
+const iconMap = {
+  FaReact: FaReact,
+  FaPython: FaPython,
+  FaNode: FaNode,
+  FaGitAlt: FaGitAlt,
+  FaJava: FaJava,
+  FaJs: FaJs,
+  FaHtml5: FaHtml5,
+  FaCss3Alt: FaCss3Alt,
+}
+
+const FloatingTechSymbols = () => {
+  const getRandomPosition = (index) => ({
+    x: Math.cos((index / techIcons.length) * Math.PI * 2) * 100,
+    y: Math.sin((index / techIcons.length) * Math.PI * 2) * 100,
+  })
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.8 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.8 }}
+      className="relative w-full h-96 rounded-3xl border-2 border-amber-400/40 bg-white/[0.02] backdrop-blur-sm shadow-[inset_0_0_20px_rgba(251,191,36,0.1),0_0_30px_rgba(251,191,36,0.1)] flex items-center justify-center overflow-hidden my-12"
+    >
+      {/* Floating Background Glow */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-amber-400/5 rounded-full blur-3xl animate-pulse"></div>
+      </div>
+
+      {/* Floating Icons Grid */}
+      <div className="relative w-full h-full flex items-center justify-center">
+        {techIcons.map((tech, index) => {
+          const Icon = iconMap[tech.icon]
+          const angle = (index / techIcons.length) * Math.PI * 2
+          const radius = 120
+          const x = Math.cos(angle) * radius
+          const y = Math.sin(angle) * radius
+
+          return (
+            <motion.div
+              key={tech.id}
+              initial={{ opacity: 0, scale: 0 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{
+                delay: tech.delay,
+                duration: 0.6,
+                type: 'spring',
+                stiffness: 100,
+              }}
+              animate={{
+                y: [0, -20, 0],
+              }}
+              transition={{
+                repeat: Infinity,
+                duration: 4 + index * 0.3,
+                ease: 'easeInOut',
+              }}
+              whileHover={{ scale: 1.2 }}
+              className="absolute w-20 h-20 rounded-2xl bg-white/[0.05] backdrop-blur-md border border-amber-400/20 flex items-center justify-center cursor-pointer hover:bg-white/[0.1] hover:border-amber-400/50 transition-all duration-300 shadow-[0_0_20px_rgba(251,191,36,0.2)]"
+              style={{
+                x,
+                y,
+              }}
+            >
+              <div className="flex flex-col items-center gap-2">
+                <Icon size={32} style={{ color: tech.color }} className="drop-shadow-lg" />
+                <span className="text-[10px] font-mono text-gray-300 uppercase tracking-wider text-center">
+                  {tech.name}
+                </span>
+              </div>
+            </motion.div>
+          )
+        })}
+
+        {/* Center Circle */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.5, duration: 0.6 }}
+          className="absolute w-24 h-24 rounded-full border-2 border-amber-400/30 bg-white/[0.03] flex items-center justify-center"
+        >
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ repeat: Infinity, duration: 20, ease: 'linear' }}
+            className="w-20 h-20 rounded-full border-[1px] border-dashed border-amber-400/20"
+          />
+        </motion.div>
+      </div>
+
+      {/* Gradient Border Effect */}
+      <div className="absolute inset-0 rounded-3xl pointer-events-none">
+        <div className="absolute inset-0 rounded-3xl border-2 border-transparent bg-gradient-to-r from-amber-400/0 via-amber-400/20 to-amber-400/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+      </div>
+    </motion.div>
+  )
 }
 
 const SkillCard = ({ title, items, index, isExpanded, onToggle }) => {
@@ -122,7 +222,7 @@ const Skills = () => {
         </motion.div>
 
         {/* Dynamic Expanding Cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start mb-12">
           {Object.entries(skills).map(([category, items], idx) => (
             <SkillCard
               key={category}
@@ -134,6 +234,20 @@ const Skills = () => {
             />
           ))}
         </div>
+
+        {/* Floating Tech Symbols Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="mt-16"
+        >
+          <h3 className="text-2xl font-bold text-gray-100 mb-8 text-center tracking-wide">
+            My <span className="text-amber-400">Tech Stack</span>
+          </h3>
+          <FloatingTechSymbols />
+        </motion.div>
 
       </div>
     </section>
