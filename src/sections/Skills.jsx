@@ -24,16 +24,16 @@ import {
 import { skills } from '../data/portfolioData'
 
 const skillIconMap = {
-  'React.js': FaReact,
   HTML: FaHtml5,
   CSS: FaCss3Alt,
   JavaScript: FaJs,
-  Python: FaPython,
-  Java: FaJava,
-  'C++': FaCube,
+  'React.js': FaReact,
   'Node.js': FaNode,
   MongoDB: FaLeaf,
   MySQL: FaDatabase,
+  Python: FaPython,
+  Java: FaJava,
+  'C++': FaCube,
   'Git/GitHub': FaGithub,
   'VS Code': FaCode,
   Pandas: FaChartBar,
@@ -49,19 +49,19 @@ const skillIconMap = {
 const skillMeta = {
   HTML: {
     category: 'Frontend',
-    description: 'Semantic page structure and accessible markup.',
+    description: 'Semantic structure for clean and accessible interfaces.',
   },
   CSS: {
     category: 'Frontend',
-    description: 'Responsive layout, polish, and visual hierarchy.',
+    description: 'Responsive styling and premium visual hierarchy.',
   },
   JavaScript: {
     category: 'Frontend',
-    description: 'Interactive UI logic and client-side behavior.',
+    description: 'Interactive behavior and client-side logic.',
   },
   'React.js': {
     category: 'Frontend',
-    description: 'Component-based UI development with reusable patterns.',
+    description: 'Component-driven UI systems and reusable patterns.',
   },
   'Node.js': {
     category: 'Backend',
@@ -69,400 +69,360 @@ const skillMeta = {
   },
   MongoDB: {
     category: 'Backend',
-    description: 'Flexible NoSQL storage for app data layers.',
+    description: 'Flexible NoSQL storage for application data.',
   },
   MySQL: {
     category: 'Backend',
-    description: 'Structured relational data and query workflows.',
+    description: 'Structured relational storage and query workflows.',
   },
   Python: {
-    category: 'Backend & AI',
-    description: 'Automation, scripting, and machine learning workflows.',
+    category: 'Languages & AI',
+    description: 'Automation, scripting, and machine learning work.',
   },
   Java: {
-    category: 'Languages',
-    description: 'Object-oriented problem solving and application design.',
+    category: 'Languages & AI',
+    description: 'Object-oriented development and application design.',
   },
   'C++': {
-    category: 'Languages',
-    description: 'Algorithms, data structures, and performance-focused coding.',
+    category: 'Languages & AI',
+    description: 'Algorithms and efficient problem solving.',
   },
   'Git/GitHub': {
     category: 'Tools',
-    description: 'Version control and collaborative development.',
+    description: 'Version control and collaborative workflows.',
   },
   'VS Code': {
     category: 'Tools',
-    description: 'Efficient development and debugging workflow.',
+    description: 'Fast and focused development environment.',
   },
   Pandas: {
     category: 'Data',
-    description: 'Data wrangling and analysis in Python.',
+    description: 'Data analysis and transformation in Python.',
   },
   'Scikit-learn': {
     category: 'AI',
-    description: 'Model training, evaluation, and ML pipelines.',
+    description: 'Model training, evaluation, and pipelines.',
   },
   'Power BI': {
     category: 'Data',
-    description: 'Interactive dashboards and business reporting.',
+    description: 'Dashboarding and visual reporting.',
   },
   Excel: {
     category: 'Data',
-    description: 'Tabular analysis and lightweight data prep.',
+    description: 'Spreadsheet analysis and lightweight data prep.',
   },
   'Machine Learning': {
     category: 'AI',
-    description: 'Predictive modeling and intelligent automation.',
+    description: 'Predictive systems and intelligent automation.',
   },
   'Data Visualization': {
     category: 'Data',
-    description: 'Clear storytelling with charts and dashboards.',
+    description: 'Insightful charting and storytelling.',
   },
   'Problem Solving': {
     category: 'Core Skill',
-    description: 'Breaking down systems into practical solutions.',
+    description: 'Breaking down problems into clear solutions.',
   },
   'Data Structures': {
     category: 'Core Skill',
-    description: 'Logical foundations for efficient algorithms.',
+    description: 'Efficient foundations for algorithms.',
   },
 }
 
-const orbitConfigs = [
-  {
-    key: 'frontend',
-    title: 'Frontend',
-    subtitle: 'Interface, motion, and interaction',
-    radius: 'clamp(5.6rem, 10vw, 8rem)',
-    ringSize: 'clamp(18rem, 30vw, 24rem)',
-    duration: 34,
-    direction: 'normal',
-    theme: 'cyan',
-    skills: skills.frontend,
-  },
-  {
-    key: 'backend',
-    title: 'Backend',
-    subtitle: 'APIs, databases, and logic',
-    radius: 'clamp(8rem, 14vw, 11rem)',
-    ringSize: 'clamp(26rem, 40vw, 34rem)',
-    duration: 48,
-    direction: 'reverse',
-    theme: 'amber',
-    skills: skills.backend,
-  },
-  {
-    key: 'tools',
-    title: 'Tools & AI',
-    subtitle: 'Productivity, analytics, and intelligence',
-    radius: 'clamp(10.6rem, 17vw, 14rem)',
-    ringSize: 'clamp(34rem, 52vw, 44rem)',
-    duration: 60,
-    direction: 'normal',
-    theme: 'violet',
-    skills: skills.tools,
-  },
-]
-
-const backgroundParticles = [
-  { top: '12%', left: '18%', size: '3px', delay: 0 },
-  { top: '18%', left: '78%', size: '2px', delay: 0.8 },
-  { top: '32%', left: '10%', size: '2px', delay: 1.6 },
-  { top: '58%', left: '84%', size: '3px', delay: 0.4 },
-  { top: '72%', left: '22%', size: '2px', delay: 1.2 },
-  { top: '78%', left: '64%', size: '3px', delay: 2 },
-]
-
-const themeStyles = {
-  cyan: {
-    label: 'text-cyan-300',
-    glow: 'shadow-[0_0_30px_rgba(34,211,238,0.18)]',
-    border: 'border-cyan-300/20',
-    borderStrong: 'border-cyan-300/40',
-    ring: 'border-cyan-300/10',
-    accent: 'bg-cyan-300',
-    badge: 'bg-cyan-300/10 text-cyan-100 border-cyan-300/20',
-  },
-  amber: {
-    label: 'text-amber-300',
-    glow: 'shadow-[0_0_30px_rgba(251,191,36,0.18)]',
-    border: 'border-amber-300/20',
-    borderStrong: 'border-amber-300/40',
-    ring: 'border-amber-300/10',
-    accent: 'bg-amber-300',
-    badge: 'bg-amber-300/10 text-amber-100 border-amber-300/20',
-  },
-  violet: {
-    label: 'text-violet-300',
-    glow: 'shadow-[0_0_30px_rgba(167,139,250,0.18)]',
-    border: 'border-violet-300/20',
-    borderStrong: 'border-violet-300/40',
-    ring: 'border-violet-300/10',
-    accent: 'bg-violet-300',
-    badge: 'bg-violet-300/10 text-violet-100 border-violet-300/20',
-  },
+const colorByCategory = {
+  Frontend: 'text-cyan-300',
+  Backend: 'text-amber-200',
+  'Languages & AI': 'text-violet-200',
+  Tools: 'text-emerald-200',
+  Data: 'text-sky-200',
+  AI: 'text-fuchsia-200',
+  'Core Skill': 'text-zinc-100',
 }
 
-const defaultActiveSkill = {
-  name: 'React.js',
-  level: 90,
-  projects: 'Frontend Interfaces',
-  orbit: 'Frontend',
-  category: skillMeta['React.js'].category,
-  description: skillMeta['React.js'].description,
-  icon: skillIconMap['React.js'],
-}
-
-const getSkillInfo = (skill, orbit) => ({
+const skillList = [
+  ...skills.frontend,
+  ...skills.backend,
+  ...skills.tools,
+].map((skill) => ({
   ...skill,
-  orbit: orbit.title,
-  category: skillMeta[skill.name]?.category ?? orbit.subtitle,
-  description: skillMeta[skill.name]?.description ?? orbit.subtitle,
   icon: skillIconMap[skill.name] || FaTools,
-})
+  category: skillMeta[skill.name]?.category ?? 'Skill',
+  description: skillMeta[skill.name]?.description ?? skill.projects,
+}))
 
-const SkillOrbitChip = ({ skill, orbit, index, isActive, setActiveSkill, paused }) => {
-  const Icon = skillIconMap[skill.name] || FaTools
-  const angle = (360 / orbit.skills.length) * index
-  const styles = themeStyles[orbit.theme]
+const placementGrid = [
+  { x: '8%', y: '10%' },
+  { x: '28%', y: '14%' },
+  { x: '52%', y: '11%' },
+  { x: '74%', y: '16%' },
+  { x: '86%', y: '12%' },
+  { x: '12%', y: '35%' },
+  { x: '32%', y: '31%' },
+  { x: '54%', y: '33%' },
+  { x: '76%', y: '32%' },
+  { x: '88%', y: '36%' },
+  { x: '7%', y: '58%' },
+  { x: '27%', y: '54%' },
+  { x: '50%', y: '57%' },
+  { x: '70%', y: '55%' },
+  { x: '88%', y: '59%' },
+  { x: '14%', y: '79%' },
+  { x: '36%', y: '77%' },
+  { x: '57%', y: '79%' },
+  { x: '76%', y: '75%' },
+  { x: '90%', y: '80%' },
+]
 
-  return (
-    <motion.button
-      type="button"
-      onMouseEnter={() =>
-        setActiveSkill(getSkillInfo(skill, orbit))
-      }
-      onFocus={() =>
-        setActiveSkill(getSkillInfo(skill, orbit))
-      }
-      whileHover={{ scale: 1.04 }}
-      className="absolute left-1/2 top-1/2 outline-none"
-      style={{
-        transform: `translate(-50%, -50%) rotate(${angle}deg) translateX(${orbit.radius})`,
-      }}
-      aria-label={`${skill.name} skill`}
-    >
-      <motion.div
-        className={`orbit-counter-spin flex items-center gap-2 rounded-full border bg-white/[0.04] px-3.5 py-2.5 backdrop-blur-2xl transition-all duration-300 ${styles.border} ${isActive ? `${styles.glow} ${styles.borderStrong} bg-white/[0.09] shadow-[0_0_26px_rgba(255,255,255,0.08)]` : 'shadow-[0_0_14px_rgba(0,0,0,0.16)]'} ${paused ? 'paused' : ''}`}
-        style={{
-          animationDuration: `${orbit.duration}s`,
-          animationDirection: orbit.direction,
-        }}
-      >
-        <motion.div
-          className={`flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/[0.06] ${styles.ring}`}
-          animate={{
-            scale: isActive ? 1.08 : 1,
-            boxShadow: isActive
-              ? '0 0 14px rgba(251,191,36,0.16)'
-              : '0 0 0 rgba(0,0,0,0)',
-          }}
-          transition={{ duration: 0.3 }}
-        >
-          <Icon size={16} className={styles.label} />
-        </motion.div>
-        <div className="min-w-0 text-left">
-          <div className="truncate text-[0.82rem] font-semibold text-white">{skill.name}</div>
-          <div className="truncate text-[9px] uppercase tracking-[0.28em] text-white/40">
-            {orbit.title}
-          </div>
-        </div>
-      </motion.div>
-    </motion.button>
-  )
-}
+const spacingPresets = [
+  { x: [-4, 4, -4], y: [-3, 3, -3], rotate: [-1, 1, -1], duration: 8 },
+  { x: [3, -3, 3], y: [-4, 4, -4], rotate: [1, -1, 1], duration: 9 },
+  { x: [-3, 3, -3], y: [2, -2, 2], rotate: [-1, 1, -1], duration: 10 },
+  { x: [4, -4, 4], y: [3, -3, 3], rotate: [1, -1, 1], duration: 11 },
+]
 
 const Skills = () => {
-  const [activeSkill, setActiveSkill] = useState(defaultActiveSkill)
-  const [pausedOrbit, setPausedOrbit] = useState(null)
+  const [activeSkill, setActiveSkill] = useState(skillList[0])
+  const [pausedSkill, setPausedSkill] = useState(null)
 
-  const orbitSummary = useMemo(
+  const titleStats = useMemo(
     () => [
-      { label: 'Orbits', value: '3' },
-      { label: 'Skills', value: '16+' },
-      { label: 'Focus', value: 'Full Stack + AI' },
+      { label: 'Skills', value: '20+' },
+      { label: 'Themes', value: 'Dark + Gold' },
+      { label: 'Style', value: 'Futuristic Minimal' },
     ],
     []
   )
 
   return (
-    <section id="skills" className="relative flex min-h-screen items-center overflow-hidden px-6 py-24 sm:px-10">
-      <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_center,rgba(251,191,36,0.08),transparent_34%),radial-gradient(circle_at_top,rgba(34,211,238,0.08),transparent_24%),linear-gradient(to_bottom,rgba(255,255,255,0.02),transparent_20%)]" />
-      <div className="absolute inset-0 pointer-events-none opacity-30 [background-image:linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] [background-size:72px_72px]" />
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {backgroundParticles.map((particle, index) => (
-          <motion.span
-            key={`${particle.top}-${index}`}
-            className="absolute rounded-full bg-amber-200/35 blur-[1px]"
-            style={{
-              top: particle.top,
-              left: particle.left,
-              width: particle.size,
-              height: particle.size,
-            }}
-            animate={{
-              opacity: [0.15, 0.65, 0.15],
-              y: [0, -12, 0],
-            }}
-            transition={{
-              duration: 5 + index,
-              repeat: Infinity,
-              delay: particle.delay,
-              ease: 'easeInOut',
-            }}
-          />
-        ))}
+    <section id="skills" className="relative min-h-screen overflow-hidden px-6 py-24 sm:px-10">
+      <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_top,rgba(212,169,55,0.08),transparent_28%),radial-gradient(circle_at_center,rgba(56,189,248,0.04),transparent_32%),linear-gradient(to_bottom,rgba(255,255,255,0.015),transparent_22%)]" />
+      <div className="absolute inset-0 pointer-events-none opacity-25 [background-image:linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] [background-size:84px_84px]" />
+
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {skillList.slice(0, 14).map((skill, index) => {
+          const drift = spacingPresets[index % spacingPresets.length]
+          return (
+            <motion.span
+              key={`${skill.name}-particle`}
+              className="absolute rounded-full bg-white/20 blur-[1px]"
+              style={{
+                left: placementGrid[index].x,
+                top: placementGrid[index].y,
+                width: '2px',
+                height: '2px',
+              }}
+              animate={{
+                opacity: [0.15, 0.55, 0.15],
+                x: drift.x,
+                y: drift.y,
+              }}
+              transition={{
+                duration: drift.duration,
+                repeat: Infinity,
+                ease: 'easeInOut',
+              }}
+            />
+          )
+        })}
       </div>
 
-      <div className="mx-auto w-full max-w-7xl relative z-10">
+      <div className="mx-auto max-w-7xl relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 18 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.7 }}
-          className="mx-auto mb-12 max-w-3xl text-center"
+          viewport={{ once: true, amount: 0.25 }}
+          transition={{ duration: 0.6 }}
+          className="mx-auto mb-10 max-w-3xl text-center"
         >
-          <p className="mb-3 text-xs font-mono uppercase tracking-[0.55em] text-amber-300/75">
-            My Tech Stack
+          <p className="mb-3 text-xs font-mono uppercase tracking-[0.55em] text-amber-200/70">
+            Premium Tech Stack
           </p>
           <h2 className="text-4xl font-black tracking-tight text-white sm:text-5xl">
-            Solar-system style skill orbit
+            My Tech Stack
           </h2>
+          <div className="mx-auto mt-5 flex h-px w-40 items-center justify-center bg-gradient-to-r from-transparent via-amber-300/40 to-transparent" />
           <p className="mt-4 text-sm leading-7 text-white/60 sm:text-base">
-            Center: Harpreet. Inner orbit: Frontend. Middle orbit: Backend. Outer orbit: Tools &amp; AI.
+            A clean floating grid of all core skills, designed to keep the section readable, immersive, and recruiter-friendly.
           </p>
         </motion.div>
 
-        <div className="relative mx-auto aspect-square w-full max-w-[84rem] min-h-[44rem]">
-          {orbitConfigs.map((orbit) => {
-            const styles = themeStyles[orbit.theme]
-            return (
-              <div
-                key={orbit.key}
-                className={`orbit-spin absolute inset-0 ${pausedOrbit === orbit.key ? 'paused' : ''}`}
-                style={{
-                  animationDuration: `${orbit.duration}s`,
-                  animationDirection: orbit.direction,
-                  animationPlayState: pausedOrbit === orbit.key ? 'paused' : 'running',
-                }}
-                onMouseEnter={() => setPausedOrbit(orbit.key)}
-                onMouseLeave={() => setPausedOrbit(null)}
-              >
-                <div
-                  className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border ${styles.ring}`}
-                  style={{ width: orbit.ringSize, height: orbit.ringSize }}
+        <motion.div
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.7 }}
+          className="relative mx-auto overflow-hidden rounded-[2rem] border border-white/10 bg-[rgba(6,8,14,0.82)] shadow-[0_0_0_1px_rgba(255,255,255,0.04),0_24px_80px_rgba(0,0,0,0.45)] backdrop-blur-2xl"
+        >
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(212,169,55,0.08),transparent_52%),radial-gradient(circle_at_top_left,rgba(56,189,248,0.08),transparent_22%),linear-gradient(135deg,rgba(255,255,255,0.02),transparent_40%)]" />
+          <div className="absolute inset-0 opacity-35 [background-image:linear-gradient(rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.035)_1px,transparent_1px)] [background-size:120px_120px]" />
+          <div className="absolute inset-0 rounded-[2rem] border border-amber-300/10" />
+
+          <div className="relative min-h-[42rem] px-4 py-5 sm:px-6 sm:py-6 lg:px-8">
+            <div className="pointer-events-none absolute inset-x-8 top-8 h-px bg-gradient-to-r from-transparent via-amber-200/20 to-transparent" />
+            <div className="pointer-events-none absolute inset-x-8 bottom-8 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+
+            <div className="pointer-events-none absolute inset-0 overflow-hidden">
+              {[...Array(18)].map((_, index) => (
+                <motion.span
+                  key={index}
+                  className="absolute rounded-full bg-amber-100/25 blur-[0.5px]"
+                  style={{
+                    left: `${8 + ((index * 7) % 84)}%`,
+                    top: `${10 + ((index * 13) % 76)}%`,
+                    width: `${1 + (index % 3)}px`,
+                    height: `${1 + (index % 3)}px`,
+                  }}
+                  animate={{ opacity: [0.08, 0.42, 0.08], y: [-2, 2, -2] }}
+                  transition={{
+                    duration: 6 + (index % 4),
+                    repeat: Infinity,
+                    ease: 'easeInOut',
+                  }}
                 />
+              ))}
+            </div>
 
-                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-                  <div className={`rounded-full border border-white/10 bg-white/[0.03] px-4 py-1 text-[10px] uppercase tracking-[0.42em] ${styles.label}`}>
-                    {orbit.title}
+            <div className="relative h-[42rem] w-full">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.96 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.7 }}
+                className="absolute left-1/2 top-1/2 z-20 flex h-[16rem] w-[16rem] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-amber-200/18 bg-[rgba(10,12,18,0.88)] text-center shadow-[0_0_40px_rgba(212,169,55,0.08)] backdrop-blur-3xl sm:h-[17rem] sm:w-[17rem]"
+              >
+                <motion.div
+                  className="absolute inset-[-0.9rem] rounded-full border border-amber-200/20"
+                  animate={{ rotate: 360 }}
+                  transition={{ repeat: Infinity, duration: 22, ease: 'linear' }}
+                />
+                <motion.div
+                  className="absolute inset-[-1.35rem] rounded-full border border-dashed border-white/10"
+                  animate={{ rotate: -360 }}
+                  transition={{ repeat: Infinity, duration: 38, ease: 'linear' }}
+                />
+                <div className="absolute inset-[0.9rem] rounded-full border border-white/8" />
+                <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle,rgba(212,169,55,0.08),transparent_58%)]" />
+
+                <div className="relative z-10 flex flex-col items-center px-6">
+                  <div className="flex h-20 w-20 items-center justify-center rounded-full border border-amber-200/18 bg-black/35 text-3xl font-black text-white shadow-[0_0_20px_rgba(212,169,55,0.1)]">
+                    HJ
                   </div>
+                  <div className="mt-4 text-[0.7rem] font-semibold uppercase tracking-[0.42em] text-amber-100/70">
+                    Harpreet
+                  </div>
+                  <h3 className="mt-3 text-2xl font-bold text-white sm:text-[1.6rem]">
+                    Full Stack Developer
+                  </h3>
+                  <p className="mt-2 text-sm text-white/68">AI &amp; Data Enthusiast</p>
                 </div>
+              </motion.div>
 
-                {orbit.skills.map((skill, index) => {
-                  const isActive = activeSkill?.name === skill.name
-                  return (
-                    <SkillOrbitChip
-                      key={`${orbit.key}-${skill.name}`}
-                      skill={skill}
-                      orbit={orbit}
-                      index={index}
-                      isActive={isActive}
-                      paused={pausedOrbit === orbit.key}
-                      setActiveSkill={setActiveSkill}
-                    />
-                  )
-                })}
-              </div>
-            )
-          })}
-
-          <div className="absolute inset-0 flex items-center justify-center">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.92 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.8 }}
-              className="relative flex h-[clamp(15rem,24vw,21rem)] w-[clamp(15rem,24vw,21rem)] flex-col items-center justify-center rounded-full border border-amber-300/20 bg-white/[0.04] px-7 text-center backdrop-blur-3xl shadow-[0_0_42px_rgba(251,191,36,0.1)]"
-            >
-              <motion.div
-                className="absolute inset-[-1rem] rounded-full border border-amber-300/20"
-                animate={{ rotate: 360 }}
-                transition={{ repeat: Infinity, duration: 18, ease: 'linear' }}
-              />
-              <motion.div
-                className="absolute inset-[-1.9rem] rounded-full border border-dashed border-white/10"
-                animate={{ rotate: -360 }}
-                transition={{ repeat: Infinity, duration: 42, ease: 'linear' }}
-              />
-              <div className="absolute inset-4 rounded-full border border-dashed border-white/10" />
-              <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle,rgba(251,191,36,0.08),transparent_60%)]" />
-
-              <div className="relative z-10 flex flex-col items-center gap-2">
-                <div className="flex h-[5.5rem] w-[5.5rem] items-center justify-center rounded-full border border-amber-300/20 bg-black/30 text-4xl font-black tracking-tight text-white shadow-[0_0_24px_rgba(251,191,36,0.12)] orbit-glow-pulse">
-                  HJ
-                </div>
-                <div className="text-[0.68rem] font-semibold uppercase tracking-[0.5em] text-amber-200/75">
-                  Harpreet
-                </div>
-                <h3 className="text-xl font-bold text-white sm:text-2xl">Full Stack Developer</h3>
-                <p className="text-sm text-white/68">AI &amp; Data Enthusiast</p>
+              <div className="absolute inset-0">
+                <div className="absolute left-1/2 top-1/2 h-[24rem] w-[24rem] -translate-x-1/2 -translate-y-1/2 rounded-full border border-amber-200/10 sm:h-[28rem] sm:w-[28rem]" />
+                <div className="absolute left-1/2 top-1/2 h-[31rem] w-[31rem] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/8 sm:h-[35rem] sm:w-[35rem]" />
+                <div className="absolute left-1/2 top-1/2 h-[38rem] w-[38rem] -translate-x-1/2 -translate-y-1/2 rounded-full border border-amber-200/8 sm:h-[42rem] sm:w-[42rem]" />
               </div>
 
-              <div className="relative z-10 mt-5 flex flex-wrap justify-center gap-2">
-                {orbitSummary.map((item) => (
-                  <span
-                    key={item.label}
-                    className="rounded-full border border-white/10 bg-white/[0.05] px-3 py-1 text-[10px] uppercase tracking-[0.3em] text-white/70"
+              {skillList.map((skill, index) => {
+                const Icon = skill.icon
+                const gridPoint = placementGrid[index]
+                const drift = spacingPresets[index % spacingPresets.length]
+                const category = skillMeta[skill.name]?.category ?? 'Skill'
+                const description = skillMeta[skill.name]?.description ?? skill.projects
+                const isActive = activeSkill.name === skill.name
+
+                return (
+                  <motion.button
+                    key={skill.name}
+                    type="button"
+                    onMouseEnter={() => {
+                      setActiveSkill(skill)
+                      setPausedSkill(skill.name)
+                    }}
+                    onMouseLeave={() => setPausedSkill(null)}
+                    onFocus={() => setActiveSkill(skill)}
+                    onBlur={() => setPausedSkill(null)}
+                    className="absolute left-0 top-0 outline-none"
+                    style={{ left: gridPoint.x, top: gridPoint.y }}
+                    whileHover={{ scale: 1.05 }}
                   >
-                    {item.value}
-                  </span>
-                ))}
-              </div>
+                    <motion.div
+                      className={`flex items-center gap-2 rounded-full border px-3 py-2.5 backdrop-blur-xl transition-all duration-300 ${isActive ? 'border-amber-200/30 bg-white/[0.09] shadow-[0_0_18px_rgba(212,169,55,0.12)]' : 'border-white/10 bg-white/[0.04] shadow-[0_8px_24px_rgba(0,0,0,0.18)]'}`}
+                      animate={{
+                        y: pausedSkill === skill.name ? 0 : drift.y,
+                        x: pausedSkill === skill.name ? 0 : drift.x,
+                        rotate: pausedSkill === skill.name ? 0 : drift.rotate,
+                      }}
+                      transition={{
+                        duration: drift.duration,
+                        repeat: Infinity,
+                        ease: 'easeInOut',
+                      }}
+                    >
+                      <div className={`flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-black/25 ${colorByCategory[category] || 'text-white/80'}`}>
+                        <Icon size={15} />
+                      </div>
+                      <div className="min-w-0 text-left">
+                        <div className="truncate text-sm font-semibold text-white">
+                          {skill.name}
+                        </div>
+                        <div className="truncate text-[9px] uppercase tracking-[0.24em] text-white/45">
+                          {category}
+                        </div>
+                      </div>
+                    </motion.div>
+                  </motion.button>
+                )
+              })}
 
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeSkill.name}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
+                  initial={{ opacity: 0, y: 12, scale: 0.98 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 12, scale: 0.98 }}
                   transition={{ duration: 0.25 }}
-                  className="relative z-10 mt-5 w-full rounded-2xl border border-white/10 bg-black/24 px-4 py-4 shadow-[0_10px_24px_rgba(0,0,0,0.24)]"
+                  className="absolute left-1/2 bottom-8 z-30 w-[min(92vw,22rem)] -translate-x-1/2"
                 >
-                  <div className="flex items-start gap-3 text-left">
-                    <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.06] text-amber-200 shadow-[0_0_14px_rgba(251,191,36,0.1)]">
-                      <activeSkill.icon size={18} />
-                    </div>
-                    <div className="min-w-0 flex-1">
-                      <div className="text-[10px] uppercase tracking-[0.4em] text-amber-200/70">
-                        Hover Focus
+                  <div className="rounded-2xl border border-white/10 bg-[rgba(8,10,15,0.88)] px-4 py-4 shadow-[0_18px_35px_rgba(0,0,0,0.28)] backdrop-blur-2xl">
+                    <div className="flex items-start gap-3">
+                      <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.06] text-amber-100 shadow-[0_0_14px_rgba(212,169,55,0.08)]">
+                        <activeSkill.icon size={18} />
                       </div>
-                      <div className="mt-1 text-lg font-semibold text-white">{activeSkill.name}</div>
-                      <div className="mt-1 text-xs uppercase tracking-[0.28em] text-white/45">
-                        {activeSkill.category}
+                      <div className="min-w-0 flex-1">
+                        <div className="text-[10px] uppercase tracking-[0.38em] text-amber-100/70">
+                          Hover Focus
+                        </div>
+                        <div className="mt-1 text-lg font-semibold text-white">
+                          {activeSkill.name}
+                        </div>
+                        <div className="mt-1 text-xs uppercase tracking-[0.28em] text-white/45">
+                          {skillMeta[activeSkill.name]?.category ?? 'Skill'}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <p className="mt-3 text-sm leading-6 text-white/64">{activeSkill.description}</p>
-                  <div className="mt-4 flex items-center justify-between text-[11px] text-white/50">
-                    <span>{activeSkill.projects}</span>
-                    <span>{activeSkill.level}%</span>
-                  </div>
-                  <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-white/10">
-                    <motion.div
-                      key={activeSkill.name}
-                      initial={{ width: 0 }}
-                      animate={{ width: `${activeSkill.level}%` }}
-                      transition={{ duration: 0.8, ease: 'easeOut' }}
-                      className="h-full rounded-full bg-amber-300 shadow-[0_0_14px_rgba(251,191,36,0.45)]"
-                    />
+                    <p className="mt-3 text-sm leading-6 text-white/64">
+                      {skillMeta[activeSkill.name]?.description ?? activeSkill.projects}
+                    </p>
+                    <div className="mt-4 flex items-center justify-between text-[11px] text-white/50">
+                      <span>{activeSkill.projects}</span>
+                      <span>{activeSkill.level}%</span>
+                    </div>
+                    <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-white/10">
+                      <motion.div
+                        key={activeSkill.name}
+                        initial={{ width: 0 }}
+                        animate={{ width: `${activeSkill.level}%` }}
+                        transition={{ duration: 0.75, ease: 'easeOut' }}
+                        className="h-full rounded-full bg-amber-200 shadow-[0_0_12px_rgba(212,169,55,0.28)]"
+                      />
+                    </div>
                   </div>
                 </motion.div>
               </AnimatePresence>
-            </motion.div>
+            </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   )
