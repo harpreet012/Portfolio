@@ -74,6 +74,15 @@ const orbitConfigs = [
   },
 ]
 
+const backgroundParticles = [
+  { top: '12%', left: '18%', size: '3px', delay: 0 },
+  { top: '18%', left: '78%', size: '2px', delay: 0.8 },
+  { top: '32%', left: '10%', size: '2px', delay: 1.6 },
+  { top: '58%', left: '84%', size: '3px', delay: 0.4 },
+  { top: '72%', left: '22%', size: '2px', delay: 1.2 },
+  { top: '78%', left: '64%', size: '3px', delay: 2 },
+]
+
 const themeStyles = {
   cyan: {
     label: 'text-cyan-300',
@@ -142,7 +151,7 @@ const SkillOrbitChip = ({ skill, orbit, index, isActive, setActiveSkill, paused 
       aria-label={`${skill.name} skill`}
     >
       <motion.div
-        className={`orbit-counter-spin flex items-center gap-3 rounded-2xl border bg-white/[0.08] px-4 py-3 backdrop-blur-2xl transition-all duration-300 ${styles.border} ${styles.glow} ${isActive ? `${styles.borderStrong} bg-white/[0.14] shadow-[0_0_35px_rgba(255,255,255,0.12)]` : 'shadow-[0_0_22px_rgba(0,0,0,0.22)]'} ${paused ? 'paused' : ''}`}
+        className={`orbit-counter-spin flex items-center gap-3 rounded-2xl border bg-white/[0.05] px-4 py-3 backdrop-blur-2xl transition-all duration-300 ${styles.border} ${isActive ? `${styles.glow} ${styles.borderStrong} bg-white/[0.12] shadow-[0_0_35px_rgba(255,255,255,0.12)]` : 'shadow-[0_0_18px_rgba(0,0,0,0.18)]'} ${paused ? 'paused' : ''}`}
         style={{
           animationDuration: `${orbit.duration}s`,
           animationDirection: orbit.direction,
@@ -188,6 +197,30 @@ const Skills = () => {
     <section id="skills" className="relative flex min-h-screen items-center overflow-hidden px-6 py-24 sm:px-10">
       <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_center,rgba(251,191,36,0.08),transparent_34%),radial-gradient(circle_at_top,rgba(34,211,238,0.08),transparent_24%),linear-gradient(to_bottom,rgba(255,255,255,0.02),transparent_20%)]" />
       <div className="absolute inset-0 pointer-events-none opacity-30 [background-image:linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] [background-size:72px_72px]" />
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {backgroundParticles.map((particle, index) => (
+          <motion.span
+            key={`${particle.top}-${index}`}
+            className="absolute rounded-full bg-amber-200/35 blur-[1px]"
+            style={{
+              top: particle.top,
+              left: particle.left,
+              width: particle.size,
+              height: particle.size,
+            }}
+            animate={{
+              opacity: [0.15, 0.65, 0.15],
+              y: [0, -12, 0],
+            }}
+            transition={{
+              duration: 5 + index,
+              repeat: Infinity,
+              delay: particle.delay,
+              ease: 'easeInOut',
+            }}
+          />
+        ))}
+      </div>
 
       <div className="mx-auto w-full max-w-7xl relative z-10">
         <motion.div
@@ -258,13 +291,23 @@ const Skills = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.8 }}
-              className="relative flex h-[clamp(16rem,26vw,22rem)] w-[clamp(16rem,26vw,22rem)] flex-col items-center justify-center rounded-full border border-amber-300/25 bg-white/[0.06] px-8 text-center backdrop-blur-3xl shadow-[0_0_50px_rgba(251,191,36,0.16)]"
+              className="relative flex h-[clamp(16rem,26vw,22rem)] w-[clamp(16rem,26vw,22rem)] flex-col items-center justify-center rounded-full border border-amber-300/25 bg-white/[0.05] px-8 text-center backdrop-blur-3xl shadow-[0_0_50px_rgba(251,191,36,0.14)]"
             >
+              <motion.div
+                className="absolute inset-[-1rem] rounded-full border border-amber-300/20"
+                animate={{ rotate: 360 }}
+                transition={{ repeat: Infinity, duration: 18, ease: 'linear' }}
+              />
+              <motion.div
+                className="absolute inset-[-1.9rem] rounded-full border border-dashed border-white/10"
+                animate={{ rotate: -360 }}
+                transition={{ repeat: Infinity, duration: 42, ease: 'linear' }}
+              />
               <div className="absolute inset-4 rounded-full border border-dashed border-white/10" />
               <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle,rgba(251,191,36,0.08),transparent_60%)]" />
 
               <div className="relative z-10 flex flex-col items-center gap-2">
-                <div className="flex h-24 w-24 items-center justify-center rounded-full border border-amber-300/25 bg-black/30 text-4xl font-black tracking-tight text-white shadow-[0_0_35px_rgba(251,191,36,0.18)]">
+                <div className="flex h-24 w-24 items-center justify-center rounded-full border border-amber-300/25 bg-black/30 text-4xl font-black tracking-tight text-white shadow-[0_0_35px_rgba(251,191,36,0.18)] orbit-glow-pulse">
                   HJ
                 </div>
                 <div className="text-sm font-semibold uppercase tracking-[0.45em] text-amber-200/80">
