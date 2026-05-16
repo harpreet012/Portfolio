@@ -32,9 +32,10 @@ export const highlights = [
 
 export const skills = {
   frontend: [
-    { name: 'React.js', level: 90, projects: 'Frontend Interfaces' },
+    { name: 'HTML', level: 95, projects: 'Semantic UI Structure' },
+    { name: 'CSS', level: 94, projects: 'Responsive Styling' },
     { name: 'JavaScript', level: 90, projects: 'Core Logic & DOM' },
-    { name: 'HTML/CSS', level: 95, projects: 'Responsive UI Design' },
+    { name: 'React.js', level: 90, projects: 'Frontend Interfaces' },
   ],
   backend: [
     { name: 'Node.js', level: 80, projects: 'Server & APIs' },
@@ -50,8 +51,11 @@ export const skills = {
     { name: 'Pandas', level: 85, projects: 'Data Processing' },
     { name: 'Scikit-learn', level: 80, projects: 'Model Training' },
     { name: 'Power BI', level: 75, projects: 'Dashboards' },
+    { name: 'Excel', level: 78, projects: 'Data Handling' },
     { name: 'Machine Learning', level: 82, projects: 'Predictive Models' },
     { name: 'Data Visualization', level: 84, projects: 'Insight Storytelling' },
+    { name: 'Problem Solving', level: 92, projects: 'Analytical Thinking' },
+    { name: 'Data Structures', level: 88, projects: 'Algorithmic Foundations' },
   ],
 }
 

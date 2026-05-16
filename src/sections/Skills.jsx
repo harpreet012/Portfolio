@@ -6,6 +6,7 @@ import {
   FaReact,
   FaJs,
   FaHtml5,
+  FaCss3Alt,
   FaPython,
   FaJava,
   FaNode,
@@ -16,13 +17,17 @@ import {
   FaChartBar,
   FaBrain,
   FaChartPie,
+  FaFileExcel,
+  FaPuzzlePiece,
+  FaSitemap,
 } from 'react-icons/fa'
 import { skills } from '../data/portfolioData'
 
 const skillIconMap = {
   'React.js': FaReact,
+  HTML: FaHtml5,
+  CSS: FaCss3Alt,
   JavaScript: FaJs,
-  'HTML/CSS': FaHtml5,
   Python: FaPython,
   Java: FaJava,
   'C++': FaCube,
@@ -34,8 +39,94 @@ const skillIconMap = {
   Pandas: FaChartBar,
   'Scikit-learn': FaBrain,
   'Power BI': FaChartPie,
+  Excel: FaFileExcel,
   'Machine Learning': FaBrain,
   'Data Visualization': FaChartPie,
+  'Problem Solving': FaPuzzlePiece,
+  'Data Structures': FaSitemap,
+}
+
+const skillMeta = {
+  HTML: {
+    category: 'Frontend',
+    description: 'Semantic page structure and accessible markup.',
+  },
+  CSS: {
+    category: 'Frontend',
+    description: 'Responsive layout, polish, and visual hierarchy.',
+  },
+  JavaScript: {
+    category: 'Frontend',
+    description: 'Interactive UI logic and client-side behavior.',
+  },
+  'React.js': {
+    category: 'Frontend',
+    description: 'Component-based UI development with reusable patterns.',
+  },
+  'Node.js': {
+    category: 'Backend',
+    description: 'Server-side JavaScript for APIs and services.',
+  },
+  MongoDB: {
+    category: 'Backend',
+    description: 'Flexible NoSQL storage for app data layers.',
+  },
+  MySQL: {
+    category: 'Backend',
+    description: 'Structured relational data and query workflows.',
+  },
+  Python: {
+    category: 'Backend & AI',
+    description: 'Automation, scripting, and machine learning workflows.',
+  },
+  Java: {
+    category: 'Languages',
+    description: 'Object-oriented problem solving and application design.',
+  },
+  'C++': {
+    category: 'Languages',
+    description: 'Algorithms, data structures, and performance-focused coding.',
+  },
+  'Git/GitHub': {
+    category: 'Tools',
+    description: 'Version control and collaborative development.',
+  },
+  'VS Code': {
+    category: 'Tools',
+    description: 'Efficient development and debugging workflow.',
+  },
+  Pandas: {
+    category: 'Data',
+    description: 'Data wrangling and analysis in Python.',
+  },
+  'Scikit-learn': {
+    category: 'AI',
+    description: 'Model training, evaluation, and ML pipelines.',
+  },
+  'Power BI': {
+    category: 'Data',
+    description: 'Interactive dashboards and business reporting.',
+  },
+  Excel: {
+    category: 'Data',
+    description: 'Tabular analysis and lightweight data prep.',
+  },
+  'Machine Learning': {
+    category: 'AI',
+    description: 'Predictive modeling and intelligent automation.',
+  },
+  'Data Visualization': {
+    category: 'Data',
+    description: 'Clear storytelling with charts and dashboards.',
+  },
+  'Problem Solving': {
+    category: 'Core Skill',
+    description: 'Breaking down systems into practical solutions.',
+  },
+  'Data Structures': {
+    category: 'Core Skill',
+    description: 'Logical foundations for efficient algorithms.',
+  },
 }
 
 const orbitConfigs = [
@@ -43,9 +134,9 @@ const orbitConfigs = [
     key: 'frontend',
     title: 'Frontend',
     subtitle: 'Interface, motion, and interaction',
-    radius: 'clamp(6.5rem, 11vw, 9rem)',
-    ringSize: 'clamp(20rem, 34vw, 28rem)',
-    duration: 26,
+    radius: 'clamp(5.6rem, 10vw, 8rem)',
+    ringSize: 'clamp(18rem, 30vw, 24rem)',
+    duration: 34,
     direction: 'normal',
     theme: 'cyan',
     skills: skills.frontend,
@@ -54,9 +145,9 @@ const orbitConfigs = [
     key: 'backend',
     title: 'Backend',
     subtitle: 'APIs, databases, and logic',
-    radius: 'clamp(9rem, 15vw, 12rem)',
-    ringSize: 'clamp(28rem, 44vw, 38rem)',
-    duration: 36,
+    radius: 'clamp(8rem, 14vw, 11rem)',
+    ringSize: 'clamp(26rem, 40vw, 34rem)',
+    duration: 48,
     direction: 'reverse',
     theme: 'amber',
     skills: skills.backend,
@@ -65,9 +156,9 @@ const orbitConfigs = [
     key: 'tools',
     title: 'Tools & AI',
     subtitle: 'Productivity, analytics, and intelligence',
-    radius: 'clamp(11rem, 18vw, 14.5rem)',
-    ringSize: 'clamp(36rem, 56vw, 48rem)',
-    duration: 46,
+    radius: 'clamp(10.6rem, 17vw, 14rem)',
+    ringSize: 'clamp(34rem, 52vw, 44rem)',
+    duration: 60,
     direction: 'normal',
     theme: 'violet',
     skills: skills.tools,
@@ -118,8 +209,18 @@ const defaultActiveSkill = {
   level: 90,
   projects: 'Frontend Interfaces',
   orbit: 'Frontend',
-  category: 'Interface, motion, and interaction',
+  category: skillMeta['React.js'].category,
+  description: skillMeta['React.js'].description,
+  icon: skillIconMap['React.js'],
 }
+
+const getSkillInfo = (skill, orbit) => ({
+  ...skill,
+  orbit: orbit.title,
+  category: skillMeta[skill.name]?.category ?? orbit.subtitle,
+  description: skillMeta[skill.name]?.description ?? orbit.subtitle,
+  icon: skillIconMap[skill.name] || FaTools,
+})
 
 const SkillOrbitChip = ({ skill, orbit, index, isActive, setActiveSkill, paused }) => {
   const Icon = skillIconMap[skill.name] || FaTools
@@ -130,20 +231,12 @@ const SkillOrbitChip = ({ skill, orbit, index, isActive, setActiveSkill, paused 
     <motion.button
       type="button"
       onMouseEnter={() =>
-        setActiveSkill({
-          ...skill,
-          orbit: orbit.title,
-          category: orbit.subtitle,
-        })
+        setActiveSkill(getSkillInfo(skill, orbit))
       }
       onFocus={() =>
-        setActiveSkill({
-          ...skill,
-          orbit: orbit.title,
-          category: orbit.subtitle,
-        })
+        setActiveSkill(getSkillInfo(skill, orbit))
       }
-      whileHover={{ scale: 1.08 }}
+      whileHover={{ scale: 1.04 }}
       className="absolute left-1/2 top-1/2 outline-none"
       style={{
         transform: `translate(-50%, -50%) rotate(${angle}deg) translateX(${orbit.radius})`,
@@ -151,28 +244,28 @@ const SkillOrbitChip = ({ skill, orbit, index, isActive, setActiveSkill, paused 
       aria-label={`${skill.name} skill`}
     >
       <motion.div
-        className={`orbit-counter-spin flex items-center gap-3 rounded-2xl border bg-white/[0.05] px-4 py-3 backdrop-blur-2xl transition-all duration-300 ${styles.border} ${isActive ? `${styles.glow} ${styles.borderStrong} bg-white/[0.12] shadow-[0_0_35px_rgba(255,255,255,0.12)]` : 'shadow-[0_0_18px_rgba(0,0,0,0.18)]'} ${paused ? 'paused' : ''}`}
+        className={`orbit-counter-spin flex items-center gap-2 rounded-full border bg-white/[0.04] px-3.5 py-2.5 backdrop-blur-2xl transition-all duration-300 ${styles.border} ${isActive ? `${styles.glow} ${styles.borderStrong} bg-white/[0.09] shadow-[0_0_26px_rgba(255,255,255,0.08)]` : 'shadow-[0_0_14px_rgba(0,0,0,0.16)]'} ${paused ? 'paused' : ''}`}
         style={{
           animationDuration: `${orbit.duration}s`,
           animationDirection: orbit.direction,
         }}
       >
         <motion.div
-          className={`flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.06] ${styles.ring}`}
+          className={`flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/[0.06] ${styles.ring}`}
           animate={{
             scale: isActive ? 1.08 : 1,
             boxShadow: isActive
-              ? '0 0 18px rgba(251,191,36,0.25)'
+              ? '0 0 14px rgba(251,191,36,0.16)'
               : '0 0 0 rgba(0,0,0,0)',
           }}
           transition={{ duration: 0.3 }}
         >
-          <Icon size={18} className={styles.label} />
+          <Icon size={16} className={styles.label} />
         </motion.div>
         <div className="min-w-0 text-left">
-          <div className="truncate text-sm font-semibold text-white">{skill.name}</div>
-          <div className="truncate text-[10px] uppercase tracking-[0.32em] text-white/45">
-            {skill.projects}
+          <div className="truncate text-[0.82rem] font-semibold text-white">{skill.name}</div>
+          <div className="truncate text-[9px] uppercase tracking-[0.28em] text-white/40">
+            {orbit.title}
           </div>
         </div>
       </motion.div>
@@ -291,7 +384,7 @@ const Skills = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.8 }}
-              className="relative flex h-[clamp(16rem,26vw,22rem)] w-[clamp(16rem,26vw,22rem)] flex-col items-center justify-center rounded-full border border-amber-300/25 bg-white/[0.05] px-8 text-center backdrop-blur-3xl shadow-[0_0_50px_rgba(251,191,36,0.14)]"
+              className="relative flex h-[clamp(15rem,24vw,21rem)] w-[clamp(15rem,24vw,21rem)] flex-col items-center justify-center rounded-full border border-amber-300/20 bg-white/[0.04] px-7 text-center backdrop-blur-3xl shadow-[0_0_42px_rgba(251,191,36,0.1)]"
             >
               <motion.div
                 className="absolute inset-[-1rem] rounded-full border border-amber-300/20"
@@ -307,14 +400,14 @@ const Skills = () => {
               <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle,rgba(251,191,36,0.08),transparent_60%)]" />
 
               <div className="relative z-10 flex flex-col items-center gap-2">
-                <div className="flex h-24 w-24 items-center justify-center rounded-full border border-amber-300/25 bg-black/30 text-4xl font-black tracking-tight text-white shadow-[0_0_35px_rgba(251,191,36,0.18)] orbit-glow-pulse">
+                <div className="flex h-[5.5rem] w-[5.5rem] items-center justify-center rounded-full border border-amber-300/20 bg-black/30 text-4xl font-black tracking-tight text-white shadow-[0_0_24px_rgba(251,191,36,0.12)] orbit-glow-pulse">
                   HJ
                 </div>
-                <div className="text-sm font-semibold uppercase tracking-[0.45em] text-amber-200/80">
+                <div className="text-[0.68rem] font-semibold uppercase tracking-[0.5em] text-amber-200/75">
                   Harpreet
                 </div>
-                <h3 className="text-2xl font-bold text-white">Full Stack Developer</h3>
-                <p className="text-sm text-white/70">AI &amp; Data Enthusiast</p>
+                <h3 className="text-xl font-bold text-white sm:text-2xl">Full Stack Developer</h3>
+                <p className="text-sm text-white/68">AI &amp; Data Enthusiast</p>
               </div>
 
               <div className="relative z-10 mt-5 flex flex-wrap justify-center gap-2">
@@ -335,17 +428,24 @@ const Skills = () => {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
                   transition={{ duration: 0.25 }}
-                  className="relative z-10 mt-6 w-full rounded-2xl border border-white/10 bg-black/20 px-4 py-4"
+                  className="relative z-10 mt-5 w-full rounded-2xl border border-white/10 bg-black/24 px-4 py-4 shadow-[0_10px_24px_rgba(0,0,0,0.24)]"
                 >
-                  <div className="text-[10px] uppercase tracking-[0.4em] text-amber-200/70">
-                    Active Skill
+                  <div className="flex items-start gap-3 text-left">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.06] text-amber-200 shadow-[0_0_14px_rgba(251,191,36,0.1)]">
+                      <activeSkill.icon size={18} />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <div className="text-[10px] uppercase tracking-[0.4em] text-amber-200/70">
+                        Hover Focus
+                      </div>
+                      <div className="mt-1 text-lg font-semibold text-white">{activeSkill.name}</div>
+                      <div className="mt-1 text-xs uppercase tracking-[0.28em] text-white/45">
+                        {activeSkill.category}
+                      </div>
+                    </div>
                   </div>
-                  <div className="mt-2 text-lg font-semibold text-white">{activeSkill.name}</div>
-                  <div className="mt-1 text-xs uppercase tracking-[0.3em] text-white/45">
-                    {activeSkill.orbit}
-                  </div>
-                  <p className="mt-3 text-sm leading-6 text-white/65">{activeSkill.category}</p>
-                  <div className="mt-4 flex items-center justify-between text-xs text-white/55">
+                  <p className="mt-3 text-sm leading-6 text-white/64">{activeSkill.description}</p>
+                  <div className="mt-4 flex items-center justify-between text-[11px] text-white/50">
                     <span>{activeSkill.projects}</span>
                     <span>{activeSkill.level}%</span>
                   </div>
