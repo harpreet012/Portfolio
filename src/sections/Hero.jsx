@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion'
-import { heroRoles } from '../data/portfolioData'
 
 const Hero = () => {
 
@@ -62,13 +61,6 @@ const Hero = () => {
           </a>
         </motion.div>
 
-        {/* Tech Symbols */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.2 }}
-          className="mt-16 flex justify-center gap-8 flex-wrap max-w-2xl"
-        >
         {/* Bottom Left Status */}
         <motion.div
           initial={{ opacity: 0 }}

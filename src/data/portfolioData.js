@@ -37,16 +37,21 @@ export const skills = {
     { name: 'HTML/CSS', level: 95, projects: 'Responsive UI Design' },
   ],
   backend: [
+    { name: 'Node.js', level: 80, projects: 'Server & APIs' },
     { name: 'Python', level: 85, projects: 'ML & Automation' },
     { name: 'Java', level: 80, projects: 'OOP & Scalability' },
     { name: 'C++', level: 75, projects: 'DSA & Systems' },
-    { name: 'Node.js', level: 80, projects: 'Server & APIs' },
+    { name: 'MongoDB', level: 78, projects: 'NoSQL Databases' },
+    { name: 'MySQL', level: 76, projects: 'Relational Databases' },
   ],
   tools: [
     { name: 'Git/GitHub', level: 90, projects: 'Version Control' },
+    { name: 'VS Code', level: 95, projects: 'Dev Workflow' },
     { name: 'Pandas', level: 85, projects: 'Data Processing' },
     { name: 'Scikit-learn', level: 80, projects: 'Model Training' },
     { name: 'Power BI', level: 75, projects: 'Dashboards' },
+    { name: 'Machine Learning', level: 82, projects: 'Predictive Models' },
+    { name: 'Data Visualization', level: 84, projects: 'Insight Storytelling' },
   ],
 }
 

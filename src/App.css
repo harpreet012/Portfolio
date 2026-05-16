@@ -25,6 +25,68 @@
   .vite {
     inset-inline: 0;
     margin: 0 auto;
+
+@keyframes orbitSpin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes orbitSpinReverse {
+  from {
+    transform: rotate(360deg);
+  }
+
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes orbitPulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+
+  50% {
+    transform: scale(1.04);
+    opacity: 1;
+  }
+}
+
+.orbit-spin {
+  animation-name: orbitSpin;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform;
+}
+
+.orbit-spin-reverse {
+  animation-name: orbitSpinReverse;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform;
+}
+
+.orbit-counter-spin {
+  animation-name: orbitSpinReverse;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform;
+}
+
+.paused {
+  animation-play-state: paused;
+}
+
+.orbit-glow-pulse {
+  animation: orbitPulse 6s ease-in-out infinite;
+}
   }
 
   .base {
