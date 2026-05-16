@@ -52,13 +52,21 @@ export const skills = {
 
 export const techIcons = [
   { id: 1, name: 'React', icon: 'FaReact', color: '#61dafb', delay: 0 },
-  { id: 2, name: 'Python', icon: 'FaPython', color: '#3776ab', delay: 0.1 },
-  { id: 3, name: 'Node.js', icon: 'FaNode', color: '#68a063', delay: 0.2 },
-  { id: 4, name: 'Git', icon: 'FaGitAlt', color: '#f1502f', delay: 0.3 },
-  { id: 5, name: 'Java', icon: 'FaJava', color: '#007396', delay: 0.4 },
-  { id: 6, name: 'JavaScript', icon: 'FaJs', color: '#f7df1e', delay: 0.5 },
-  { id: 7, name: 'HTML5', icon: 'FaHtml5', color: '#e34c26', delay: 0.6 },
-  { id: 8, name: 'CSS3', icon: 'FaCss3Alt', color: '#563d7c', delay: 0.7 },
+  { id: 2, name: 'Python', icon: 'FaPython', color: '#3776ab', delay: 0.08 },
+  { id: 3, name: 'Node.js', icon: 'FaNode', color: '#68a063', delay: 0.16 },
+  { id: 4, name: 'Git', icon: 'FaGitAlt', color: '#f1502f', delay: 0.24 },
+  { id: 5, name: 'Java', icon: 'FaJava', color: '#007396', delay: 0.32 },
+  { id: 6, name: 'JavaScript', icon: 'FaJs', color: '#f7df1e', delay: 0.4 },
+  { id: 7, name: 'HTML5', icon: 'FaHtml5', color: '#e34c26', delay: 0.48 },
+  { id: 8, name: 'CSS3', icon: 'FaCss3Alt', color: '#563d7c', delay: 0.56 },
+  { id: 9, name: 'C++', icon: 'FaCube', color: '#00599c', delay: 0.64 },
+  { id: 10, name: 'MongoDB', icon: 'FaLeaf', color: '#13aa52', delay: 0.72 },
+  { id: 11, name: 'MySQL', icon: 'FaDatabase', color: '#0052cc', delay: 0.8 },
+  { id: 12, name: 'GitHub', icon: 'FaGithub', color: '#ffffff', delay: 0.88 },
+  { id: 13, name: 'VS Code', icon: 'FaCode', color: '#0078d4', delay: 0.96 },
+  { id: 14, name: 'Pandas', icon: 'FaChartBar', color: '#150458', delay: 1.04 },
+  { id: 15, name: 'ML', icon: 'FaBrain', color: '#00d4ff', delay: 1.12 },
+  { id: 16, name: 'Data Viz', icon: 'FaChartPie', color: '#f39c12', delay: 1.2 },
 ]
 
 export const projects = [
