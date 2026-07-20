@@ -1,5 +1,5 @@
-import { useMemo, useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import React, { useEffect, useRef, useState, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   FaCode,
   FaTools,
@@ -11,419 +11,1132 @@ import {
   FaJava,
   FaNode,
   FaGithub,
-  FaCube,
-  FaLeaf,
   FaDatabase,
-  FaChartBar,
-  FaBrain,
   FaChartPie,
-  FaFileExcel,
-  FaPuzzlePiece,
   FaSitemap,
-} from 'react-icons/fa'
-import { skills } from '../data/portfolioData'
+  FaBootstrap,
+  FaNetworkWired,
+  FaLayerGroup,
+  FaTerminal,
+  FaLaptop,
+  FaSyncAlt,
+  FaDocker,
+  FaServer,
+  FaBrain,
+} from "react-icons/fa";
+import {
+  SiTailwindcss,
+  SiExpress,
+  SiSpring,
+  SiApachekafka,
+  SiMongodb,
+  SiMysql,
+  SiPostman,
+  SiVercel,
+  SiRender,
+  SiJsonwebtokens,
+  SiCplusplus,
+} from "react-icons/si";
 
-const skillIconMap = {
-  HTML: FaHtml5,
-  CSS: FaCss3Alt,
-  JavaScript: FaJs,
-  'React.js': FaReact,
-  'Node.js': FaNode,
-  MongoDB: FaLeaf,
-  MySQL: FaDatabase,
-  Python: FaPython,
-  Java: FaJava,
-  'C++': FaCube,
-  'Git/GitHub': FaGithub,
-  'VS Code': FaCode,
-  Pandas: FaChartBar,
-  'Scikit-learn': FaBrain,
-  'Power BI': FaChartPie,
-  Excel: FaFileExcel,
-  'Machine Learning': FaBrain,
-  'Data Visualization': FaChartPie,
-  'Problem Solving': FaPuzzlePiece,
-  'Data Structures': FaSitemap,
-}
+// ─── Skills data with official brand colors ─────────────────────────────────
+const ALL_SKILLS = [
+  {
+    name: "Java",
+    icon: FaJava,
+    color: "#f89820",
+    cat: "Backend",
+    level: 85,
+    rel: "Spring Boot, OOP, JDBC",
+    desc: "Object-oriented development, multi-threading, and enterprise software.",
+  },
+  {
+    name: "JavaScript",
+    icon: FaJs,
+    color: "#f7df1e",
+    cat: "Frontend",
+    level: 90,
+    rel: "ES6+, Async, DOM, React",
+    desc: "Interactive client-side behaviors and asynchronous event loops.",
+  },
+  {
+    name: "SQL",
+    icon: FaDatabase,
+    color: "#00aff0",
+    cat: "Database",
+    level: 82,
+    rel: "MySQL, Schema Design, Queries",
+    desc: "Relational query optimization, indexing, and transactional integrity.",
+  },
+  {
+    name: "C++",
+    icon: SiCplusplus,
+    color: "#00599c",
+    cat: "Languages",
+    level: 75,
+    rel: "DSA, Systems, Low-level Memory",
+    desc: "Low-level system controls and algorithmic optimization.",
+  },
+  {
+    name: "Python",
+    icon: FaPython,
+    color: "#3776ab",
+    cat: "Languages",
+    level: 80,
+    rel: "Machine Learning, Pandas, Scipy",
+    desc: "Machine learning pipelines, scripting, and data transformation.",
+  },
+  {
+    name: "React.js",
+    icon: FaReact,
+    color: "#61dafb",
+    cat: "Frontend",
+    level: 90,
+    rel: "Hooks, Context, Redux, Next.js",
+    desc: "Component architecture, hooks, and virtual DOM reconciliation.",
+  },
+  {
+    name: "HTML5",
+    icon: FaHtml5,
+    color: "#e34c26",
+    cat: "Frontend",
+    level: 95,
+    rel: "Semantic UI, DOM, SEO",
+    desc: "Semantic layouts, SEO compliance, and modern DOM elements.",
+  },
+  {
+    name: "CSS3",
+    icon: FaCss3Alt,
+    color: "#1572b6",
+    cat: "Frontend",
+    level: 94,
+    rel: "Flexbox, Grid, Responsive Design",
+    desc: "Fluid grids, Flexbox, transitions, and keyframe animations.",
+  },
+  {
+    name: "Tailwind CSS",
+    icon: SiTailwindcss,
+    color: "#06b6d4",
+    cat: "Frontend",
+    level: 88,
+    rel: "Utility-first classes, Config, Custom themes",
+    desc: "Utility-first CSS styling for rapid responsive layouts.",
+  },
+  {
+    name: "Bootstrap",
+    icon: FaBootstrap,
+    color: "#7952b3",
+    cat: "Frontend",
+    level: 85,
+    rel: "Grid layouts, Templates, Alerts",
+    desc: "Responsive grid systems and template UI components.",
+  },
+  {
+    name: "Node.js",
+    icon: FaNode,
+    color: "#3c9c3c",
+    cat: "Backend",
+    level: 80,
+    rel: "Express, REST APIs, V8 runtime",
+    desc: "Event-driven async backend scripting and server runtimes.",
+  },
+  {
+    name: "Express.js",
+    icon: SiExpress,
+    color: "#ffffff",
+    cat: "Backend",
+    level: 82,
+    rel: "REST API, Routing, Middlewares",
+    desc: "RESTful API routes, middleware, and request-response handling.",
+  },
+  {
+    name: "Spring Boot",
+    icon: SiSpring,
+    color: "#6db33f",
+    cat: "Backend",
+    level: 78,
+    rel: "Java, Dependency Injection, Microservices",
+    desc: "Java MVC, dependency injection, and secure microservices.",
+  },
+  {
+    name: "Kafka",
+    icon: SiApachekafka,
+    color: "#ffffff",
+    cat: "Backend",
+    level: 75,
+    rel: "Event Streaming, Broker, Pipeline",
+    desc: "Distributed event streaming and high-throughput pipelines.",
+  },
+  {
+    name: "MongoDB",
+    icon: SiMongodb,
+    color: "#47a248",
+    cat: "Database",
+    level: 78,
+    rel: "NoSQL, Document Model, Queries",
+    desc: "NoSQL document storage, flexible schemas, and aggregation.",
+  },
+  {
+    name: "MySQL",
+    icon: SiMysql,
+    color: "#00758f",
+    cat: "Database",
+    level: 76,
+    rel: "Relational database, Foreign keys, SQL",
+    desc: "Relational DB setups, table relations, and SQL queries.",
+  },
+  {
+    name: "DSA",
+    icon: FaSitemap,
+    color: "#facc15",
+    cat: "Core CS",
+    level: 88,
+    rel: "Sorting, Searching, Trees, Graphs",
+    desc: "Time complexity, sorting/searching algorithms, trees, graphs.",
+  },
+  {
+    name: "OOP",
+    icon: FaLayerGroup,
+    color: "#fb923c",
+    cat: "Core CS",
+    level: 85,
+    rel: "Inheritance, Polymorphism, Abstraction",
+    desc: "Encapsulation, inheritance, polymorphism, and modular design.",
+  },
+  {
+    name: "DBMS",
+    icon: FaDatabase,
+    color: "#a78bfa",
+    cat: "Core CS",
+    level: 80,
+    rel: "Normalization, ACID, SQL Theory",
+    desc: "Database modeling, transactions, and normalization theory.",
+  },
+  {
+    name: "OS",
+    icon: FaTerminal,
+    color: "#34d399",
+    cat: "Core CS",
+    level: 75,
+    rel: "CPU Scheduling, Threads, File system",
+    desc: "Process scheduling, memory management, and file systems.",
+  },
+  {
+    name: "Networks",
+    icon: FaNetworkWired,
+    color: "#60a5fa",
+    cat: "Core CS",
+    level: 78,
+    rel: "TCP/IP, Sockets, HTTP, DNS",
+    desc: "TCP/IP layers, routing protocols, and client-server comms.",
+  },
+  {
+    name: "Git",
+    icon: FaTools,
+    color: "#f05032",
+    cat: "Tools",
+    level: 90,
+    rel: "Branches, Merging, Rebase, Log",
+    desc: "Distributed version control, branching, and pull requests.",
+  },
+  {
+    name: "GitHub",
+    icon: FaGithub,
+    color: "#ffffff",
+    cat: "Tools",
+    level: 90,
+    rel: "PRs, Actions, Projects, Settings",
+    desc: "Remote repositories, code reviews, and CI workflows.",
+  },
+  {
+    name: "Docker",
+    icon: FaDocker,
+    color: "#2496ed",
+    cat: "Tools",
+    level: 80,
+    rel: "Containers, Compose, Volumes",
+    desc: "Container builds, volumes, ports, and containerized runtimes.",
+  },
+  {
+    name: "VS Code",
+    icon: FaCode,
+    color: "#007acc",
+    cat: "Tools",
+    level: 95,
+    rel: "Extensions, Settings, Keybindings",
+    desc: "IDE environments, terminal scripting, and editor extensions.",
+  },
+  {
+    name: "Postman",
+    icon: SiPostman,
+    color: "#ff6c37",
+    cat: "Tools",
+    level: 85,
+    rel: "Collections, Environments, API Test",
+    desc: "Endpoint validation, API testing, and collection variables.",
+  },
+  {
+    name: "Vercel",
+    icon: SiVercel,
+    color: "#ffffff",
+    cat: "Tools",
+    level: 85,
+    rel: "Frontend deployment, Domains, Functions",
+    desc: "Automatic deployments, serverless functions, and CDN hosting.",
+  },
+  {
+    name: "Render",
+    icon: SiRender,
+    color: "#46e3b7",
+    cat: "Tools",
+    level: 80,
+    rel: "Webservices, Cloud DB, Auto-builds",
+    desc: "Backend hosting, database hosting, and automated deployments.",
+  },
+  {
+    name: "Power BI",
+    icon: FaChartPie,
+    color: "#f2c811",
+    cat: "Tools",
+    level: 75,
+    rel: "Reports, DAX measures, Data Model",
+    desc: "DAX measures, data loading, and interactive dashboards.",
+  },
+  {
+    name: "RESTful APIs",
+    icon: FaServer,
+    color: "#a855f7",
+    cat: "Concepts",
+    level: 88,
+    rel: "HTTP status, Methods, JSON schemas",
+    desc: "HTTP methods, status codes, and standard resource schemas.",
+  },
+  {
+    name: "JWT Auth",
+    icon: SiJsonwebtokens,
+    color: "#d63aff",
+    cat: "Concepts",
+    level: 82,
+    rel: "Access tokens, Refresh, Signature",
+    desc: "Stateless session encryption, signature keys, and middleware.",
+  },
+  {
+    name: "MVC",
+    icon: FaSitemap,
+    color: "#e879f9",
+    cat: "Concepts",
+    level: 85,
+    rel: "Controller, Model, Data binds",
+    desc: "Model-View-Controller, routing, and data binding separation.",
+  },
+  {
+    name: "Responsive Design",
+    icon: FaLaptop,
+    color: "#38bdf8",
+    cat: "Concepts",
+    level: 92,
+    rel: "Media queries, Flex layouts, Viewport",
+    desc: "Media queries, mobile-first design, and fluid layouts.",
+  },
+  {
+    name: "Agile",
+    icon: FaSyncAlt,
+    color: "#4ade80",
+    cat: "Concepts",
+    level: 80,
+    rel: "Scrum, Sprint planning, Backlogs",
+    desc: "Scrum, sprint plans, daily standups, and backlog updates.",
+  },
+];
 
-const skillMeta = {
-  HTML: {
-    category: 'Frontend',
-    description: 'Semantic structure for clean and accessible interfaces.',
-  },
-  CSS: {
-    category: 'Frontend',
-    description: 'Responsive styling and premium visual hierarchy.',
-  },
-  JavaScript: {
-    category: 'Frontend',
-    description: 'Interactive behavior and client-side logic.',
-  },
-  'React.js': {
-    category: 'Frontend',
-    description: 'Component-driven UI systems and reusable patterns.',
-  },
-  'Node.js': {
-    category: 'Backend',
-    description: 'Server-side JavaScript for APIs and services.',
-  },
-  MongoDB: {
-    category: 'Backend',
-    description: 'Flexible NoSQL storage for application data.',
-  },
-  MySQL: {
-    category: 'Backend',
-    description: 'Structured relational storage and query workflows.',
-  },
-  Python: {
-    category: 'Languages & AI',
-    description: 'Automation, scripting, and machine learning work.',
-  },
-  Java: {
-    category: 'Languages & AI',
-    description: 'Object-oriented development and application design.',
-  },
-  'C++': {
-    category: 'Languages & AI',
-    description: 'Algorithms and efficient problem solving.',
-  },
-  'Git/GitHub': {
-    category: 'Tools',
-    description: 'Version control and collaborative workflows.',
-  },
-  'VS Code': {
-    category: 'Tools',
-    description: 'Fast and focused development environment.',
-  },
-  Pandas: {
-    category: 'Data',
-    description: 'Data analysis and transformation in Python.',
-  },
-  'Scikit-learn': {
-    category: 'AI',
-    description: 'Model training, evaluation, and pipelines.',
-  },
-  'Power BI': {
-    category: 'Data',
-    description: 'Dashboarding and visual reporting.',
-  },
-  Excel: {
-    category: 'Data',
-    description: 'Spreadsheet analysis and lightweight data prep.',
-  },
-  'Machine Learning': {
-    category: 'AI',
-    description: 'Predictive systems and intelligent automation.',
-  },
-  'Data Visualization': {
-    category: 'Data',
-    description: 'Insightful charting and storytelling.',
-  },
-  'Problem Solving': {
-    category: 'Core Skill',
-    description: 'Breaking down problems into clear solutions.',
-  },
-  'Data Structures': {
-    category: 'Core Skill',
-    description: 'Efficient foundations for algorithms.',
-  },
-}
+// ─── Visual Constants ───────────────────────────────────────────────────────
+const ORB_SIZE = 68;
 
-const colorByCategory = {
-  Frontend: 'text-cyan-300',
-  Backend: 'text-amber-200',
-  'Languages & AI': 'text-violet-200',
-  Tools: 'text-emerald-200',
-  Data: 'text-sky-200',
-  AI: 'text-fuchsia-200',
-  'Core Skill': 'text-zinc-100',
-}
+// ─── Tooltip Panel (floats in sync inside the translated parent wrapper) ───
+const TooltipPanel = ({ skill, p, containerWidth, containerHeight }) => {
+  if (!skill) return null;
+  const Icon = skill.icon;
+  const panelWidth = 240;
+  const panelHeight = 155;
 
-const skillList = [
-  ...skills.frontend,
-  ...skills.backend,
-  ...skills.tools,
-].map((skill) => ({
-  ...skill,
-  icon: skillIconMap[skill.name] || FaTools,
-  category: skillMeta[skill.name]?.category ?? 'Skill',
-  description: skillMeta[skill.name]?.description ?? skill.projects,
-}))
+  // Base positions are already in pixels
+  const baseRx = p.x;
+  const baseRy = p.y;
 
-const placementGrid = [
-  { x: '8%', y: '10%' },
-  { x: '28%', y: '14%' },
-  { x: '52%', y: '11%' },
-  { x: '74%', y: '16%' },
-  { x: '86%', y: '12%' },
-  { x: '12%', y: '35%' },
-  { x: '32%', y: '31%' },
-  { x: '54%', y: '33%' },
-  { x: '76%', y: '32%' },
-  { x: '88%', y: '36%' },
-  { x: '7%', y: '58%' },
-  { x: '27%', y: '54%' },
-  { x: '50%', y: '57%' },
-  { x: '70%', y: '55%' },
-  { x: '88%', y: '59%' },
-  { x: '14%', y: '79%' },
-  { x: '36%', y: '77%' },
-  { x: '57%', y: '79%' },
-  { x: '76%', y: '75%' },
-  { x: '90%', y: '80%' },
-]
+  // Flip tooltip above the orb if too close to bottom boundary
+  const flip = baseRy + 42 + panelHeight > containerHeight - 15;
 
-const spacingPresets = [
-  { x: [-4, 4, -4], y: [-3, 3, -3], rotate: [-1, 1, -1], duration: 8 },
-  { x: [3, -3, 3], y: [-4, 4, -4], rotate: [1, -1, 1], duration: 9 },
-  { x: [-3, 3, -3], y: [2, -2, 2], rotate: [-1, 1, -1], duration: 10 },
-  { x: [4, -4, 4], y: [3, -3, 3], rotate: [1, -1, 1], duration: 11 },
-]
-
-const Skills = () => {
-  const [selectedSkill, setSelectedSkill] = useState(skillList[0])
-  const [pausedSkill, setPausedSkill] = useState(null)
-
-  const titleStats = useMemo(
-    () => [
-      { label: 'Skills', value: '20+' },
-      { label: 'Themes', value: 'Dark + Gold' },
-      { label: 'Style', value: 'Futuristic Minimal' },
-    ],
-    []
-  )
+  // Compute horizontal clamping offsets to keep the tooltip fully inside HUD bounds
+  let shiftX = 0;
+  const halfWidth = panelWidth / 2;
+  const margin = 15;
+  if (baseRx < halfWidth + margin) {
+    shiftX = halfWidth + margin - baseRx;
+  } else if (baseRx > containerWidth - (halfWidth + margin)) {
+    shiftX = containerWidth - (halfWidth + margin) - baseRx;
+  }
 
   return (
-    <section id="skills" className="relative min-h-screen overflow-hidden px-6 py-24 sm:px-10">
-      <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_top,rgba(212,169,55,0.08),transparent_28%),radial-gradient(circle_at_center,rgba(56,189,248,0.04),transparent_32%),linear-gradient(to_bottom,rgba(255,255,255,0.015),transparent_22%)]" />
-      <div className="absolute inset-0 pointer-events-none opacity-25 [background-image:linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] [background-size:84px_84px]" />
-
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {skillList.slice(0, 14).map((skill, index) => {
-          const drift = spacingPresets[index % spacingPresets.length]
-          return (
-            <motion.span
-              key={`${skill.name}-particle`}
-              className="absolute rounded-full bg-white/20 blur-[1px]"
-              style={{
-                left: placementGrid[index].x,
-                top: placementGrid[index].y,
-                width: '2px',
-                height: '2px',
-              }}
-              animate={{
-                opacity: [0.15, 0.55, 0.15],
-                x: drift.x,
-                y: drift.y,
-              }}
-              transition={{
-                duration: drift.duration,
-                repeat: Infinity,
-                ease: 'easeInOut',
-              }}
-            />
-          )
-        })}
-      </div>
-
-      <div className="mx-auto max-w-7xl relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.25 }}
-          transition={{ duration: 0.6 }}
-          className="mx-auto mb-10 max-w-3xl text-center"
+    <AnimatePresence>
+      <motion.div
+        key={skill.name}
+        initial={{ opacity: 0, y: flip ? -8 : 8, scale: 0.94 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.94 }}
+        transition={{ duration: 0.2, ease: "easeOut" }}
+        style={{
+          position: "absolute",
+          left: "50%",
+          top: flip ? -panelHeight - 12 : ORB_SIZE + 12,
+          transform: `translateX(calc(-50% + ${shiftX}px))`,
+          width: panelWidth,
+          zIndex: 80,
+          pointerEvents: "none",
+        }}
+      >
+        <div
+          style={{
+            background: "rgba(10, 10, 15, 0.96)",
+            border: `1px solid ${skill.color}45`,
+            borderRadius: 14,
+            padding: "12px 14px 10px",
+            boxShadow: `0 16px 40px rgba(0,0,0,0.85), 0 0 24px ${skill.color}15`,
+            backdropFilter: "blur(20px)",
+            WebkitBackdropFilter: "blur(20px)",
+          }}
         >
-          <p className="mb-3 text-xs font-mono uppercase tracking-[0.55em] text-amber-200/70">
-            Premium Tech Stack
-          </p>
-          <h2 className="text-4xl font-black tracking-tight text-white sm:text-5xl">
-            My Tech Stack
-          </h2>
-          <div className="mx-auto mt-5 flex h-px w-40 items-center justify-center bg-gradient-to-r from-transparent via-amber-300/40 to-transparent" />
-          <p className="mt-4 text-sm leading-7 text-white/60 sm:text-base">
-            A clean floating grid of all core skills, designed to keep the section readable, immersive, and recruiter-friendly.
-          </p>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 28 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.7 }}
-          className="relative mx-auto overflow-hidden rounded-[2rem] border border-white/10 bg-[rgba(6,8,14,0.82)] shadow-[0_0_0_1px_rgba(255,255,255,0.04),0_24px_80px_rgba(0,0,0,0.45)] backdrop-blur-2xl"
-        >
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(212,169,55,0.08),transparent_52%),radial-gradient(circle_at_top_left,rgba(56,189,248,0.08),transparent_22%),linear-gradient(135deg,rgba(255,255,255,0.02),transparent_40%)]" />
-          <div className="absolute inset-0 opacity-35 [background-image:linear-gradient(rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.035)_1px,transparent_1px)] [background-size:120px_120px]" />
-          <div className="absolute inset-0 rounded-[2rem] border border-amber-300/10" />
-
-          <div className="relative min-h-[42rem] px-4 py-5 sm:px-6 sm:py-6 lg:px-8">
-            <div className="pointer-events-none absolute inset-x-8 top-8 h-px bg-gradient-to-r from-transparent via-amber-200/20 to-transparent" />
-            <div className="pointer-events-none absolute inset-x-8 bottom-8 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-
-            <div className="pointer-events-none absolute inset-0 overflow-hidden">
-              {[...Array(18)].map((_, index) => (
-                <motion.span
-                  key={index}
-                  className="absolute rounded-full bg-amber-100/25 blur-[0.5px]"
-                  style={{
-                    left: `${8 + ((index * 7) % 84)}%`,
-                    top: `${10 + ((index * 13) % 76)}%`,
-                    width: `${1 + (index % 3)}px`,
-                    height: `${1 + (index % 3)}px`,
-                  }}
-                  animate={{ opacity: [0.08, 0.42, 0.08], y: [-2, 2, -2] }}
-                  transition={{
-                    duration: 6 + (index % 4),
-                    repeat: Infinity,
-                    ease: 'easeInOut',
-                  }}
-                />
-              ))}
-            </div>
-
-            <div className="relative h-[42rem] w-full">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.96 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.7 }}
-                className="absolute left-1/2 top-1/2 z-20 flex h-[16rem] w-[16rem] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-amber-200/18 bg-[rgba(10,12,18,0.88)] text-center shadow-[0_0_40px_rgba(212,169,55,0.08)] backdrop-blur-3xl sm:h-[17rem] sm:w-[17rem]"
+          {/* Header row */}
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              marginBottom: 8,
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+              <Icon
+                size={18}
+                style={{
+                  color: skill.color,
+                  filter: `drop-shadow(0 0 5px ${skill.color})`,
+                }}
+              />
+              <span
+                style={{
+                  color: "#fff",
+                  fontWeight: 700,
+                  fontSize: 12.5,
+                  letterSpacing: "0.02em",
+                }}
               >
-                <motion.div
-                  className="absolute inset-[-0.9rem] rounded-full border border-amber-200/20"
-                  animate={{ rotate: 360 }}
-                  transition={{ repeat: Infinity, duration: 22, ease: 'linear' }}
-                />
-                <motion.div
-                  className="absolute inset-[-1.35rem] rounded-full border border-dashed border-white/10"
-                  animate={{ rotate: -360 }}
-                  transition={{ repeat: Infinity, duration: 38, ease: 'linear' }}
-                />
-                <div className="absolute inset-[0.9rem] rounded-full border border-white/8" />
-                <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle,rgba(212,169,55,0.08),transparent_58%)]" />
+                {skill.name}
+              </span>
+            </div>
+            <span
+              style={{
+                fontSize: 8.5,
+                fontFamily: "monospace",
+                color: skill.color,
+                background: `${skill.color}12`,
+                border: `1px solid ${skill.color}30`,
+                borderRadius: 4,
+                padding: "1.5px 6px",
+                textTransform: "uppercase",
+                fontWeight: 600,
+              }}
+            >
+              {skill.cat}
+            </span>
+          </div>
 
-                <div className="relative z-10 flex flex-col items-center px-6">
-                  <div className="flex h-20 w-20 items-center justify-center rounded-full border border-amber-200/18 bg-black/35 text-3xl font-black text-white shadow-[0_0_20px_rgba(212,169,55,0.1)]">
-                    HJ
-                  </div>
-                  <div className="mt-4 text-[0.7rem] font-semibold uppercase tracking-[0.42em] text-amber-100/70">
-                    Harpreet
-                  </div>
-                  <h3 className="mt-3 text-2xl font-bold text-white sm:text-[1.6rem]">
-                    Full Stack Developer
-                  </h3>
-                  <p className="mt-2 text-sm text-white/68">AI &amp; Data Enthusiast</p>
-                </div>
-              </motion.div>
+          {/* Description */}
+          <p
+            style={{
+              color: "rgba(255,255,255,0.45)",
+              fontSize: 10.5,
+              lineHeight: 1.6,
+              margin: "0 0 8px",
+            }}
+          >
+            {skill.desc}
+          </p>
 
-              <div className="absolute inset-0">
-                <div className="absolute left-1/2 top-1/2 h-[24rem] w-[24rem] -translate-x-1/2 -translate-y-1/2 rounded-full border border-amber-200/10 sm:h-[28rem] sm:w-[28rem]" />
-                <div className="absolute left-1/2 top-1/2 h-[31rem] w-[31rem] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/8 sm:h-[35rem] sm:w-[35rem]" />
-                <div className="absolute left-1/2 top-1/2 h-[38rem] w-[38rem] -translate-x-1/2 -translate-y-1/2 rounded-full border border-amber-200/8 sm:h-[42rem] sm:w-[42rem]" />
-              </div>
-
-              {skillList.map((skill, index) => {
-                const Icon = skill.icon
-                const gridPoint = placementGrid[index]
-                const drift = spacingPresets[index % spacingPresets.length]
-                const category = skillMeta[skill.name]?.category ?? 'Skill'
-                const isActive = selectedSkill.name === skill.name
-
-                return (
-                  <motion.button
-                    key={skill.name}
-                    type="button"
-                    onClick={() => setSelectedSkill(skill)}
-                    onMouseEnter={() => setPausedSkill(skill.name)}
-                    onMouseLeave={() => setPausedSkill(null)}
-                    onFocus={() => setPausedSkill(skill.name)}
-                    onBlur={() => setPausedSkill(null)}
-                    className="absolute left-0 top-0 outline-none"
-                    style={{ left: gridPoint.x, top: gridPoint.y }}
-                    whileHover={{ scale: 1.05 }}
-                  >
-                    <motion.div
-                      className={`flex items-center gap-2 rounded-full border px-3 py-2.5 backdrop-blur-xl transition-all duration-300 ${isActive ? 'border-amber-200/30 bg-white/[0.09] shadow-[0_0_18px_rgba(212,169,55,0.12)]' : 'border-white/10 bg-white/[0.04] shadow-[0_8px_24px_rgba(0,0,0,0.18)]'}`}
-                      animate={{
-                        y: pausedSkill === skill.name ? 0 : drift.y,
-                        x: pausedSkill === skill.name ? 0 : drift.x,
-                        rotate: pausedSkill === skill.name ? 0 : drift.rotate,
-                      }}
-                      transition={{
-                        duration: drift.duration,
-                        repeat: Infinity,
-                        ease: 'easeInOut',
-                      }}
-                    >
-                      <div className={`flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-black/25 ${colorByCategory[category] || 'text-white/80'}`}>
-                        <Icon size={15} />
-                      </div>
-                      <div className="min-w-0 text-left">
-                        <div className="truncate text-sm font-semibold text-white">
-                          {skill.name}
-                        </div>
-                        <div className="truncate text-[9px] uppercase tracking-[0.24em] text-white/45">
-                          {category}
-                        </div>
-                      </div>
-                    </motion.div>
-                  </motion.button>
-                )
-              })}
-
+          {/* Proficiency and Progress bar */}
+          <div style={{ margin: "8px 0" }}>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                fontSize: 9,
+                fontFamily: "monospace",
+                color: "rgba(255,255,255,0.3)",
+                marginBottom: 4,
+              }}
+            >
+              <span>PROFICIENCY</span>
+              <span style={{ color: skill.color }}>{skill.level}%</span>
+            </div>
+            <div
+              style={{
+                height: 2,
+                backgroundColor: "rgba(255,255,255,0.06)",
+                borderRadius: 9,
+                overflow: "hidden",
+                width: "100%",
+              }}
+            >
+              <div
+                style={{
+                  height: "100%",
+                  width: `${skill.level}%`,
+                  backgroundColor: skill.color,
+                  boxShadow: `0 0 8px ${skill.color}`,
+                }}
+              />
             </div>
           </div>
+
+          {/* Related Tech */}
+          <div
+            style={{
+              borderTop: "1px solid rgba(255,255,255,0.05)",
+              paddingTop: 6,
+              display: "flex",
+              flexDirection: "column",
+              gap: 2,
+            }}
+          >
+            <span
+              style={{
+                fontSize: 8,
+                fontFamily: "monospace",
+                color: "rgba(255,255,255,0.25)",
+              }}
+            >
+              RELATED TECH
+            </span>
+            <span
+              style={{
+                fontSize: 9,
+                fontFamily: "monospace",
+                color: "rgba(255,255,255,0.65)",
+              }}
+            >
+              {skill.rel}
+            </span>
+          </div>
+        </div>
+      </motion.div>
+    </AnimatePresence>
+  );
+};
+
+// ─── Main Skills component ──────────────────────────────────────────────────
+const Skills = () => {
+  const arenaRef = useRef(null);
+  const particlesRef = useRef([]);
+  const rafRef = useRef(null);
+  const lastTickRef = useRef(null);
+  const iconRefs = useRef([]);
+  const stageTimersRef = useRef([]);
+
+  const [hoveredIdx, setHoveredIdx] = useState(null);
+  const [arenaReady, setArenaReady] = useState(false);
+  const [arenaStage, setArenaStage] = useState("idle");
+  const [dimensions, setDimensions] = useState({ width: 800, height: 545 });
+
+  // ─── Generate fixed anti-gravity configurations EXACTLY ONCE on mount ──────
+  useEffect(() => {
+    const ps = [];
+    const minDistance = 0.125; // normalized space distance threshold to prevent initial overlaps
+
+    for (let i = 0; i < ALL_SKILLS.length; i++) {
+      let x = 0,
+        y = 0,
+        valid = false;
+      let attempts = 0;
+
+      while (!valid && attempts < 300) {
+        // Safe inner bounds coordinates (0.12 to 0.88) to prevent edge touching
+        x = 0.12 + Math.random() * 0.76;
+        y = 0.12 + Math.random() * 0.76;
+        valid = true;
+
+        for (let j = 0; j < ps.length; j++) {
+          const q = ps[j];
+          const dx = x - q.x;
+          const dy = y - q.y;
+          if (Math.sqrt(dx * dx + dy * dy) < minDistance) {
+            valid = false;
+            break;
+          }
+        }
+        attempts++;
+      }
+
+      const width = arenaRef.current?.offsetWidth || dimensions.width;
+      const height = arenaRef.current?.offsetHeight || dimensions.height;
+      const half = ORB_SIZE / 2;
+      const speed = 12 + Math.random() * 12;
+      const angle = Math.random() * Math.PI * 2;
+      const vx = Math.cos(angle) * speed;
+      const vy = Math.sin(angle) * speed;
+
+      const rotSpeed = 0.003 + Math.random() * 0.004;
+      const breathSpeed = 0.015 + Math.random() * 0.015;
+
+      ps.push({
+        id: i,
+        x: Math.min(Math.max(x * width, half), Math.max(half, width - half)),
+        y: Math.min(Math.max(y * height, half), Math.max(half, height - half)),
+        vx,
+        vy,
+        rotAngle: Math.random() * Math.PI * 2,
+        rotSpeed,
+        breathAngle: Math.random() * Math.PI * 2,
+        breathSpeed,
+      });
+    }
+
+    particlesRef.current = ps;
+    setArenaReady(true);
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      stageTimersRef.current.forEach((timer) => clearTimeout(timer));
+    };
+  }, []);
+
+  // ─── Animation loop updating translation, rotation and breathing ──────────
+  const tick = useCallback((timestamp) => {
+    const arena = arenaRef.current;
+    if (!arena) return;
+    const w = arena.offsetWidth;
+    const h = arena.offsetHeight;
+    const ps = particlesRef.current;
+    const half = ORB_SIZE / 2;
+    const minX = half;
+    const maxX = Math.max(half, w - half);
+    const minY = half;
+    const maxY = Math.max(half, h - half);
+    const minDistance = ORB_SIZE * 0.98;
+    const boundaryBounce = 0.82;
+    const drag = 0.992;
+
+    const lastTimestamp = lastTickRef.current;
+    lastTickRef.current = timestamp;
+    const dt = lastTimestamp
+      ? Math.min(0.033, Math.max(0.008, (timestamp - lastTimestamp) / 1000))
+      : 0.016;
+
+    for (let i = 0; i < ps.length; i++) {
+      const p = ps[i];
+
+      p.rotAngle += p.rotSpeed;
+      p.breathAngle += p.breathSpeed;
+
+      p.x += p.vx * dt;
+      p.y += p.vy * dt;
+
+      if (p.x <= minX) {
+        p.x = minX;
+        p.vx = Math.abs(p.vx) * boundaryBounce;
+      } else if (p.x >= maxX) {
+        p.x = maxX;
+        p.vx = -Math.abs(p.vx) * boundaryBounce;
+      }
+
+      if (p.y <= minY) {
+        p.y = minY;
+        p.vy = Math.abs(p.vy) * boundaryBounce;
+      } else if (p.y >= maxY) {
+        p.y = maxY;
+        p.vy = -Math.abs(p.vy) * boundaryBounce;
+      }
+
+      p.vx *= drag;
+      p.vy *= drag;
+    }
+
+    for (let i = 0; i < ps.length; i++) {
+      for (let j = i + 1; j < ps.length; j++) {
+        const p = ps[i];
+        const q = ps[j];
+        const dx = q.x - p.x;
+        const dy = q.y - p.y;
+        const distSq = dx * dx + dy * dy;
+
+        if (distSq === 0 || distSq >= minDistance * minDistance) continue;
+
+        const dist = Math.sqrt(distSq);
+        const overlap = minDistance - dist;
+        const nx = dx / dist;
+        const ny = dy / dist;
+        const separation = overlap * 0.04;
+        const impulse = overlap * 0.7;
+
+        p.x -= nx * separation;
+        p.y -= ny * separation;
+        q.x += nx * separation;
+        q.y += ny * separation;
+
+        p.vx -= nx * impulse * 0.5;
+        p.vy -= ny * impulse * 0.5;
+        q.vx += nx * impulse * 0.5;
+        q.vy += ny * impulse * 0.5;
+      }
+    }
+
+    for (let i = 0; i < ps.length; i++) {
+      const p = ps[i];
+
+      if (p.x < minX) {
+        p.x = minX;
+        p.vx = Math.abs(p.vx) * boundaryBounce;
+      } else if (p.x > maxX) {
+        p.x = maxX;
+        p.vx = -Math.abs(p.vx) * boundaryBounce;
+      }
+
+      if (p.y < minY) {
+        p.y = minY;
+        p.vy = Math.abs(p.vy) * boundaryBounce;
+      } else if (p.y > maxY) {
+        p.y = maxY;
+        p.vy = -Math.abs(p.vy) * boundaryBounce;
+      }
+
+      const rot = Math.sin(p.rotAngle) * 2; // Gentle rotation within ±2 degrees
+
+      const el = iconRefs.current[i];
+      if (el) {
+        // Apply translation and rotation
+        el.style.transform = `translate3d(${p.x - half}px, ${p.y - half}px, 0) rotate(${rot}deg)`;
+
+        // Calculate breathing glow intensity between 80% and 100%
+        const breath = 0.8 + Math.sin(p.breathAngle) * 0.2;
+        el.style.setProperty("--glow-breath", breath.toFixed(3));
+      }
+    }
+
+    rafRef.current = requestAnimationFrame(tick);
+  }, []);
+
+  // ─── Handlers ────────────────────────────────────────────────────────────
+  const handleIconEnter = useCallback((idx) => {
+    setHoveredIdx(idx);
+  }, []);
+
+  const handleIconLeave = useCallback(() => setHoveredIdx(null), []);
+
+  const w = dimensions.width;
+  const h = dimensions.height;
+  const hoveredSkill = hoveredIdx !== null ? ALL_SKILLS[hoveredIdx] : null;
+
+  // ─── Setup resize bounds observer (does not reposition particles) ──────────
+  useEffect(() => {
+    const arena = arenaRef.current;
+    if (!arena) return;
+    if (arenaStage !== "float" || !arenaReady) return;
+    const w = arena.offsetWidth;
+    const h = arena.offsetHeight;
+    setDimensions({ width: w, height: h });
+
+    lastTickRef.current = null;
+    rafRef.current = requestAnimationFrame(tick);
+
+    const ro = new ResizeObserver(() => {
+      const nw = arena.offsetWidth;
+      const nh = arena.offsetHeight;
+      setDimensions({ width: nw, height: nh });
+    });
+    ro.observe(arena);
+
+    return () => {
+      ro.disconnect();
+      cancelAnimationFrame(rafRef.current);
+    };
+  }, [tick, arenaReady, arenaStage]);
+
+  const handleArenaEnter = useCallback(() => {
+    if (arenaStage !== "idle") return;
+
+    setArenaReady(true);
+    setArenaStage("border");
+
+    const orbTimer = setTimeout(() => setArenaStage("orbs"), 460);
+    const floatTimer = setTimeout(() => setArenaStage("float"), 980);
+    stageTimersRef.current.push(orbTimer, floatTimer);
+  }, [arenaStage]);
+
+  const borderDraw = arenaStage !== "idle";
+  const orbVisible = arenaStage === "orbs" || arenaStage === "float";
+
+  return (
+    <section
+      id="skills"
+      className="relative min-h-screen overflow-hidden px-6 py-20 sm:px-10"
+    >
+      {/* Background space elements */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse 55% 35% at 50% 0%, rgba(212,169,55,0.04) 0%, transparent 70%)",
+        }}
+      />
+
+      <div className="mx-auto max-w-6xl relative z-10">
+        {/* Heading */}
+        <motion.div
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.25 }}
+          transition={{ duration: 0.65 }}
+          className="mx-auto mb-12 max-w-3xl text-center"
+        >
+          <p className="mb-3 text-[10px] font-mono uppercase tracking-[0.55em] text-amber-200/55">
+            Professional Toolbox
+          </p>
+          <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-white uppercase">
+            Technical Skills
+          </h2>
+          <div className="mx-auto mt-4 h-px w-32 bg-linear-to-r from-transparent via-amber-300/35 to-transparent" />
+          <p className="mt-5 text-xs text-white/20 font-light tracking-widest uppercase">
+            Hover to view telemetry & details
+          </p>
         </motion.div>
 
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={selectedSkill.name}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 10 }}
-            transition={{ duration: 0.25 }}
-            className="mx-auto mt-6 w-full max-w-3xl"
+        {/* Style block for HUD Line Animation & Glass Orb Crescent Highlight */}
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
+          .hud-glow-line {
+            animation: hudFlow 12s linear infinite;
+            filter: drop-shadow(0 0 3px rgba(212,169,55,0.6));
+          }
+          @keyframes hudFlow {
+            from { stroke-dashoffset: 0; }
+            to { stroke-dashoffset: 800; }
+          }
+          .orb-container {
+            width: ${ORB_SIZE}px;
+            height: ${ORB_SIZE}px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: radial-gradient(circle at 30% 25%, #18181b 0%, #0d0d0f 75%, #050507 100%);
+            box-shadow: 
+              inset 0 1.5px 3px rgba(255, 255, 255, 0.08), 
+              inset 0 -2px 6px rgba(0, 0, 0, 0.95),
+              0 6px 16px rgba(0, 0, 0, 0.55);
+            transition: background 0.3s, border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+          }
+          .orb-container::before {
+            content: '';
+            position: absolute;
+            top: 1.5px;
+            left: 8%;
+            right: 8%;
+            height: 38%;
+            border-radius: 50% 50% 35% 35% / 80% 80% 20% 20%;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0) 100%);
+            pointer-events: none;
+            z-index: 2;
+          }
+          .orb-container::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: 20%;
+            right: 20%;
+            height: 8px;
+            background: radial-gradient(ellipse at bottom, rgba(255,255,255,0.03), transparent);
+            filter: blur(1px);
+            pointer-events: none;
+          }
+        `,
+          }}
+        />
+
+        {/* ── Futuristic HUD Skills Arena ─────────────────────────────────── */}
+        <motion.div
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          onViewportEnter={handleArenaEnter}
+          viewport={{ once: true, amount: 0.1 }}
+          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+          ref={arenaRef}
+          style={{
+            position: "relative",
+            width: "100%",
+            height: 545,
+            overflow: "visible", // allows tooltips to escape limits if needed
+            cursor: "default",
+            background: "transparent",
+          }}
+        >
+          {/* Custom Futuristic HUD Frame SVG */}
+          {arenaReady && (
+            <motion.svg
+              className="absolute inset-0 w-full h-full pointer-events-none"
+              style={{ zIndex: 0 }}
+            >
+              {/* Sci-fi cropped frame outline */}
+              <path
+                d={`M 16 0 L ${w - 16} 0 L ${w} 16 L ${w} ${h - 16} L ${w - 16} ${h} L 16 ${h} L 0 ${h - 16} L 0 16 Z`}
+                fill="none"
+                stroke="rgba(212, 169, 55, 0.12)"
+                strokeWidth="1.2"
+              />
+
+              {/* Glowing Corner Accents */}
+              <path
+                d="M 0 32 L 0 16 L 16 0 L 32 0"
+                fill="none"
+                stroke="#d4a937"
+                strokeWidth="2.5"
+                style={{ filter: "drop-shadow(0 0 4px rgba(212,169,55,0.7))" }}
+              />
+              <path
+                d={`M ${w - 32} 0 L ${w - 16} 0 L ${w} 16 L ${w} 32`}
+                fill="none"
+                stroke="#d4a937"
+                strokeWidth="2.5"
+                style={{ filter: "drop-shadow(0 0 4px rgba(212,169,55,0.7))" }}
+              />
+              <path
+                d={`M 0 ${h - 32} L 0 ${h - 16} L 16 ${h} L 32 ${h}`}
+                fill="none"
+                stroke="#d4a937"
+                strokeWidth="2.5"
+                style={{ filter: "drop-shadow(0 0 4px rgba(212,169,55,0.7))" }}
+              />
+              <path
+                d={`M ${w - 32} ${h} L ${w - 16} ${h} L ${w} ${h - 16} L ${w} ${h - 32}`}
+                fill="none"
+                stroke="#d4a937"
+                strokeWidth="2.5"
+                style={{ filter: "drop-shadow(0 0 4px rgba(212,169,55,0.7))" }}
+              />
+
+              {/* Crosshair accents */}
+              <line
+                x1={w / 2 - 20}
+                y1={2}
+                x2={w / 2 + 20}
+                y2={2}
+                stroke="rgba(212,169,55,0.3)"
+                strokeWidth="1"
+              />
+              <line
+                x1={w / 2}
+                y1={0}
+                x2={w / 2}
+                y2={5}
+                stroke="rgba(212,169,55,0.3)"
+                strokeWidth="1"
+              />
+              <line
+                x1={w / 2 - 20}
+                y1={h - 2}
+                x2={w / 2 + 20}
+                y2={h - 2}
+                stroke="rgba(212,169,55,0.3)"
+                strokeWidth="1"
+              />
+              <line
+                x1={w / 2}
+                y1={h}
+                x2={w / 2}
+                y2={h - 5}
+                stroke="rgba(212,169,55,0.3)"
+                strokeWidth="1"
+              />
+
+              {/* Animated Light Beams running border */}
+              <motion.path
+                d={`M 16 0 L ${w - 16} 0 L ${w} 16 L ${w} ${h - 16} L ${w - 16} ${h} L 16 ${h} L 0 ${h - 16} L 0 16 Z`}
+                fill="none"
+                stroke="#d4a937"
+                strokeWidth="1.5"
+                strokeDasharray="90 310"
+                className="hud-glow-line"
+                initial={{ pathLength: 0, opacity: 0.18 }}
+                animate={
+                  borderDraw
+                    ? { pathLength: 1, opacity: 1 }
+                    : { pathLength: 0, opacity: 0.18 }
+                }
+                transition={{ duration: 1.05, ease: [0.22, 1, 0.36, 1] }}
+              />
+            </motion.svg>
+          )}
+
+          {/* Floating skill icons */}
+          {ALL_SKILLS.map((skill, idx) => {
+            const Icon = skill.icon;
+            const isHov = hoveredIdx === idx;
+            const isAnyHov = hoveredIdx !== null;
+
+            // Highlight hovered, dim others slightly
+            const iconOpacity = isHov ? 1 : isAnyHov ? 0.35 : 0.85;
+            const iconScale = isHov ? 1.08 : isAnyHov ? 0.95 : 1.0;
+            const p = particlesRef.current[idx];
+
+            return (
+              <div
+                key={skill.name}
+                ref={(el) => (iconRefs.current[idx] = el)}
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: ORB_SIZE,
+                  height: ORB_SIZE + 20,
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  cursor: "pointer",
+                  willChange: "transform",
+                  zIndex: isHov ? 50 : 10,
+                }}
+              >
+                {/* ── Inner container (handles opacity, scale, and hover transitions) ── */}
+                <div
+                  onMouseEnter={() => handleIconEnter(idx)}
+                  onMouseLeave={handleIconLeave}
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    gap: 6,
+                    width: "100%",
+                    height: "100%",
+                    opacity: arenaReady && orbVisible ? iconOpacity : 0,
+                    transform: `scale(${iconScale})`,
+                    transition: "opacity 0.35s ease, transform 0.35s ease",
+                  }}
+                >
+                  {/* Outer ambient glow matching icon color (breathing in sync) */}
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: -14,
+                      left: -14,
+                      width: ORB_SIZE + 28,
+                      height: ORB_SIZE + 28,
+                      borderRadius: "50%",
+                      background: `radial-gradient(circle, ${skill.color}28 0%, transparent 68%)`,
+                      pointerEvents: "none",
+                      opacity: isHov
+                        ? 1
+                        : "calc(var(--glow-breath, 0.9) * 0.45)",
+                      transition: "background 0.3s ease, opacity 0.2s ease",
+                    }}
+                  />
+
+                  {/* ── Circular dark glass orb (permanent premium glass look) ── */}
+                  <div
+                    className="orb-container"
+                    style={{
+                      border: isHov
+                        ? `1.5px solid ${skill.color}85`
+                        : "1px solid rgba(212, 169, 55, 0.15)",
+                      boxShadow: isHov
+                        ? `inset 0 1.5px 3px rgba(255, 255, 255, 0.15), 
+                           inset 0 -2px 6px rgba(0, 0, 0, 0.95),
+                           0 0 24px ${skill.color}45, 
+                           0 8px 24px rgba(0, 0, 0, 0.65)`
+                        : `inset 0 1.5px 3px rgba(255, 255, 255, 0.08), 
+                           inset 0 -2px 6px rgba(0, 0, 0, 0.95),
+                           0 0 calc(var(--glow-breath, 0.9) * 12px) ${skill.color}15,
+                           0 6px 16px rgba(0, 0, 0, 0.55)`,
+                    }}
+                  >
+                    {/* Inner illuminated light source (glow from inside, breathing) */}
+                    <div
+                      style={{
+                        position: "absolute",
+                        inset: 6,
+                        borderRadius: "50%",
+                        background: `radial-gradient(circle, ${skill.color}${isHov ? "3f" : "15"} 0%, transparent 70%)`,
+                        opacity: isHov ? 1 : "var(--glow-breath, 0.9)",
+                        pointerEvents: "none",
+                        transition: "background 0.3s ease, opacity 0.2s ease",
+                      }}
+                    />
+
+                    {/* Icon glows permanently with official color */}
+                    <Icon
+                      size={24}
+                      style={{
+                        color: isHov ? skill.color : `${skill.color}b8`,
+                        filter: `drop-shadow(0 0 ${isHov ? "10px" : "5px"} ${skill.color}cc)`,
+                        zIndex: 3,
+                        transition: "color 0.3s ease, filter 0.3s ease",
+                      }}
+                    />
+                  </div>
+
+                  {/* Label text */}
+                  <span
+                    style={{
+                      fontSize: 8.5,
+                      fontFamily: "monospace",
+                      color: isHov
+                        ? "rgba(255,255,255,0.85)"
+                        : "rgba(255,255,255,0.22)",
+                      letterSpacing: "0.04em",
+                      whiteSpace: "nowrap",
+                      pointerEvents: "none",
+                      transition: "color 0.3s ease",
+                      maxWidth: 76,
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      textAlign: "center",
+                    }}
+                  >
+                    {skill.name}
+                  </span>
+                </div>
+
+                {/* Glassmorphic Tooltip below hovered item (inherits translation so it floats seamlessly) */}
+                {isHov && p && (
+                  <TooltipPanel
+                    skill={skill}
+                    p={p}
+                    containerWidth={w}
+                    containerHeight={h}
+                  />
+                )}
+              </div>
+            );
+          })}
+
+          {/* Badge count info */}
+          <div
+            style={{
+              position: "absolute",
+              bottom: 14,
+              right: 18,
+              zIndex: 5,
+              pointerEvents: "none",
+              fontSize: 8.5,
+              fontFamily: "monospace",
+              color: "rgba(255,255,255,0.14)",
+              letterSpacing: "0.12em",
+            }}
           >
-            <div className="rounded-2xl border border-white/10 bg-[rgba(8,10,15,0.82)] px-5 py-4 shadow-[0_18px_35px_rgba(0,0,0,0.22)] backdrop-blur-2xl">
-              <div className="flex items-start gap-3">
-                <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.06] text-amber-100 shadow-[0_0_14px_rgba(212,169,55,0.08)]">
-                  <selectedSkill.icon size={18} />
-                </div>
-                <div className="min-w-0 flex-1">
-                  <div className="text-[10px] uppercase tracking-[0.38em] text-amber-100/70">
-                    Click Focus
-                  </div>
-                  <div className="mt-1 text-lg font-semibold text-white">
-                    {selectedSkill.name}
-                  </div>
-                  <div className="mt-1 text-xs uppercase tracking-[0.28em] text-white/45">
-                    {skillMeta[selectedSkill.name]?.category ?? 'Skill'}
-                  </div>
-                </div>
-              </div>
-              <p className="mt-3 text-sm leading-6 text-white/64">
-                {skillMeta[selectedSkill.name]?.description ?? selectedSkill.projects}
-              </p>
-              <div className="mt-4 flex items-center justify-between text-[11px] text-white/50">
-                <span>{selectedSkill.projects}</span>
-                <span>{selectedSkill.level}%</span>
-              </div>
-              <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-white/10">
-                <motion.div
-                  key={selectedSkill.name}
-                  initial={{ width: 0 }}
-                  animate={{ width: `${selectedSkill.level}%` }}
-                  transition={{ duration: 0.75, ease: 'easeOut' }}
-                  className="h-full rounded-full bg-amber-200 shadow-[0_0_12px_rgba(212,169,55,0.26)]"
-                />
-              </div>
-            </div>
-          </motion.div>
-        </AnimatePresence>
+            SYSTEM: {ALL_SKILLS.length} MODULES DETECTED
+          </div>
+        </motion.div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Skills
+export default Skills;

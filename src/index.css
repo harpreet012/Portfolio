@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;700;800&family=Fira+Code:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap');
 @import 'tailwindcss';
 
 :root {
@@ -39,7 +39,7 @@ html {
 
 body {
   margin: 0;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   background: var(--bg-base);
   color: var(--text-primary);
   overflow-x: hidden;
@@ -312,3 +312,66 @@ a {
 .nav-link-active .nav-link-underline {
   transform: scaleX(1);
 }
+
+/* ── Skills arena: suppress native cursor unconditionally ───────────────── */
+.skills-arena,
+.skills-arena * {
+  cursor: none !important;
+}
+
+/* ── Global font consistency: apply Space Grotesk everywhere ────────────── */
+h1, h2, h3, h4, h5, h6,
+.font-sans, .font-mono,
+button, input, textarea, select {
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+/* ── Floating-label input base style ────────────────────────────────────── */
+.floating-input-wrap input,
+.floating-input-wrap textarea {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.75rem;
+  color: #fff;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.floating-input-wrap input:hover,
+.floating-input-wrap textarea:hover {
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+.floating-input-wrap input:focus,
+.floating-input-wrap textarea:focus {
+  outline: none;
+  border-color: rgba(212, 169, 55, 0.6);
+  box-shadow: 0 0 0 1px rgba(212, 169, 55, 0.25), 0 0 16px rgba(212, 169, 55, 0.12);
+}
+
+/* ── Timeline pulse ring (used by Experience) ────────────────────────────── */
+@keyframes pulse-ring {
+  0%   { transform: scale(1);   opacity: 0.5; }
+  70%  { transform: scale(2.2); opacity: 0;   }
+  100% { transform: scale(2.2); opacity: 0;   }
+}
+
+/* ── Send button shimmer sweep ───────────────────────────────────────────── */
+@keyframes shimmer-sweep {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(200%);  }
+}
+
+/* ── Section fade-up (data-reveal fallback for older sections) ───────────── */
+[data-reveal="section"] {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+[data-reveal="section"].revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+

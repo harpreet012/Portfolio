@@ -30,33 +30,56 @@ export const highlights = [
   },
 ]
 
+// Full skill set, matched 1:1 against the "Technical Skills" section of the resume.
 export const skills = {
-  frontend: [
-    { name: 'HTML', level: 95, projects: 'Semantic UI Structure' },
-    { name: 'CSS', level: 94, projects: 'Responsive Styling' },
+  languages: [
+    { name: 'Java', level: 85, projects: 'OOP & Scalability' },
     { name: 'JavaScript', level: 90, projects: 'Core Logic & DOM' },
+    { name: 'SQL', level: 82, projects: 'Query & Schema Design' },
+    { name: 'C++', level: 75, projects: 'DSA & Systems' },
+    { name: 'Python', level: 80, projects: 'Data Scripting' },
+  ],
+  frontend: [
     { name: 'React.js', level: 90, projects: 'Frontend Interfaces' },
+    { name: 'HTML5', level: 95, projects: 'Semantic UI Structure' },
+    { name: 'CSS3', level: 94, projects: 'Responsive Styling' },
+    { name: 'Tailwind CSS', level: 88, projects: 'Utility-First Styling' },
+    { name: 'Bootstrap', level: 85, projects: 'Grid Layouts' },
   ],
   backend: [
     { name: 'Node.js', level: 80, projects: 'Server & APIs' },
-    { name: 'Python', level: 85, projects: 'ML & Automation' },
-    { name: 'Java', level: 80, projects: 'OOP & Scalability' },
-    { name: 'C++', level: 75, projects: 'DSA & Systems' },
+    { name: 'Express.js', level: 82, projects: 'REST API Routing' },
+    { name: 'Spring Boot', level: 78, projects: 'MVC Architecture' },
+    { name: 'Kafka', level: 75, projects: 'Message Streaming & Events' },
+  ],
+  databases: [
     { name: 'MongoDB', level: 78, projects: 'NoSQL Databases' },
     { name: 'MySQL', level: 76, projects: 'Relational Databases' },
   ],
-  tools: [
-    { name: 'Git/GitHub', level: 90, projects: 'Version Control' },
-    { name: 'VS Code', level: 95, projects: 'Dev Workflow' },
-    { name: 'Pandas', level: 85, projects: 'Data Processing' },
-    { name: 'Scikit-learn', level: 80, projects: 'Model Training' },
-    { name: 'Power BI', level: 75, projects: 'Dashboards' },
-    { name: 'Excel', level: 78, projects: 'Data Handling' },
-    { name: 'Machine Learning', level: 82, projects: 'Predictive Models' },
-    { name: 'Data Visualization', level: 84, projects: 'Insight Storytelling' },
-    { name: 'Problem Solving', level: 92, projects: 'Analytical Thinking' },
-    { name: 'Data Structures', level: 88, projects: 'Algorithmic Foundations' },
+  coreCs: [
+    { name: 'Data Structures & Algorithms', level: 88, projects: 'Problem Solving & Optimization' },
+    { name: 'OOP', level: 85, projects: 'Class Hierarchy & Design Patterns' },
+    { name: 'DBMS', level: 80, projects: 'Relational Theory & Normalization' },
+    { name: 'Operating Systems', level: 75, projects: 'Process Scheduling & Memory' },
+    { name: 'Computer Networks', level: 78, projects: 'Network Protocols & Layers' },
   ],
+  tools: [
+    { name: 'Git', level: 90, projects: 'Version Control' },
+    { name: 'GitHub', level: 90, projects: 'Collaboration & Repositories' },
+    { name: 'Docker', level: 80, projects: 'Containerized Deployment' },
+    { name: 'VS Code', level: 95, projects: 'IDE Development Environment' },
+    { name: 'Postman', level: 85, projects: 'API Client & Automation' },
+    { name: 'Vercel', level: 85, projects: 'Frontend Deployments' },
+    { name: 'Render', level: 80, projects: 'Backend Web Hosting' },
+    { name: 'Power BI', level: 75, projects: 'Analytics Dashboards' },
+  ],
+  concepts: [
+    { name: 'RESTful APIs', level: 88, projects: 'Service API Integration' },
+    { name: 'JWT Authentication', level: 82, projects: 'Stateless Sessions & Security' },
+    { name: 'MVC Architecture', level: 85, projects: 'Software Separation of Concerns' },
+    { name: 'Responsive Web Design', level: 92, projects: 'Mobile-First Layouts' },
+    { name: 'Agile Methodology', level: 80, projects: 'Scrum Sprints & Project Management' },
+  ]
 }
 
 export const techIcons = [
@@ -152,7 +175,7 @@ export const certifications = [
     date: '2024',
   },
   {
-    title: 'B.Tech CSE (Current CGPA: 7.5)',
+    title: 'B.Tech CSE (Current CGPA: 7.68)',
     platform: 'K.R. Mangalam University',
     date: '2023 - Present',
   },
