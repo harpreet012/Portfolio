@@ -76,16 +76,20 @@ const ExperienceCard = ({ item, index }) => {
         <div className="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-2">
           <div>
             <h3 className="text-xl font-bold text-gray-100">{item.role}</h3>
-            <p className="text-md text-amber-400 mt-1">{item.company}</p>
+            <p className="text-sm font-mono text-amber-400 mt-1">{item.company}</p>
           </div>
           <span className="inline-block px-3 py-1 bg-amber-400/10 border border-amber-400/20 text-xs font-mono text-amber-300 rounded-full shrink-0 h-fit">
             {item.period}
           </span>
         </div>
 
-        <p className="relative z-10 text-sm leading-relaxed text-gray-400 mt-2">
-          {item.details}
-        </p>
+        {item.highlights && (
+          <ul className="relative z-10 space-y-2 text-[13.5px] text-gray-400 mt-3 list-disc pl-5 marker:text-amber-400/80 leading-relaxed font-light">
+            {item.highlights.map((bullet, i) => (
+              <li key={i}>{bullet}</li>
+            ))}
+          </ul>
+        )}
       </motion.div>
     </motion.div>
   );

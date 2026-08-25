@@ -117,8 +117,7 @@ const CustomCursorAdvanced = () => {
       ripple.style.transform = "translate(-50%, -50%) scale(0.3)";
 
       // Force reflow so the next transition actually runs
-      // eslint-disable-next-line no-unused-expressions
-      ripple.offsetWidth;
+      void ripple.offsetWidth;
 
       ripple.style.transition = "transform .5s cubic-bezier(.16,1,.3,1), opacity .5s ease";
       ripple.style.transform = "translate(-50%, -50%) scale(1.6)";

@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
 const ROLES = [
-  "Software Development Engineer",
-  "Full Stack Engineer",
-  "Data Analyst",
+  "Software Engineer",
+  "Full-Stack Developer",
+  "Backend Developer",
 ];
 
 const Hero = () => {
@@ -43,7 +43,7 @@ const Hero = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setRoleIdx((prev) => (prev + 1) % ROLES.length);
-    }, 2600);
+    }, 3000);
     return () => clearInterval(interval);
   }, []);
 
@@ -54,7 +54,7 @@ const Hero = () => {
     >
       <div className="mx-auto max-w-7xl flex flex-col items-center z-10 w-full relative">
         {/* Large Overlapping Text */}
-        <div className="relative w-full flex flex-col items-center justify-center mb-16">
+        <div className="relative w-full flex flex-col items-center justify-center mb-10">
           <motion.h1
             variants={heroLine}
             initial="hidden"
@@ -77,15 +77,35 @@ const Hero = () => {
           </motion.h1>
         </div>
 
-        {/* Inline Role Switcher */}
+        {/* Primary Role Indicator */}
         <motion.div
           variants={heroLine}
           initial="hidden"
           animate="visible"
-          transition={{ delay: 0.25 }}
-          className="mt-12 flex items-center justify-center overflow-hidden px-2"
+          transition={{ delay: 0.2 }}
+          className="mt-6 flex flex-col items-center max-w-2xl px-4"
         >
-          <div className="flex items-center justify-center gap-2 sm:gap-3 whitespace-nowrap text-[10px] sm:text-xs md:text-sm font-mono uppercase tracking-[0.18em] sm:tracking-[0.22em] text-center leading-none">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-amber-400/30 bg-amber-400/5 mb-4">
+            <span className="w-2 h-2 rounded-full bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.8)]" />
+            <span className="text-xs sm:text-sm font-mono text-amber-300 uppercase tracking-widest font-semibold">
+              Software Engineer | Full-Stack Developer
+            </span>
+          </div>
+
+          <p className="text-sm sm:text-base text-gray-300 font-light leading-relaxed max-w-xl">
+            Final-year CSE student building scalable web applications, backend services, and reliable software solutions with modern engineering practices.
+          </p>
+        </motion.div>
+
+        {/* Inline Focus Area Switcher */}
+        <motion.div
+          variants={heroLine}
+          initial="hidden"
+          animate="visible"
+          transition={{ delay: 0.28 }}
+          className="mt-6 flex items-center justify-center overflow-hidden px-2"
+        >
+          <div className="flex items-center justify-center gap-2 sm:gap-3 whitespace-nowrap text-[10px] sm:text-xs md:text-xs font-mono uppercase tracking-[0.16em] sm:tracking-[0.2em] text-center leading-none">
             {ROLES.map((role, index) => {
               const isActive = index === roleIdx;
 
@@ -93,22 +113,21 @@ const Hero = () => {
                 <motion.span
                   key={role}
                   animate={{
-                    opacity: isActive ? 1 : 0.56,
-                    scale: isActive ? 1.03 : 1,
-                    letterSpacing: isActive ? "0.24em" : "0.18em",
-                    color: isActive ? "#f6d46b" : "rgba(255,255,255,0.72)",
+                    opacity: isActive ? 1 : 0.45,
+                    scale: isActive ? 1.02 : 1,
+                    color: isActive ? "#f6d46b" : "rgba(255,255,255,0.6)",
                     textShadow: isActive
-                      ? "0 0 18px rgba(246,212,107,0.42), 0 0 5px rgba(246,212,107,0.24)"
+                      ? "0 0 16px rgba(246,212,107,0.35)"
                       : "0 0 0 rgba(0,0,0,0)",
                   }}
-                  transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                   className="inline-flex items-center whitespace-nowrap"
                 >
                   {role.toUpperCase()}
                   {index < ROLES.length - 1 && (
                     <span
                       aria-hidden="true"
-                      className="mx-2 sm:mx-3 text-[rgba(255,255,255,0.35)]"
+                      className="mx-2 sm:mx-3 text-[rgba(255,255,255,0.25)]"
                       style={{ letterSpacing: 0 }}
                     >
                       •
@@ -125,14 +144,21 @@ const Hero = () => {
           variants={ctaGroup}
           initial="hidden"
           animate="visible"
-          className="mt-12 flex flex-wrap justify-center gap-6"
+          className="mt-10 flex flex-wrap justify-center gap-4 sm:gap-6"
         >
           <motion.a
             variants={ctaItem}
             href="#projects"
-            className="px-8 py-3 border border-white/20 rounded-full text-xs font-mono uppercase tracking-widest hover:bg-white hover:text-black transition-all duration-300"
+            className="px-7 py-3 border border-amber-400/40 bg-amber-400/10 text-amber-300 rounded-full text-xs font-mono uppercase tracking-widest hover:bg-amber-400 hover:text-black transition-all duration-300 shadow-[0_0_15px_rgba(251,191,36,0.1)]"
           >
             Explore Projects
+          </motion.a>
+          <motion.a
+            variants={ctaItem}
+            href="#contact"
+            className="px-7 py-3 border border-white/20 rounded-full text-xs font-mono uppercase tracking-widest hover:bg-white hover:text-black transition-all duration-300"
+          >
+            Get In Touch
           </motion.a>
         </motion.div>
 

@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { FaBars, FaTimes } from 'react-icons/fa'
 import { navLinks } from '../../data/portfolioData'
 
-const Navbar = ({ theme, onToggleTheme }) => {
+const Navbar = ({ _theme, _onToggleTheme }) => {
   const [openMenu, setOpenMenu]       = useState(false)
   const [activeSection, setActiveSection] = useState('hero')
   const [scrolled, setScrolled]       = useState(false)

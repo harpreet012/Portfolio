@@ -6,9 +6,8 @@ import {
   FaReact,
   FaNode,
   FaDocker,
-  FaBrain,
 } from "react-icons/fa";
-import { SiSpring, SiMongodb } from "react-icons/si";
+import { SiSpring, SiMongodb, SiExpress } from "react-icons/si";
 import profileImage from "../assets/WhatsApp Image 2026-07-19 at 2.42.14 PM.jpeg";
 
 const skillChips = [
@@ -16,15 +15,15 @@ const skillChips = [
   { name: "Node.js", icon: FaNode, color: "#339933" },
   { name: "Spring Boot", icon: SiSpring, color: "#6db33f" },
   { name: "Docker", icon: FaDocker, color: "#2496ed" },
-  { name: "AI", icon: FaBrain, color: "#a855f7" },
+  { name: "Express.js", icon: SiExpress, color: "#cccccc" },
   { name: "MongoDB", icon: SiMongodb, color: "#47a248" },
 ];
 
 const highlights = [
-  { label: "12+ Projects", desc: "Production-ready apps & platforms" },
-  { label: "MERN Stack", desc: "Seamless full-stack integrations" },
-  { label: "Machine Learning", desc: "Predictive modeling & frameworks" },
-  { label: "Data Analytics", desc: "Turning data into strategy" },
+  { label: "B.Tech CSE", desc: "Final-year at K.R. Mangalam University" },
+  { label: "Full-Stack Dev", desc: "React, Node.js, Express & Databases" },
+  { label: "Backend & APIs", desc: "REST APIs, Express, Spring Boot, SQL/NoSQL" },
+  { label: "Software Eng.", desc: "OOP, MVC, system design & clean architecture" },
 ];
 
 /* ── Highlight card with cursor-follow radial light ── */
@@ -193,27 +192,27 @@ const ProfileCard = () => {
               Harpreet Jakhar
             </h3>
             <p className="text-[10px] font-mono text-amber-400 mt-1.5 uppercase tracking-widest leading-relaxed">
-              Full Stack Developer / AI & Data Analyst
+              Software / Full-Stack Developer
             </p>
             <div className="h-px w-full bg-white/5 my-4" />
             <div className="flex justify-between gap-4 text-[10px] font-mono text-gray-400">
               <div>
                 <span className="text-white block font-bold text-sm mb-0.5">
-                  1+ Years
+                  Final Year
                 </span>
-                Experience
+                B.Tech CSE
               </div>
               <div className="text-center">
                 <span className="text-white block font-bold text-sm mb-0.5">
-                  12+ Projects
+                  Full Stack
                 </span>
-                Completed
+                Primary Focus
               </div>
               <div className="text-right">
                 <span className="text-white block font-bold text-sm mb-0.5">
-                  Active
+                  Backend
                 </span>
-                Status
+                & Databases
               </div>
             </div>
           </div>
@@ -268,7 +267,7 @@ const About = () => {
               className="flex items-center gap-3 mb-2"
             >
               <span className="text-[10px] font-mono uppercase tracking-[0.4em] text-amber-400 font-semibold">
-                Who I Am
+                Profile Summary
               </span>
               <div className="h-px w-8 bg-amber-400/30" />
             </motion.div>
@@ -286,8 +285,7 @@ const About = () => {
               variants={revealItem}
               className="text-lg sm:text-xl font-medium text-amber-300/90 mb-6 tracking-wide leading-relaxed"
             >
-              Bridging high-performance backend systems with intuitive user
-              experiences.
+              Building scalable web applications, robust backend services, and well-engineered software systems.
             </motion.p>
 
             {/* Paragraphs */}
@@ -296,16 +294,10 @@ const About = () => {
               className="space-y-4 text-gray-400 text-[14.5px] leading-relaxed mb-8"
             >
               <p>
-                I am a full-stack engineer and computer science enthusiast
-                dedicated to building high-performance web applications and
-                intelligent data solutions. My work bridges the gap between
-                elegant client interfaces and scalable database systems.
+                I am a final-year Computer Science Engineering student focused on Software Engineering and Full-Stack Development. My work spans end-to-end web applications built with React, Node.js, Express, and both relational and NoSQL databases, with a strong emphasis on clean architecture, REST API design, and deployment-ready practices.
               </p>
               <p>
-                With a strong foundation in software engineering, I specialize
-                in crafting robust backend architectures, orchestrating
-                containerized environments, and extracting insights using
-                machine learning and data analytics.
+                I approach every project with engineering fundamentals — OOP, MVC patterns, and system design principles — while continuously expanding my practical experience through hands-on builds and internship work.
               </p>
             </motion.div>
 

@@ -3,39 +3,46 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { Points, PointMaterial } from '@react-three/drei'
 import * as THREE from 'three'
 
-/* ── Blue galaxy particles (original) ── */
+// Deterministic pseudo-random helper for pure hook execution
+function pseudoRandom(seed) {
+  const x = Math.sin(seed++) * 10000;
+  return x - Math.floor(x);
+}
+
+/* ── Blue galaxy particles ── */
 function GalaxyParticles({ count = 15000 }) {
-  const points = useRef()
-  const { mouse, viewport } = useThree()
+  const points = useRef();
+  const { mouse, viewport } = useThree();
 
   const positions = useMemo(() => {
-    const arr = new Float32Array(count * 3)
-    const distance = 30
+    const arr = new Float32Array(count * 3);
+    const distance = 30;
+    let seed = 1;
     for (let i = 0; i < count; i++) {
-      const radius      = Math.random() * distance
-      const branchAngle = (i % 3) * ((2 * Math.PI) / 3)
-      const spinAngle   = radius * 0.5
-      const rx = Math.pow(Math.random(), 3) * (Math.random() < 0.5 ? 1 : -1) * 2
-      const ry = Math.pow(Math.random(), 3) * (Math.random() < 0.5 ? 1 : -1) * 2
-      const rz = Math.pow(Math.random(), 3) * (Math.random() < 0.5 ? 1 : -1) * 2
-      arr[i * 3]     = Math.cos(branchAngle + spinAngle) * radius + rx
-      arr[i * 3 + 1] = (Math.random() - 0.5) * (radius * 0.2) + ry
-      arr[i * 3 + 2] = Math.sin(branchAngle + spinAngle) * radius + rz
+      const rVal = pseudoRandom(seed++);
+      const radius = rVal * distance;
+      const branchAngle = (i % 3) * ((2 * Math.PI) / 3);
+      const spinAngle = radius * 0.5;
+      const rx = Math.pow(pseudoRandom(seed++), 3) * (pseudoRandom(seed++) < 0.5 ? 1 : -1) * 2;
+      const ry = Math.pow(pseudoRandom(seed++), 3) * (pseudoRandom(seed++) < 0.5 ? 1 : -1) * 2;
+      const rz = Math.pow(pseudoRandom(seed++), 3) * (pseudoRandom(seed++) < 0.5 ? 1 : -1) * 2;
+      arr[i * 3] = Math.cos(branchAngle + spinAngle) * radius + rx;
+      arr[i * 3 + 1] = (pseudoRandom(seed++) - 0.5) * (radius * 0.2) + ry;
+      arr[i * 3 + 2] = Math.sin(branchAngle + spinAngle) * radius + rz;
     }
-    return arr
-  }, [count])
+    return arr;
+  }, [count]);
 
-  useFrame((state, delta) => {
-    points.current.rotation.y -= delta * 0.05
-    const scrollY  = window.scrollY
-    const targetX  = (mouse.x * viewport.width)  / 10
-    const targetY  = (mouse.y * viewport.height) / 10
-    points.current.position.x += (targetX - points.current.position.x) * 0.02
-    points.current.position.y += (targetY - points.current.position.y) * 0.02
-    points.current.rotation.x = 0.2 + scrollY * 0.0002
-    // Subtle scroll parallax on Z
-    points.current.position.z += (-(scrollY * 0.002) - points.current.position.z) * 0.04
-  })
+  useFrame((_state, delta) => {
+    points.current.rotation.y -= delta * 0.05;
+    const scrollY = window.scrollY;
+    const targetX = (mouse.x * viewport.width) / 10;
+    const targetY = (mouse.y * viewport.height) / 10;
+    points.current.position.x += (targetX - points.current.position.x) * 0.02;
+    points.current.position.y += (targetY - points.current.position.y) * 0.02;
+    points.current.rotation.x = 0.2 + scrollY * 0.0002;
+    points.current.position.z += (-(scrollY * 0.002) - points.current.position.z) * 0.04;
+  });
 
   return (
     <Points ref={points} positions={positions} stride={3} frustumCulled={false}>
@@ -49,42 +56,33 @@ function GalaxyParticles({ count = 15000 }) {
         opacity={0.35}
       />
     </Points>
-  )
+  );
 }
 
-/* ── Gold sparkle particles (new layer) ── */
+/* ── Gold sparkle particles ── */
 function GoldSparkles({ count = 220 }) {
-  const points = useRef()
-  const time   = useRef(0)
+  const points = useRef();
+  const time = useRef(0);
 
   const positions = useMemo(() => {
-    const arr = new Float32Array(count * 3)
+    const arr = new Float32Array(count * 3);
+    let seed = 42;
     for (let i = 0; i < count; i++) {
-      // Distribute randomly across a wide volume
-      arr[i * 3]     = (Math.random() - 0.5) * 50
-      arr[i * 3 + 1] = (Math.random() - 0.5) * 20
-      arr[i * 3 + 2] = (Math.random() - 0.5) * 40
+      arr[i * 3] = (pseudoRandom(seed++) - 0.5) * 50;
+      arr[i * 3 + 1] = (pseudoRandom(seed++) - 0.5) * 20;
+      arr[i * 3 + 2] = (pseudoRandom(seed++) - 0.5) * 40;
     }
-    return arr
-  }, [count])
+    return arr;
+  }, [count]);
 
-  // Phase offsets so each sparkle twinkles independently
-  const phases = useMemo(
-    () => Array.from({ length: count }, () => Math.random() * Math.PI * 2),
-    [count]
-  )
-
-  useFrame((state, delta) => {
-    time.current += delta
-    // Animate opacity via material — subtle sine pulse (0.15 → 0.65)
+  useFrame((_state, delta) => {
+    time.current += delta;
     if (points.current) {
-      const t = time.current
-      // Use the mean phase for a gentle global breathe
-      points.current.material.opacity = 0.25 + Math.sin(t * 0.8) * 0.12
-      // Very slow drift rotation
-      points.current.rotation.y += delta * 0.012
+      const t = time.current;
+      points.current.material.opacity = 0.25 + Math.sin(t * 0.8) * 0.12;
+      points.current.rotation.y += delta * 0.012;
     }
-  })
+  });
 
   return (
     <Points ref={points} positions={positions} stride={3} frustumCulled={false}>
@@ -98,7 +96,7 @@ function GoldSparkles({ count = 220 }) {
         opacity={0.28}
       />
     </Points>
-  )
+  );
 }
 
 export default function BackgroundGalaxy() {

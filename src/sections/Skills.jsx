@@ -44,307 +44,273 @@ const ALL_SKILLS = [
     name: "Java",
     icon: FaJava,
     color: "#f89820",
-    cat: "Backend",
-    level: 85,
-    rel: "Spring Boot, OOP, JDBC",
-    desc: "Object-oriented development, multi-threading, and enterprise software.",
+    cat: "Languages",
+    rel: "Spring Boot, OOP, Backend Services",
+    desc: "Object-oriented software development, enterprise backend architecture, and multi-threading.",
   },
   {
     name: "JavaScript",
     icon: FaJs,
     color: "#f7df1e",
-    cat: "Frontend",
-    level: 90,
+    cat: "Languages",
     rel: "ES6+, Async, DOM, React",
-    desc: "Interactive client-side behaviors and asynchronous event loops.",
+    desc: "Modern JavaScript, event loop handling, asynchronous promises, and client-side logic.",
   },
   {
     name: "SQL",
     icon: FaDatabase,
     color: "#00aff0",
-    cat: "Database",
-    level: 82,
-    rel: "MySQL, Schema Design, Queries",
-    desc: "Relational query optimization, indexing, and transactional integrity.",
+    cat: "Databases",
+    rel: "MySQL, Schema Design, Query Optimization",
+    desc: "Relational queries, ACID transactions, data normalization, and schema indexing.",
   },
   {
     name: "C++",
     icon: SiCplusplus,
     color: "#00599c",
     cat: "Languages",
-    level: 75,
-    rel: "DSA, Systems, Low-level Memory",
-    desc: "Low-level system controls and algorithmic optimization.",
+    rel: "DSA, Algorithms, System Concepts",
+    desc: "Low-level system controls, memory management, and algorithmic problem solving.",
   },
   {
     name: "Python",
     icon: FaPython,
     color: "#3776ab",
     cat: "Languages",
-    level: 80,
-    rel: "Machine Learning, Pandas, Scipy",
-    desc: "Machine learning pipelines, scripting, and data transformation.",
+    rel: "Scikit-learn, Pandas, ML Pipelines",
+    desc: "Machine learning workflows, data preprocessing pipelines, and automation scripting.",
   },
   {
     name: "React.js",
     icon: FaReact,
     color: "#61dafb",
     cat: "Frontend",
-    level: 90,
-    rel: "Hooks, Context, Redux, Next.js",
-    desc: "Component architecture, hooks, and virtual DOM reconciliation.",
+    rel: "Hooks, Context, Component Design",
+    desc: "Modern React architecture, custom hooks, reusable components, and virtual DOM efficiency.",
   },
   {
     name: "HTML5",
     icon: FaHtml5,
     color: "#e34c26",
     cat: "Frontend",
-    level: 95,
-    rel: "Semantic UI, DOM, SEO",
-    desc: "Semantic layouts, SEO compliance, and modern DOM elements.",
+    rel: "Semantic DOM, Accessibility, Web Standards",
+    desc: "Accessible layout structure, semantic HTML elements, and SEO-friendly document hierarchy.",
   },
   {
     name: "CSS3",
     icon: FaCss3Alt,
     color: "#1572b6",
     cat: "Frontend",
-    level: 94,
-    rel: "Flexbox, Grid, Responsive Design",
-    desc: "Fluid grids, Flexbox, transitions, and keyframe animations.",
+    rel: "Flexbox, CSS Grid, Responsive Design",
+    desc: "Fluid responsive layouts, Flexbox/Grid systems, CSS animations, and UI transitions.",
   },
   {
     name: "Tailwind CSS",
     icon: SiTailwindcss,
     color: "#06b6d4",
     cat: "Frontend",
-    level: 88,
-    rel: "Utility-first classes, Config, Custom themes",
-    desc: "Utility-first CSS styling for rapid responsive layouts.",
+    rel: "Utility-First, Design Tokens, Responsive",
+    desc: "Utility-first CSS styling for consistent, scalable, and responsive component design.",
   },
   {
     name: "Bootstrap",
     icon: FaBootstrap,
     color: "#7952b3",
     cat: "Frontend",
-    level: 85,
-    rel: "Grid layouts, Templates, Alerts",
-    desc: "Responsive grid systems and template UI components.",
+    rel: "Grid Systems, UI Components, Prototypes",
+    desc: "Responsive grid layouts, pre-styled UI components, and rapid responsive prototyping.",
   },
   {
     name: "Node.js",
     icon: FaNode,
     color: "#3c9c3c",
     cat: "Backend",
-    level: 80,
-    rel: "Express, REST APIs, V8 runtime",
-    desc: "Event-driven async backend scripting and server runtimes.",
+    rel: "Express, REST APIs, V8 Runtime",
+    desc: "Asynchronous event-driven server runtime and scalable backend script execution.",
   },
   {
     name: "Express.js",
     icon: SiExpress,
     color: "#ffffff",
     cat: "Backend",
-    level: 82,
-    rel: "REST API, Routing, Middlewares",
-    desc: "RESTful API routes, middleware, and request-response handling.",
+    rel: "REST APIs, Middleware, Routing",
+    desc: "RESTful API routes, request-response lifecycles, and backend service middleware.",
   },
   {
     name: "Spring Boot",
     icon: SiSpring,
     color: "#6db33f",
     cat: "Backend",
-    level: 78,
-    rel: "Java, Dependency Injection, Microservices",
-    desc: "Java MVC, dependency injection, and secure microservices.",
+    rel: "Java MVC, Dependency Injection, APIs",
+    desc: "Java enterprise MVC patterns, dependency injection, and scalable service endpoints.",
   },
   {
     name: "Kafka",
     icon: SiApachekafka,
     color: "#ffffff",
     cat: "Backend",
-    level: 75,
-    rel: "Event Streaming, Broker, Pipeline",
-    desc: "Distributed event streaming and high-throughput pipelines.",
+    rel: "Event Streaming, Message Brokers",
+    desc: "Distributed event streaming, publish-subscribe queues, and pipeline communication.",
   },
   {
     name: "MongoDB",
     icon: SiMongodb,
     color: "#47a248",
-    cat: "Database",
-    level: 78,
-    rel: "NoSQL, Document Model, Queries",
-    desc: "NoSQL document storage, flexible schemas, and aggregation.",
+    cat: "Databases",
+    rel: "NoSQL, Document Model, Aggregation",
+    desc: "NoSQL document storage, flexible schema design, and aggregation pipelines.",
   },
   {
     name: "MySQL",
     icon: SiMysql,
     color: "#00758f",
-    cat: "Database",
-    level: 76,
-    rel: "Relational database, Foreign keys, SQL",
-    desc: "Relational DB setups, table relations, and SQL queries.",
+    cat: "Databases",
+    rel: "Relational DB, Foreign Keys, Indexing",
+    desc: "Relational table modeling, foreign key relations, constraints, and SQL transactions.",
   },
   {
     name: "DSA",
     icon: FaSitemap,
     color: "#facc15",
     cat: "Core CS",
-    level: 88,
-    rel: "Sorting, Searching, Trees, Graphs",
-    desc: "Time complexity, sorting/searching algorithms, trees, graphs.",
+    rel: "Trees, Graphs, Sorting, Complexity",
+    desc: "Algorithm analysis, time/space complexity, sorting/searching, and data structures.",
   },
   {
     name: "OOP",
     icon: FaLayerGroup,
     color: "#fb923c",
     cat: "Core CS",
-    level: 85,
-    rel: "Inheritance, Polymorphism, Abstraction",
-    desc: "Encapsulation, inheritance, polymorphism, and modular design.",
+    rel: "Encapsulation, Polymorphism, Design",
+    desc: "Encapsulation, inheritance, polymorphism, and modular software architecture.",
   },
   {
     name: "DBMS",
     icon: FaDatabase,
     color: "#a78bfa",
     cat: "Core CS",
-    level: 80,
-    rel: "Normalization, ACID, SQL Theory",
-    desc: "Database modeling, transactions, and normalization theory.",
+    rel: "Normalization, ACID, Transactions",
+    desc: "Relational database theory, ACID properties, normalization, and concurrency control.",
   },
   {
     name: "OS",
     icon: FaTerminal,
     color: "#34d399",
     cat: "Core CS",
-    level: 75,
-    rel: "CPU Scheduling, Threads, File system",
-    desc: "Process scheduling, memory management, and file systems.",
+    rel: "CPU Scheduling, Memory, Processes",
+    desc: "Process management, CPU scheduling, thread synchronization, and virtual memory.",
   },
   {
     name: "Networks",
     icon: FaNetworkWired,
     color: "#60a5fa",
     cat: "Core CS",
-    level: 78,
-    rel: "TCP/IP, Sockets, HTTP, DNS",
-    desc: "TCP/IP layers, routing protocols, and client-server comms.",
+    rel: "TCP/IP, HTTP/HTTPS, Sockets, DNS",
+    desc: "TCP/IP layer models, HTTP contracts, DNS resolution, and client-server communication.",
   },
   {
     name: "Git",
     icon: FaTools,
     color: "#f05032",
     cat: "Tools",
-    level: 90,
-    rel: "Branches, Merging, Rebase, Log",
-    desc: "Distributed version control, branching, and pull requests.",
+    rel: "Branching, Merging, Rebase, Commits",
+    desc: "Distributed version control, branching strategies, and repository synchronization.",
   },
   {
     name: "GitHub",
     icon: FaGithub,
     color: "#ffffff",
     cat: "Tools",
-    level: 90,
-    rel: "PRs, Actions, Projects, Settings",
-    desc: "Remote repositories, code reviews, and CI workflows.",
+    rel: "Pull Requests, Code Review, CI/CD",
+    desc: "Collaborative code reviews, pull requests, repository management, and automation.",
   },
   {
     name: "Docker",
     icon: FaDocker,
     color: "#2496ed",
     cat: "Tools",
-    level: 80,
-    rel: "Containers, Compose, Volumes",
-    desc: "Container builds, volumes, ports, and containerized runtimes.",
+    rel: "Containers, Dockerfiles, Compose",
+    desc: "Application containerization, reproducible builds, and isolated local runtime environments.",
   },
   {
     name: "VS Code",
     icon: FaCode,
     color: "#007acc",
     cat: "Tools",
-    level: 95,
-    rel: "Extensions, Settings, Keybindings",
-    desc: "IDE environments, terminal scripting, and editor extensions.",
+    rel: "Extensions, Debugging, Tooling",
+    desc: "Integrated development environment, debugging workflows, and editor productivity extensions.",
   },
   {
     name: "Postman",
     icon: SiPostman,
     color: "#ff6c37",
     cat: "Tools",
-    level: 85,
-    rel: "Collections, Environments, API Test",
-    desc: "Endpoint validation, API testing, and collection variables.",
+    rel: "API Testing, Collections, Validation",
+    desc: "REST API endpoint validation, environment variables, and automated request collections.",
   },
   {
     name: "Vercel",
     icon: SiVercel,
     color: "#ffffff",
     cat: "Tools",
-    level: 85,
-    rel: "Frontend deployment, Domains, Functions",
-    desc: "Automatic deployments, serverless functions, and CDN hosting.",
+    rel: "Frontend Deployment, CI/CD, CDN",
+    desc: "Continuous deployment workflows, frontend hosting, and serverless infrastructure.",
   },
   {
     name: "Render",
     icon: SiRender,
     color: "#46e3b7",
     cat: "Tools",
-    level: 80,
-    rel: "Webservices, Cloud DB, Auto-builds",
-    desc: "Backend hosting, database hosting, and automated deployments.",
+    rel: "Web Services, Backend Hosting, DBs",
+    desc: "Cloud web services, automatic Git-based deployments, and backend server hosting.",
   },
   {
     name: "Power BI",
     icon: FaChartPie,
     color: "#f2c811",
     cat: "Tools",
-    level: 75,
-    rel: "Reports, DAX measures, Data Model",
-    desc: "DAX measures, data loading, and interactive dashboards.",
+    rel: "DAX Measures, Data Modeling, KPIs",
+    desc: "Interactive business intelligence dashboards, DAX calculations, and KPI reporting.",
   },
   {
     name: "RESTful APIs",
     icon: FaServer,
     color: "#a855f7",
     cat: "Concepts",
-    level: 88,
-    rel: "HTTP status, Methods, JSON schemas",
-    desc: "HTTP methods, status codes, and standard resource schemas.",
+    rel: "HTTP Verbs, JSON Contracts, Status",
+    desc: "Stateless REST architectural constraints, standard HTTP status codes, and JSON schemas.",
   },
   {
     name: "JWT Auth",
     icon: SiJsonwebtokens,
     color: "#d63aff",
     cat: "Concepts",
-    level: 82,
-    rel: "Access tokens, Refresh, Signature",
-    desc: "Stateless session encryption, signature keys, and middleware.",
+    rel: "Stateless Auth, Tokens, Signatures",
+    desc: "Stateless user authentication, token signing, expiration, and authorization middleware.",
   },
   {
     name: "MVC",
     icon: FaSitemap,
     color: "#e879f9",
     cat: "Concepts",
-    level: 85,
-    rel: "Controller, Model, Data binds",
-    desc: "Model-View-Controller, routing, and data binding separation.",
+    rel: "Model, View, Controller Architecture",
+    desc: "Separation of concerns between business logic, data models, and presentation views.",
   },
   {
     name: "Responsive Design",
     icon: FaLaptop,
     color: "#38bdf8",
     cat: "Concepts",
-    level: 92,
-    rel: "Media queries, Flex layouts, Viewport",
-    desc: "Media queries, mobile-first design, and fluid layouts.",
+    rel: "Mobile-First, Viewports, Adaptive",
+    desc: "Mobile-first responsive architecture, fluid grids, and multi-device usability.",
   },
   {
     name: "Agile",
     icon: FaSyncAlt,
     color: "#4ade80",
     cat: "Concepts",
-    level: 80,
-    rel: "Scrum, Sprint planning, Backlogs",
-    desc: "Scrum, sprint plans, daily standups, and backlog updates.",
+    rel: "Scrum, Sprints, Team Collaboration",
+    desc: "Iterative sprint cycles, user stories, daily standups, and collaborative code delivery.",
   },
 ];
 
@@ -452,74 +418,40 @@ const TooltipPanel = ({ skill, p, containerWidth, containerHeight }) => {
           {/* Description */}
           <p
             style={{
-              color: "rgba(255,255,255,0.45)",
-              fontSize: 10.5,
-              lineHeight: 1.6,
-              margin: "0 0 8px",
+              color: "rgba(255,255,255,0.75)",
+              fontSize: 11,
+              lineHeight: 1.55,
+              margin: "0 0 10px",
             }}
           >
             {skill.desc}
           </p>
 
-          {/* Proficiency and Progress bar */}
-          <div style={{ margin: "8px 0" }}>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                fontSize: 9,
-                fontFamily: "monospace",
-                color: "rgba(255,255,255,0.3)",
-                marginBottom: 4,
-              }}
-            >
-              <span>PROFICIENCY</span>
-              <span style={{ color: skill.color }}>{skill.level}%</span>
-            </div>
-            <div
-              style={{
-                height: 2,
-                backgroundColor: "rgba(255,255,255,0.06)",
-                borderRadius: 9,
-                overflow: "hidden",
-                width: "100%",
-              }}
-            >
-              <div
-                style={{
-                  height: "100%",
-                  width: `${skill.level}%`,
-                  backgroundColor: skill.color,
-                  boxShadow: `0 0 8px ${skill.color}`,
-                }}
-              />
-            </div>
-          </div>
-
           {/* Related Tech */}
           <div
             style={{
-              borderTop: "1px solid rgba(255,255,255,0.05)",
-              paddingTop: 6,
+              borderTop: "1px solid rgba(255,255,255,0.08)",
+              paddingTop: 8,
               display: "flex",
               flexDirection: "column",
-              gap: 2,
+              gap: 3,
             }}
           >
             <span
               style={{
-                fontSize: 8,
+                fontSize: 8.5,
                 fontFamily: "monospace",
-                color: "rgba(255,255,255,0.25)",
+                color: "rgba(255,255,255,0.4)",
+                letterSpacing: "0.08em",
               }}
             >
-              RELATED TECH
+              CORE FOCUS & ASSOCIATED TECH
             </span>
             <span
               style={{
-                fontSize: 9,
+                fontSize: 10,
                 fontFamily: "monospace",
-                color: "rgba(255,255,255,0.65)",
+                color: "rgba(255,255,255,0.85)",
               }}
             >
               {skill.rel}
@@ -531,95 +463,108 @@ const TooltipPanel = ({ skill, p, containerWidth, containerHeight }) => {
   );
 };
 
+// Helper to generate particle physics configuration
+const initParticles = (width, height) => {
+  const ps = [];
+  const minDistance = 0.125;
+
+  for (let i = 0; i < ALL_SKILLS.length; i++) {
+    let x = 0,
+      y = 0,
+      valid = false;
+    let attempts = 0;
+
+    while (!valid && attempts < 300) {
+      x = 0.12 + Math.random() * 0.76;
+      y = 0.12 + Math.random() * 0.76;
+      valid = true;
+
+      for (let j = 0; j < ps.length; j++) {
+        const q = ps[j];
+        const dx = x - q.x;
+        const dy = y - q.y;
+        if (Math.sqrt(dx * dx + dy * dy) < minDistance) {
+          valid = false;
+          break;
+        }
+      }
+      attempts++;
+    }
+
+    const half = ORB_SIZE / 2;
+    const speed = 12 + Math.random() * 12;
+    const angle = Math.random() * Math.PI * 2;
+    const vx = Math.cos(angle) * speed;
+    const vy = Math.sin(angle) * speed;
+
+    const rotSpeed = 0.003 + Math.random() * 0.004;
+    const breathSpeed = 0.015 + Math.random() * 0.015;
+
+    ps.push({
+      id: i,
+      x: Math.min(Math.max(x * width, half), Math.max(half, width - half)),
+      y: Math.min(Math.max(y * height, half), Math.max(half, height - half)),
+      vx,
+      vy,
+      rotAngle: Math.random() * Math.PI * 2,
+      rotSpeed,
+      breathAngle: Math.random() * Math.PI * 2,
+      breathSpeed,
+    });
+  }
+  return ps;
+};
+
 // ─── Main Skills component ──────────────────────────────────────────────────
 const Skills = () => {
   const arenaRef = useRef(null);
-  const particlesRef = useRef([]);
   const rafRef = useRef(null);
   const lastTickRef = useRef(null);
   const iconRefs = useRef([]);
   const stageTimersRef = useRef([]);
 
   const [hoveredIdx, setHoveredIdx] = useState(null);
-  const [arenaReady, setArenaReady] = useState(false);
   const [arenaStage, setArenaStage] = useState("idle");
   const [dimensions, setDimensions] = useState({ width: 800, height: 545 });
+  const [particles] = useState(() => initParticles(800, 545));
+  const particlesRef = useRef(particles);
 
-  // ─── Generate fixed anti-gravity configurations EXACTLY ONCE on mount ──────
+  // Keep ref in sync with state
   useEffect(() => {
-    const ps = [];
-    const minDistance = 0.125; // normalized space distance threshold to prevent initial overlaps
-
-    for (let i = 0; i < ALL_SKILLS.length; i++) {
-      let x = 0,
-        y = 0,
-        valid = false;
-      let attempts = 0;
-
-      while (!valid && attempts < 300) {
-        // Safe inner bounds coordinates (0.12 to 0.88) to prevent edge touching
-        x = 0.12 + Math.random() * 0.76;
-        y = 0.12 + Math.random() * 0.76;
-        valid = true;
-
-        for (let j = 0; j < ps.length; j++) {
-          const q = ps[j];
-          const dx = x - q.x;
-          const dy = y - q.y;
-          if (Math.sqrt(dx * dx + dy * dy) < minDistance) {
-            valid = false;
-            break;
-          }
-        }
-        attempts++;
-      }
-
-      const width = arenaRef.current?.offsetWidth || dimensions.width;
-      const height = arenaRef.current?.offsetHeight || dimensions.height;
-      const half = ORB_SIZE / 2;
-      const speed = 12 + Math.random() * 12;
-      const angle = Math.random() * Math.PI * 2;
-      const vx = Math.cos(angle) * speed;
-      const vy = Math.sin(angle) * speed;
-
-      const rotSpeed = 0.003 + Math.random() * 0.004;
-      const breathSpeed = 0.015 + Math.random() * 0.015;
-
-      ps.push({
-        id: i,
-        x: Math.min(Math.max(x * width, half), Math.max(half, width - half)),
-        y: Math.min(Math.max(y * height, half), Math.max(half, height - half)),
-        vx,
-        vy,
-        rotAngle: Math.random() * Math.PI * 2,
-        rotSpeed,
-        breathAngle: Math.random() * Math.PI * 2,
-        breathSpeed,
-      });
-    }
-
-    particlesRef.current = ps;
-    setArenaReady(true);
-  }, []);
+    particlesRef.current = particles;
+  }, [particles]);
 
   useEffect(() => {
+    const timers = stageTimersRef;
     return () => {
-      stageTimersRef.current.forEach((timer) => clearTimeout(timer));
+      timers.current.forEach((timer) => clearTimeout(timer));
     };
   }, []);
+
+  // ─── Handlers ────────────────────────────────────────────────────────────
+  const handleIconEnter = useCallback((idx) => {
+    setHoveredIdx(idx);
+  }, []);
+
+  const handleIconLeave = useCallback(() => setHoveredIdx(null), []);
+
+  const w = dimensions.width;
+  const h = dimensions.height;
+
+  const tickRef = useRef();
 
   // ─── Animation loop updating translation, rotation and breathing ──────────
   const tick = useCallback((timestamp) => {
     const arena = arenaRef.current;
     if (!arena) return;
-    const w = arena.offsetWidth;
-    const h = arena.offsetHeight;
+    const arenaW = arena.offsetWidth;
+    const arenaH = arena.offsetHeight;
     const ps = particlesRef.current;
     const half = ORB_SIZE / 2;
     const minX = half;
-    const maxX = Math.max(half, w - half);
+    const maxX = Math.max(half, arenaW - half);
     const minY = half;
-    const maxY = Math.max(half, h - half);
+    const maxY = Math.max(half, arenaH - half);
     const minDistance = ORB_SIZE * 0.98;
     const boundaryBounce = 0.82;
     const drag = 0.992;
@@ -707,41 +652,33 @@ const Skills = () => {
         p.vy = -Math.abs(p.vy) * boundaryBounce;
       }
 
-      const rot = Math.sin(p.rotAngle) * 2; // Gentle rotation within ±2 degrees
+      const rot = Math.sin(p.rotAngle) * 2;
 
       const el = iconRefs.current[i];
       if (el) {
-        // Apply translation and rotation
         el.style.transform = `translate3d(${p.x - half}px, ${p.y - half}px, 0) rotate(${rot}deg)`;
-
-        // Calculate breathing glow intensity between 80% and 100%
         const breath = 0.8 + Math.sin(p.breathAngle) * 0.2;
         el.style.setProperty("--glow-breath", breath.toFixed(3));
       }
     }
 
-    rafRef.current = requestAnimationFrame(tick);
+    rafRef.current = requestAnimationFrame((ts) => {
+      if (tickRef.current) tickRef.current(ts);
+    });
   }, []);
 
-  // ─── Handlers ────────────────────────────────────────────────────────────
-  const handleIconEnter = useCallback((idx) => {
-    setHoveredIdx(idx);
-  }, []);
+  useEffect(() => {
+    tickRef.current = tick;
+  }, [tick]);
 
-  const handleIconLeave = useCallback(() => setHoveredIdx(null), []);
-
-  const w = dimensions.width;
-  const h = dimensions.height;
-  const hoveredSkill = hoveredIdx !== null ? ALL_SKILLS[hoveredIdx] : null;
-
-  // ─── Setup resize bounds observer (does not reposition particles) ──────────
+  // ─── Setup resize bounds observer ──────────
   useEffect(() => {
     const arena = arenaRef.current;
     if (!arena) return;
-    if (arenaStage !== "float" || !arenaReady) return;
-    const w = arena.offsetWidth;
-    const h = arena.offsetHeight;
-    setDimensions({ width: w, height: h });
+    if (arenaStage !== "float") return;
+    const currentW = arena.offsetWidth;
+    const currentH = arena.offsetHeight;
+    setDimensions({ width: currentW, height: currentH });
 
     lastTickRef.current = null;
     rafRef.current = requestAnimationFrame(tick);
@@ -755,14 +692,13 @@ const Skills = () => {
 
     return () => {
       ro.disconnect();
-      cancelAnimationFrame(rafRef.current);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
-  }, [tick, arenaReady, arenaStage]);
+  }, [tick, arenaStage]);
 
   const handleArenaEnter = useCallback(() => {
     if (arenaStage !== "idle") return;
 
-    setArenaReady(true);
     setArenaStage("border");
 
     const orbTimer = setTimeout(() => setArenaStage("orbs"), 460);
@@ -880,11 +816,10 @@ const Skills = () => {
           }}
         >
           {/* Custom Futuristic HUD Frame SVG */}
-          {arenaReady && (
-            <motion.svg
-              className="absolute inset-0 w-full h-full pointer-events-none"
-              style={{ zIndex: 0 }}
-            >
+          <motion.svg
+            className="absolute inset-0 w-full h-full pointer-events-none"
+            style={{ zIndex: 0 }}
+          >
               {/* Sci-fi cropped frame outline */}
               <path
                 d={`M 16 0 L ${w - 16} 0 L ${w} 16 L ${w} ${h - 16} L ${w - 16} ${h} L 16 ${h} L 0 ${h - 16} L 0 16 Z`}
@@ -974,7 +909,6 @@ const Skills = () => {
                 transition={{ duration: 1.05, ease: [0.22, 1, 0.36, 1] }}
               />
             </motion.svg>
-          )}
 
           {/* Floating skill icons */}
           {ALL_SKILLS.map((skill, idx) => {
@@ -985,12 +919,14 @@ const Skills = () => {
             // Highlight hovered, dim others slightly
             const iconOpacity = isHov ? 1 : isAnyHov ? 0.35 : 0.85;
             const iconScale = isHov ? 1.08 : isAnyHov ? 0.95 : 1.0;
-            const p = particlesRef.current[idx];
+            const p = particles[idx];
 
             return (
               <div
                 key={skill.name}
-                ref={(el) => (iconRefs.current[idx] = el)}
+                ref={(el) => {
+                  iconRefs.current[idx] = el;
+                }}
                 style={{
                   position: "absolute",
                   top: 0,
@@ -1016,7 +952,7 @@ const Skills = () => {
                     gap: 6,
                     width: "100%",
                     height: "100%",
-                    opacity: arenaReady && orbVisible ? iconOpacity : 0,
+                    opacity: orbVisible ? iconOpacity : 0,
                     transform: `scale(${iconScale})`,
                     transition: "opacity 0.35s ease, transform 0.35s ease",
                   }}
