@@ -84,7 +84,7 @@ const ExperienceCard = ({ item, index }) => {
         </div>
 
         {item.highlights && (
-          <ul className="relative z-10 space-y-2 text-[13.5px] text-gray-400 mt-3 list-disc pl-5 marker:text-amber-400/80 leading-relaxed font-light">
+          <ul className="relative z-10 space-y-2 text-sm text-gray-400 mt-3 list-disc pl-5 marker:text-amber-400/80 leading-relaxed font-light">
             {item.highlights.map((bullet, i) => (
               <li key={i}>{bullet}</li>
             ))}

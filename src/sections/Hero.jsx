@@ -65,7 +65,8 @@ const Hero = () => {
             HARPREET
           </motion.h1>
 
-          <motion.h1
+          <motion.div
+            aria-hidden="true"
             variants={heroLine}
             initial="hidden"
             animate="visible"
@@ -74,7 +75,7 @@ const Hero = () => {
             style={{ letterSpacing: "0.02em" }}
           >
             JAKHAR
-          </motion.h1>
+          </motion.div>
         </div>
 
         {/* Primary Role Indicator */}
@@ -87,7 +88,7 @@ const Hero = () => {
         >
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-amber-400/30 bg-amber-400/5 mb-4">
             <span className="w-2 h-2 rounded-full bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.8)]" />
-            <span className="text-xs sm:text-sm font-mono text-amber-300 uppercase tracking-widest font-semibold">
+            <span className="text-xs sm:text-sm font-mono text-amber-300 tracking-wide font-medium">
               Software Engineer | Full-Stack Developer
             </span>
           </div>
@@ -105,7 +106,7 @@ const Hero = () => {
           transition={{ delay: 0.28 }}
           className="mt-6 flex items-center justify-center overflow-hidden px-2"
         >
-          <div className="flex items-center justify-center gap-2 sm:gap-3 whitespace-nowrap text-[10px] sm:text-xs md:text-xs font-mono uppercase tracking-[0.16em] sm:tracking-[0.2em] text-center leading-none">
+          <div className="flex items-center justify-center gap-2 sm:gap-3 whitespace-nowrap text-xs sm:text-sm font-mono tracking-wide text-center leading-none">
             {ROLES.map((role, index) => {
               const isActive = index === roleIdx;
 
@@ -123,11 +124,11 @@ const Hero = () => {
                   transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                   className="inline-flex items-center whitespace-nowrap"
                 >
-                  {role.toUpperCase()}
+                  {role}
                   {index < ROLES.length - 1 && (
                     <span
                       aria-hidden="true"
-                      className="mx-2 sm:mx-3 text-[rgba(255,255,255,0.25)]"
+                      className="mx-2 sm:mx-3 text-white/25"
                       style={{ letterSpacing: 0 }}
                     >
                       •
@@ -149,14 +150,14 @@ const Hero = () => {
           <motion.a
             variants={ctaItem}
             href="#projects"
-            className="px-7 py-3 border border-amber-400/40 bg-amber-400/10 text-amber-300 rounded-full text-xs font-mono uppercase tracking-widest hover:bg-amber-400 hover:text-black transition-all duration-300 shadow-[0_0_15px_rgba(251,191,36,0.1)]"
+            className="px-7 py-3 border border-amber-400/40 bg-amber-400/10 text-amber-300 rounded-full text-xs sm:text-sm font-mono tracking-wide hover:bg-amber-400 hover:text-black transition-all duration-300 shadow-[0_0_15px_rgba(251,191,36,0.1)]"
           >
             Explore Projects
           </motion.a>
           <motion.a
             variants={ctaItem}
             href="#contact"
-            className="px-7 py-3 border border-white/20 rounded-full text-xs font-mono uppercase tracking-widest hover:bg-white hover:text-black transition-all duration-300"
+            className="px-7 py-3 border border-white/20 rounded-full text-xs sm:text-sm font-mono tracking-wide hover:bg-white hover:text-black transition-all duration-300"
           >
             Get In Touch
           </motion.a>
@@ -169,12 +170,12 @@ const Hero = () => {
           transition={{ duration: 1, delay: 1.2 }}
           className="absolute bottom-10 left-0 flex flex-col items-start gap-2"
         >
-          <div className="flex items-center gap-3 text-xs font-mono tracking-widest font-bold">
+          <div className="flex items-center gap-3 text-xs font-mono tracking-wider font-semibold text-gray-300">
             <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.8)]" />
-            AVAILABLE FOR WORK
+            Available for Work
           </div>
-          <span className="text-[10px] text-gray-500 font-mono tracking-widest ml-5">
-            ROHTAK, INDIA
+          <span className="text-xs text-gray-500 font-mono tracking-wide ml-5">
+            Rohtak, India
           </span>
         </motion.div>
 
@@ -183,9 +184,9 @@ const Hero = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 1.2 }}
-          className="absolute bottom-10 right-0 hidden sm:flex items-center gap-4 text-[10px] font-mono tracking-[0.25em] text-gray-500"
+          className="absolute bottom-10 right-0 hidden sm:flex items-center gap-4 text-xs font-mono tracking-wider text-gray-500"
         >
-          SCROLL TO EXPLORE
+          Scroll to explore
           <div className="w-12 h-px bg-white/20" />
         </motion.div>
       </div>

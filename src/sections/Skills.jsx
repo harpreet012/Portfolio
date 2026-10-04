@@ -391,7 +391,7 @@ const TooltipPanel = ({ skill, p, containerWidth, containerHeight }) => {
                 style={{
                   color: "#fff",
                   fontWeight: 700,
-                  fontSize: 12.5,
+                  fontSize: 13,
                   letterSpacing: "0.02em",
                 }}
               >
@@ -400,7 +400,7 @@ const TooltipPanel = ({ skill, p, containerWidth, containerHeight }) => {
             </div>
             <span
               style={{
-                fontSize: 8.5,
+                fontSize: 11,
                 fontFamily: "monospace",
                 color: skill.color,
                 background: `${skill.color}12`,
@@ -419,7 +419,7 @@ const TooltipPanel = ({ skill, p, containerWidth, containerHeight }) => {
           <p
             style={{
               color: "rgba(255,255,255,0.75)",
-              fontSize: 11,
+              fontSize: 12,
               lineHeight: 1.55,
               margin: "0 0 10px",
             }}
@@ -439,7 +439,7 @@ const TooltipPanel = ({ skill, p, containerWidth, containerHeight }) => {
           >
             <span
               style={{
-                fontSize: 8.5,
+                fontSize: 11,
                 fontFamily: "monospace",
                 color: "rgba(255,255,255,0.4)",
                 letterSpacing: "0.08em",
@@ -449,7 +449,7 @@ const TooltipPanel = ({ skill, p, containerWidth, containerHeight }) => {
             </span>
             <span
               style={{
-                fontSize: 10,
+                fontSize: 12,
                 fontFamily: "monospace",
                 color: "rgba(255,255,255,0.85)",
               }}
@@ -732,10 +732,10 @@ const Skills = () => {
           transition={{ duration: 0.65 }}
           className="mx-auto mb-12 max-w-3xl text-center"
         >
-          <p className="mb-3 text-[10px] font-mono uppercase tracking-[0.55em] text-amber-200/55">
+          <p className="mb-3 text-xs font-mono tracking-wide text-amber-200/70">
             Professional Toolbox
           </p>
-          <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-white uppercase">
+          <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-white">
             Technical Skills
           </h2>
           <div className="mx-auto mt-4 h-px w-32 bg-linear-to-r from-transparent via-amber-300/35 to-transparent" />
@@ -1021,19 +1021,16 @@ const Skills = () => {
                   {/* Label text */}
                   <span
                     style={{
-                      fontSize: 8.5,
+                      fontSize: 12,
                       fontFamily: "monospace",
                       color: isHov
-                        ? "rgba(255,255,255,0.85)"
-                        : "rgba(255,255,255,0.22)",
-                      letterSpacing: "0.04em",
-                      whiteSpace: "nowrap",
+                        ? "rgba(255,255,255,0.9)"
+                        : "rgba(255,255,255,0.45)",
+                      letterSpacing: "0.02em",
                       pointerEvents: "none",
                       transition: "color 0.3s ease",
-                      maxWidth: 76,
-                      overflow: "hidden",
-                      textOverflow: "ellipsis",
                       textAlign: "center",
+                      wordBreak: "break-word",
                     }}
                   >
                     {skill.name}
@@ -1055,16 +1052,17 @@ const Skills = () => {
 
           {/* Badge count info */}
           <div
+            aria-hidden="true"
             style={{
               position: "absolute",
               bottom: 14,
               right: 18,
               zIndex: 5,
               pointerEvents: "none",
-              fontSize: 8.5,
+              fontSize: 10,
               fontFamily: "monospace",
-              color: "rgba(255,255,255,0.14)",
-              letterSpacing: "0.12em",
+              color: "rgba(255,255,255,0.2)",
+              letterSpacing: "0.08em",
             }}
           >
             SYSTEM: {ALL_SKILLS.length} MODULES DETECTED

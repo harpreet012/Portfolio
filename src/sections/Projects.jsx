@@ -124,7 +124,7 @@ const ProjectCard = ({ project, index }) => {
 
         {/* Featured badge */}
         {isFeatured && (
-          <div className="absolute top-3 right-3 z-20 px-2.5 py-0.5 rounded-md border border-amber-400/50 bg-black/80 backdrop-blur-md text-[9px] font-mono uppercase tracking-widest text-amber-300">
+          <div className="absolute top-3 right-3 z-20 px-2.5 py-0.5 rounded-lg border border-amber-400/50 bg-black/80 backdrop-blur-md text-xs font-mono uppercase tracking-wider text-amber-300">
             Featured
           </div>
         )}
@@ -136,7 +136,7 @@ const ProjectCard = ({ project, index }) => {
         style={{ transform: "translateZ(25px)" }}
       >
         {/* Category */}
-        <span className="text-[9.5px] font-mono tracking-[0.2em] uppercase text-amber-400/80 font-medium">
+        <span className="text-xs font-mono tracking-wide uppercase text-amber-400/80 font-medium">
           {project.category}
         </span>
 
@@ -146,7 +146,7 @@ const ProjectCard = ({ project, index }) => {
         </h3>
 
         {/* Short Summary */}
-        <p className="text-[12.5px] leading-relaxed text-gray-400 font-light">
+        <p className="text-xs sm:text-sm leading-relaxed text-gray-400 font-light">
           {project.description}
         </p>
 
@@ -158,7 +158,7 @@ const ProjectCard = ({ project, index }) => {
               initial={false}
               animate={{ opacity: 1 }}
               transition={{ delay: i * 0.02, duration: 0.2 }}
-              className="px-2 py-0.5 bg-white/4 rounded-full border border-white/5 text-[9px] font-mono text-gray-300 transition-colors group-hover:border-amber-400/25 group-hover:text-amber-200 cursor-default"
+              className="px-2.5 py-0.5 bg-white/4 rounded-full border border-white/5 text-xs font-mono text-gray-300 transition-colors group-hover:border-amber-400/25 group-hover:text-amber-200 cursor-default"
             >
               {item}
             </motion.span>
@@ -173,7 +173,8 @@ const ProjectCard = ({ project, index }) => {
               <a
                 href={project.links.github}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
+                aria-label={`View ${project.title} source code on GitHub (opens in a new tab)`}
                 className="flex items-center gap-1.5 text-gray-400 hover:text-amber-400 transition-colors duration-300 text-xs font-mono"
               >
                 <FaGithub size={13} className="text-amber-400" />
@@ -184,7 +185,8 @@ const ProjectCard = ({ project, index }) => {
               <a
                 href={project.links.demo}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
+                aria-label={`View ${project.title} live demo (opens in a new tab)`}
                 className="flex items-center gap-1.5 text-gray-400 hover:text-amber-400 transition-colors duration-300 text-xs font-mono"
               >
                 <FaExternalLinkAlt size={11} className="text-amber-400" />
@@ -205,7 +207,10 @@ const Projects = () => {
       className="relative px-6 py-20 sm:px-10 overflow-hidden"
     >
       {/* Giant Background Number */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[40vw] font-black text-outline opacity-10 pointer-events-none select-none z-0 leading-none">
+      <div
+        aria-hidden="true"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[40vw] font-black text-outline opacity-10 pointer-events-none select-none z-0 leading-none"
+      >
         02
       </div>
 

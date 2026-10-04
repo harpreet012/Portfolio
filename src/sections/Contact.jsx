@@ -75,7 +75,7 @@ const FloatingInput = ({
             : active
               ? "none"
               : "translateY(-50%)",
-          fontSize: active ? "9px" : "12px",
+          fontSize: active ? "10px" : "12px",
           letterSpacing: active ? "0.12em" : "0.06em",
           textTransform: "uppercase",
           color: focused ? "rgba(212,169,55,0.8)" : "rgba(156,163,175,0.6)",
@@ -185,10 +185,16 @@ const Contact = () => {
       className="relative px-6 py-32 sm:px-10 overflow-hidden"
     >
       {/* Giant Background Text */}
-      <div className="absolute top-[20%] left-1/2 -translate-x-1/2 -translate-y-1/2 text-[15vw] font-black text-white pointer-events-none select-none z-10 leading-none tracking-tighter whitespace-nowrap mix-blend-difference">
+      <div
+        aria-hidden="true"
+        className="absolute top-[20%] left-1/2 -translate-x-1/2 -translate-y-1/2 text-[15vw] font-black text-white pointer-events-none select-none z-10 leading-none tracking-tighter whitespace-nowrap mix-blend-difference"
+      >
         LET'S
       </div>
-      <div className="absolute top-[20%] left-1/2 -translate-x-1/2 -translate-y-1/2 text-[15vw] font-black text-outline opacity-20 pointer-events-none select-none z-0 leading-none tracking-widest whitespace-nowrap ml-[30vw]">
+      <div
+        aria-hidden="true"
+        className="absolute top-[20%] left-1/2 -translate-x-1/2 -translate-y-1/2 text-[15vw] font-black text-outline opacity-20 pointer-events-none select-none z-0 leading-none tracking-widest whitespace-nowrap ml-[30vw]"
+      >
         TALK
       </div>
 
@@ -201,12 +207,12 @@ const Contact = () => {
             transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
             className="lg:col-span-2 space-y-6"
           >
-            <motion.h3
+            <motion.h2
               variants={formItem}
               className="text-3xl font-semibold text-gray-100"
             >
               Let's connect
-            </motion.h3>
+            </motion.h2>
             <motion.p
               variants={formItem}
               className="text-gray-400 text-sm leading-relaxed"
@@ -226,12 +232,14 @@ const Contact = () => {
                   Email: FaEnvelope,
                 };
                 const Icon = iconMap[link.label] || FaGithub;
+                const isExternal = link.label !== "Email";
                 return (
                   <a
                     key={link.label}
                     href={link.href}
-                    target={link.label === "Email" ? "_self" : "_blank"}
-                    rel="noreferrer"
+                    target={isExternal ? "_blank" : "_self"}
+                    rel={isExternal ? "noopener noreferrer" : undefined}
+                    aria-label={isExternal ? `${link.label} profile (opens in a new tab)` : `Send email to Harpreet`}
                     className="flex items-center gap-3 text-sm font-mono text-gray-300 hover:text-amber-400 transition-colors duration-200"
                   >
                     <Icon size={18} className="text-amber-400" /> {link.label}

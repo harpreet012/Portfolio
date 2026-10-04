@@ -73,7 +73,7 @@ const HighlightCard = ({ item, index }) => {
       <div className="text-amber-400 font-bold text-sm sm:text-base mb-1 font-mono relative z-10">
         {item.label}
       </div>
-      <div className="text-[11px] sm:text-xs text-gray-400 leading-normal relative z-10">
+      <div className="text-xs text-gray-400 leading-normal relative z-10">
         {item.desc}
       </div>
     </motion.div>
@@ -147,7 +147,7 @@ const ProfileCard = () => {
 
         {/* Card */}
         <div
-          className="relative overflow-hidden rounded-2xl p-4 backdrop-blur-2xl shadow-2xl transition-all duration-500"
+          className="relative overflow-hidden rounded-xl p-4 backdrop-blur-2xl shadow-2xl transition-all duration-500"
           style={{
             background:
               "linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%)",
@@ -161,7 +161,7 @@ const ProfileCard = () => {
         >
           {/* Moving gloss reflection */}
           <motion.div
-            className="absolute inset-0 rounded-2xl pointer-events-none z-10"
+            className="absolute inset-0 rounded-xl pointer-events-none z-10"
             style={{
               background: useTransform(
                 [glossX, glossY],
@@ -181,8 +181,8 @@ const ProfileCard = () => {
               className="h-90 sm:h-100 w-full object-cover transition-transform duration-500"
               style={{ transform: hovered ? "scale(1.03)" : "scale(1)" }}
             />
-            <div className="absolute top-3 left-3 px-3 py-1 rounded-full border border-white/10 bg-black/60 backdrop-blur-md text-[9px] font-mono uppercase tracking-widest text-amber-300">
-              HJ.Dev
+            <div className="absolute top-3 left-3 px-3 py-1 rounded-full border border-white/10 bg-black/60 backdrop-blur-md text-xs font-mono text-amber-300">
+              HJ.dev
             </div>
           </div>
 
@@ -191,11 +191,11 @@ const ProfileCard = () => {
             <h3 className="text-xl font-bold text-white tracking-wide">
               Harpreet Jakhar
             </h3>
-            <p className="text-[10px] font-mono text-amber-400 mt-1.5 uppercase tracking-widest leading-relaxed">
+            <p className="text-xs font-mono text-amber-400 mt-1.5 tracking-wide leading-relaxed">
               Software / Full-Stack Developer
             </p>
             <div className="h-px w-full bg-white/5 my-4" />
-            <div className="flex justify-between gap-4 text-[10px] font-mono text-gray-400">
+            <div className="flex justify-between gap-4 text-xs font-mono text-gray-400">
               <div>
                 <span className="text-white block font-bold text-sm mb-0.5">
                   Final Year
@@ -266,7 +266,7 @@ const About = () => {
               variants={revealItem}
               className="flex items-center gap-3 mb-2"
             >
-              <span className="text-[10px] font-mono uppercase tracking-[0.4em] text-amber-400 font-semibold">
+              <span className="text-xs font-mono uppercase tracking-widest text-amber-400 font-semibold">
                 Profile Summary
               </span>
               <div className="h-px w-8 bg-amber-400/30" />
@@ -275,7 +275,7 @@ const About = () => {
             {/* Title */}
             <motion.h2
               variants={revealItem}
-              className="text-4xl sm:text-5xl font-black tracking-tight text-white uppercase mb-4"
+              className="text-4xl sm:text-5xl font-black tracking-tight text-white mb-4"
             >
               About Me
             </motion.h2>
@@ -291,7 +291,7 @@ const About = () => {
             {/* Paragraphs */}
             <motion.div
               variants={revealItem}
-              className="space-y-4 text-gray-400 text-[14.5px] leading-relaxed mb-8"
+              className="space-y-4 text-gray-400 text-sm sm:text-base leading-relaxed mb-8"
             >
               <p>
                 I am a final-year Computer Science Engineering student focused on Software Engineering and Full-Stack Development. My work spans end-to-end web applications built with React, Node.js, Express, and both relational and NoSQL databases, with a strong emphasis on clean architecture, REST API design, and deployment-ready practices.
@@ -313,9 +313,9 @@ const About = () => {
 
             {/* Skill Chips */}
             <motion.div variants={revealItem} className="mb-10">
-              <h4 className="text-[9px] font-mono uppercase tracking-[0.25em] text-gray-500 mb-3">
+              <h3 className="text-xs font-mono text-gray-400 mb-3 tracking-wide">
                 Core Technologies
-              </h4>
+              </h3>
               <div className="flex flex-wrap gap-2.5">
                 {skillChips.map((skill) => {
                   const Icon = skill.icon;
@@ -324,7 +324,7 @@ const About = () => {
                       key={skill.name}
                       whileHover={{ scale: 1.08 }}
                       transition={{ duration: 0.2, ease: "easeOut" }}
-                      className="flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/5 bg-white/2 text-[11px] text-gray-300 hover:border-amber-400/30 hover:bg-white/4 transition-colors duration-300 cursor-default"
+                      className="flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/5 bg-white/2 text-xs text-gray-300 hover:border-amber-400/30 hover:bg-white/4 transition-colors duration-300 cursor-default"
                       style={{
                         "--chip-color": skill.color,
                       }}
@@ -334,7 +334,7 @@ const About = () => {
                           color: skill.color,
                           filter: `drop-shadow(0 0 5px ${skill.color}88)`,
                         }}
-                        size={12}
+                        size={14}
                       />
                       <span className="font-mono">{skill.name}</span>
                     </motion.div>

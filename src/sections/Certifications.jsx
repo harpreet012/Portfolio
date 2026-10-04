@@ -84,8 +84,8 @@ const CredentialCard = ({ title, subtitle, date, details, score, skills, icon: I
       )}
 
       {skills && (
-        <p className="text-[11px] font-mono text-gray-400/90 mb-4 relative z-10">
-          <span className="text-amber-400/80 uppercase tracking-wider text-[9px] block mb-0.5">Focus:</span>
+        <p className="text-xs font-mono text-gray-400 relative z-10 mb-4">
+          <span className="text-amber-400/90 font-medium mr-1.5 inline">Focus:</span>
           {skills}
         </p>
       )}
@@ -96,10 +96,10 @@ const CredentialCard = ({ title, subtitle, date, details, score, skills, icon: I
             {score}
           </span>
         ) : (
-          <span className="text-[11px] font-mono text-gray-500">Verified</span>
+          <span className="text-xs font-mono text-gray-500">Verified</span>
         )}
 
-        <span className="text-[10px] font-mono uppercase tracking-widest text-gray-400">
+        <span className="text-xs font-mono uppercase tracking-wider text-gray-400">
           {date}
         </span>
       </div>
@@ -122,7 +122,7 @@ const Certifications = () => {
         {/* Education Section */}
         <div>
           <div className="flex items-center gap-3 mb-6">
-            <span className="text-[11px] font-mono uppercase tracking-[0.3em] text-amber-400 font-semibold">
+            <span className="text-xs font-mono uppercase tracking-wider text-amber-400 font-semibold">
               Academic Background
             </span>
             <div className="h-px grow bg-white/10" />
@@ -149,7 +149,7 @@ const Certifications = () => {
           {/* Certifications Column */}
           <div>
             <div className="flex items-center gap-3 mb-6">
-              <span className="text-[11px] font-mono uppercase tracking-[0.3em] text-amber-400 font-semibold">
+              <span className="text-xs font-mono uppercase tracking-wider text-amber-400 font-semibold">
                 Professional Certifications
               </span>
               <div className="h-px grow bg-white/10" />
@@ -173,7 +173,7 @@ const Certifications = () => {
           {/* Workshops Column */}
           <div>
             <div className="flex items-center gap-3 mb-6">
-              <span className="text-[11px] font-mono uppercase tracking-[0.3em] text-amber-400 font-semibold">
+              <span className="text-xs font-mono uppercase tracking-wider text-amber-400 font-semibold">
                 Technical Workshops
               </span>
               <div className="h-px grow bg-white/10" />

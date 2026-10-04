@@ -182,7 +182,79 @@ export const techIcons = [
  */
 export const projects = [
   {
-    title: 'AI-Powered Predictive Maintenance System',
+    title: 'ShopSphere',
+    category: 'Full Stack / E-Commerce',
+    featured: true,
+    problem: 'Building an end-to-end e-commerce platform with reliable stock validation, multi-factor authentication, and automated order status workflows.',
+    description:
+      'Full-stack e-commerce application featuring password and email OTP authentication, stock-validated cart, simulated checkout, and admin analytics.',
+    implementation:
+      'Engineered with React 19, Vite, Tailwind CSS, Node.js/Express, MongoDB/Mongoose, JWT + bcrypt, Nodemailer notifications, and Jest/Supertest test suites.',
+    highlights: [
+      'Password login, email OTP login, and forgot-password OTP recovery flows',
+      'Catalog search, category filtering, sorting, wishlist, and stock-validated shopping cart',
+      'Checkout simulation supporting COD, Card, and UPI with enforced order status transitions',
+      'Purchase-verified reviews, Nodemailer transactional emails, and admin sales analytics',
+    ],
+    tech: ['React 19', 'Node.js', 'Express.js', 'MongoDB', 'JWT', 'Tailwind CSS', 'Nodemailer', 'Jest'],
+    image:
+      'https://images.unsplash.com/photo-1557821552-17105176677c?auto=format&fit=crop&w=1200&q=80',
+    links: {
+      github: 'https://github.com/harpreet012/ShopSphere',
+      demo: 'https://shopsphere-frontend-sooty.vercel.app/',
+      documentation: '',
+    },
+  },
+  {
+    title: 'Secure Contact Portal',
+    category: 'Full Stack / Security & APIs',
+    featured: false,
+    problem: 'Protecting communication and messaging endpoints from spam, unauthorized administrative access, and common web vulnerabilities.',
+    description:
+      'Hardened MERN contact management system with Zod schema validation, Helmet security headers, Express rate limiting, and JWT admin controls.',
+    implementation:
+      'Architected using React, Node.js, Express, and MongoDB with bcrypt hashing, Morgan request logging, Winston error auditing, and protected REST routes.',
+    highlights: [
+      'Strict Zod schema validation and input sanitization on all submission routes',
+      'Production security headers via Helmet, CORS configuration, and Express rate limiting',
+      'JWT authentication with bcrypt password hashing for protected admin dashboard routes',
+      'Structured Morgan request logging and Winston error logging pipelines',
+    ],
+    tech: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'JWT', 'Zod', 'Helmet', 'Winston'],
+    image:
+      'https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1200&q=80',
+    links: {
+      github: 'https://github.com/harpreet012/Contact-Form',
+      demo: 'https://contact-form-mu-jet.vercel.app/',
+      documentation: '',
+    },
+  },
+  {
+    title: 'Workspace Dashboard',
+    category: 'Frontend Engineering / Web App',
+    featured: false,
+    problem: 'Streamlining agile office seating, real-time desk availability tracking, and space utilization analytics for modern teams.',
+    description:
+      'Interactive workplace management and desk booking dashboard with interactive multi-floor maps, occupancy analytics, and GSAP animations.',
+    implementation:
+      'Built using React, Vite, React Router, and GSAP, featuring floor plan filtering, booking workflows, and localStorage preference persistence.',
+    highlights: [
+      'Interactive multi-floor map with window seat and meeting room proximity filters',
+      'Live status indicators for desk availability, occupant details, and reservation times',
+      'Occupancy analytics tracking weekly booking trends, peak usage hours, and department usage',
+      'GSAP-animated dock navigation, SVG shape overlay transitions, and theme preferences',
+    ],
+    tech: ['React.js', 'Vite', 'React Router', 'GSAP', 'Tailwind CSS', 'LocalStorage'],
+    image:
+      'https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=1200&q=80',
+    links: {
+      github: 'https://github.com/harpreet012/WorkSpace-Dashboard',
+      demo: 'https://work-space-dashboard.vercel.app/',
+      documentation: '',
+    },
+  },
+  {
+    title: 'AI Predictive Maintenance System',
     category: 'Full Stack / AI & ML',
     featured: true,
     problem: 'Industrial equipment downtime from unexpected mechanical and thermal wear.',
@@ -200,8 +272,80 @@ export const projects = [
     image:
       'https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=1200&q=80',
     links: {
-      github: '', // Placeholder: set to your GitHub repo URL when ready
-      demo: '',   // Placeholder: set to your live deployment URL when ready
+      github: 'https://github.com/harpreet012/AI-PREDICTIVE-MAINTAINENCE-',
+      demo: '',
+      documentation: '',
+    },
+  },
+  {
+    title: 'HRMS Lite',
+    category: 'Full Stack / Python & Flask',
+    featured: false,
+    problem: 'Managing workforce records, attendance logging, and department-level leave workflows in a streamlined system.',
+    description:
+      'Lightweight Human Resource Management System featuring employee directory, attendance tracking, and leave workflow management.',
+    implementation:
+      'Engineered with Python, Flask backend REST APIs, SQLite database persistence, and a responsive frontend interface.',
+    highlights: [
+      'Centralized employee directory with role and department assignments',
+      'Automated attendance tracking and leave request lifecycle management',
+      'RESTful API architecture with structured error handling and validation',
+      'Responsive client interface deployed with production readiness',
+    ],
+    tech: ['Python', 'Flask', 'SQLite', 'REST APIs', 'JavaScript', 'Tailwind CSS'],
+    image:
+      'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80',
+    links: {
+      github: 'https://github.com/harpreet012/HRMS--LITE',
+      demo: 'https://hrms-lite-xi-six.vercel.app',
+      documentation: '',
+    },
+  },
+  {
+    title: 'Expense Tracker',
+    category: 'Full Stack / Spring Boot',
+    featured: false,
+    problem: 'Tracking personal and enterprise expenditures with categorized budgets, transactional records, and data persistence.',
+    description:
+      'Full-stack personal finance tracker with Java Spring Boot REST services, MySQL relational persistence, and dynamic category analytics.',
+    implementation:
+      'Architected with React/Vite on the client and Java Spring Boot on the server with JPA/Hibernate, MySQL database, and RESTful endpoints.',
+    highlights: [
+      'Robust Java Spring Boot REST API layer with JPA/Hibernate data access',
+      'Categorized income and expenditure logging with dynamic balance calculation',
+      'Relational data persistence with MySQL transactional consistency',
+      'Interactive frontend dashboard for real-time budget and expense breakdown',
+    ],
+    tech: ['React.js', 'Java', 'Spring Boot', 'MySQL', 'REST APIs', 'Tailwind CSS'],
+    image:
+      'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1200&q=80',
+    links: {
+      github: 'https://github.com/harpreet012/Expense-Tracker',
+      demo: '',
+      documentation: '',
+    },
+  },
+  {
+    title: 'AI Chatbot',
+    category: 'AI & ML / Full Stack',
+    featured: false,
+    problem: 'Providing multi-modal conversational AI interactions with contextual chat memory and voice capabilities.',
+    description:
+      'Full-stack conversational AI assistant powered by Google Gemini 2.5 Flash, featuring voice input, text-to-speech, and markdown rendering.',
+    implementation:
+      'Developed with React 18, Vite, Framer Motion, and Node.js/Express integrating Google Gemini API and the browser Web Speech API.',
+    highlights: [
+      'Real-time AI conversation powered by Google Gemini 2.5 Flash API',
+      'Voice recognition input and text-to-speech auto-narration via Web Speech API',
+      'Contextual chat session history with rich syntax-highlighted markdown',
+      'Secure backend API proxy ensuring zero frontend key exposure',
+    ],
+    tech: ['React.js', 'Node.js', 'Express.js', 'Gemini API', 'Web Speech API', 'Framer Motion'],
+    image:
+      'https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1200&q=80',
+    links: {
+      github: 'https://github.com/harpreet012/AI-Chatbot',
+      demo: '',
       documentation: '',
     },
   },
@@ -224,8 +368,8 @@ export const projects = [
     image:
       'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80',
     links: {
-      github: '', // Placeholder: set to your PowerBI repository URL when ready
-      demo: '',   // Power BI dashboard file / published report URL
+      github: 'https://github.com/harpreet012/HR-Analytics-Dashboard-using-PowerBI',
+      demo: '',
       documentation: '',
     },
   },
@@ -248,7 +392,7 @@ export const projects = [
     image:
       'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80',
     links: {
-      github: '', // Placeholder: set to your ML repository URL when ready
+      github: 'https://github.com/harpreet012/Adult-Salary-Prediction-ML-Project',
       demo: '',
       documentation: '',
     },
@@ -272,8 +416,8 @@ export const projects = [
     image:
       'https://images.unsplash.com/photo-1518773553398-650c184e0bb3?auto=format&fit=crop&w=1200&q=80',
     links: {
-      github: '', // Placeholder: set to this portfolio repo URL when ready
-      demo: '',   // Placeholder: set to live portfolio URL when ready
+      github: 'https://github.com/harpreet012/Portfolio',
+      demo: 'https://portfolio-three-sooty-vc3uh18hp7.vercel.app/',
       documentation: '',
     },
   },
