@@ -273,7 +273,7 @@ export const projects = [
       'https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=1200&q=80',
     links: {
       github: 'https://github.com/harpreet012/AI-PREDICTIVE-MAINTAINENCE-',
-      demo: '',
+      demo: 'https://pm-frontend-qxlo.onrender.com/',
       documentation: '',
     },
   },
