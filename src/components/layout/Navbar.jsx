@@ -1,14 +1,20 @@
 import { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FaBars, FaTimes } from 'react-icons/fa'
 import { navLinks } from '../../data/portfolioData'
 
 const Navbar = ({ _theme, _onToggleTheme }) => {
-  const [openMenu, setOpenMenu]       = useState(false)
+  const [openMenu, setOpenMenu]           = useState(false)
   const [activeSection, setActiveSection] = useState('hero')
-  const [scrolled, setScrolled]       = useState(false)
+  const [scrolled, setScrolled]           = useState(false)
+
+  const location   = useLocation()
+  const isProjectsPage = location.pathname === '/projects'
 
   useEffect(() => {
+    if (isProjectsPage) return   // no scroll-spy on the /projects page
+
     const ids      = navLinks.map((l) => l.id)
     const sections = ids.map((id) => document.getElementById(id)).filter(Boolean)
 
@@ -25,11 +31,31 @@ const Navbar = ({ _theme, _onToggleTheme }) => {
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
+  }, [isProjectsPage])
+
+  // Also track scrolled state on /projects page (for navbar opacity)
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  const scrollToSection = (id) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  const handleNavClick = (id) => {
+    if (isProjectsPage) {
+      // Navigate to home page at the specific section anchor
+      window.location.href = `/#${id}`
+    } else {
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
     setOpenMenu(false)
+  }
+
+  const handleLogoClick = () => {
+    if (isProjectsPage) {
+      window.location.href = '/'
+    } else {
+      document.getElementById('hero')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
   }
 
   return (
@@ -45,7 +71,7 @@ const Navbar = ({ _theme, _onToggleTheme }) => {
       >
         <div className="flex items-center justify-between gap-4">
           <button
-            onClick={() => scrollToSection('hero')}
+            onClick={handleLogoClick}
             className="text-lg font-bold tracking-widest text-amber-400 uppercase font-mono hover:text-amber-300 transition-colors duration-200"
           >
             HJ<span className="text-gray-500 text-xs">.dev</span>
@@ -54,11 +80,11 @@ const Navbar = ({ _theme, _onToggleTheme }) => {
           {/* Desktop nav */}
           <ul className="hidden items-center gap-8 lg:flex">
             {navLinks.map((link) => {
-              const isActive = activeSection === link.id
+              const isActive = !isProjectsPage && activeSection === link.id
               return (
                 <li key={link.id} className="relative">
                   <button
-                    onClick={() => scrollToSection(link.id)}
+                    onClick={() => handleNavClick(link.id)}
                     className={`nav-link text-xs font-mono uppercase tracking-[0.1em] transition-colors duration-200 ${
                       isActive
                         ? 'text-amber-400'
@@ -119,11 +145,11 @@ const Navbar = ({ _theme, _onToggleTheme }) => {
             >
               <ul className="grid gap-4 pt-6 pb-2">
                 {navLinks.map((link) => {
-                  const isActive = activeSection === link.id
+                  const isActive = !isProjectsPage && activeSection === link.id
                   return (
                     <li key={link.id}>
                       <button
-                        onClick={() => scrollToSection(link.id)}
+                        onClick={() => handleNavClick(link.id)}
                         className={`nav-link w-full text-left text-xs font-mono uppercase tracking-[0.1em] transition-colors duration-200 ${
                           isActive
                             ? 'text-amber-400 drop-shadow-[0_0_8px_rgba(251,191,36,0.45)]'

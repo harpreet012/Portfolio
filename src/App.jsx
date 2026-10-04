@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Routes, Route } from "react-router-dom";
 import { motion } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -16,8 +17,33 @@ import Certifications from "./sections/Certifications";
 import Contact from "./sections/Contact";
 import Footer from "./sections/Footer";
 import CustomCursorAdvanced from "./components/effects/CustomCursorAdvanced";
+import AllProjectsPage from "./pages/AllProjectsPage";
 
 gsap.registerPlugin(ScrollTrigger);
+
+/* ── Portfolio home page ── */
+function HomePage({ theme, toggleTheme, loading }) {
+  return (
+    <>
+      <Navbar theme={theme} onToggleTheme={toggleTheme} />
+      <motion.main
+        initial={{ opacity: 0 }}
+        animate={{ opacity: loading ? 0 : 1 }}
+        transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+        className="relative z-10"
+      >
+        <Hero />
+        <About />
+        <Skills />
+        <Projects />
+        <Experience />
+        <Certifications />
+        <Contact />
+        <Footer />
+      </motion.main>
+    </>
+  );
+}
 
 function App() {
   const [theme, setTheme] = useState(
@@ -27,7 +53,6 @@ function App() {
 
   useEffect(() => {
     document.documentElement.classList.toggle("light-theme", theme === "light");
-
     const timeout = setTimeout(() => setLoading(false), 2100);
     return () => clearTimeout(timeout);
   }, [theme]);
@@ -117,33 +142,30 @@ function App() {
   return (
     <>
       <Loader loading={loading} />
-
       <CustomCursorAdvanced />
-
       <ScrollProgress />
-
-      {/* Background Elements */}
       <BackgroundGalaxy />
 
-      <Navbar theme={theme} onToggleTheme={toggleTheme} />
-
-      <motion.main
-        initial={{ opacity: 0 }}
-        animate={{ opacity: loading ? 0 : 1 }}
-        transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-        className="relative z-10"
-      >
-        <Hero />
-        <About />
-        <Skills />
-        <Projects />
-        <Experience />
-        <Certifications />
-        <Contact />
-        <Footer />
-      </motion.main>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <HomePage
+              theme={theme}
+              toggleTheme={toggleTheme}
+              loading={loading}
+            />
+          }
+        />
+        <Route
+          path="/projects"
+          element={<AllProjectsPage theme={theme} onToggleTheme={toggleTheme} />}
+        />
+      </Routes>
     </>
   );
 }
 
 export default App;
+
+

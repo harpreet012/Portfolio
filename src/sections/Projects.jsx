@@ -1,5 +1,6 @@
 import { useRef, useState, useCallback } from "react";
-import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { Link } from "react-router-dom";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { FaExternalLinkAlt, FaGithub } from "react-icons/fa";
 import SectionHeading from "../components/common/SectionHeading";
 import { projects } from "../data/portfolioData";
@@ -121,11 +122,9 @@ const FeaturedProjectCard = ({ project, index, isReversed }) => {
           }`}
         >
           <div>
-            <div className="flex items-center justify-between gap-2 mb-1.5">
-              <span className="text-xs font-mono tracking-wide text-amber-400/90 font-medium">
-                {project.category}
-              </span>
-            </div>
+            <span className="text-xs font-mono tracking-wide text-amber-400/90 font-medium block mb-1.5">
+              {project.category}
+            </span>
 
             <h3 className="text-xl sm:text-2xl font-bold text-gray-100 group-hover:text-amber-300 transition-colors duration-300 leading-snug">
               {project.title}
@@ -135,7 +134,6 @@ const FeaturedProjectCard = ({ project, index, isReversed }) => {
               {project.description}
             </p>
 
-            {/* Tech badges */}
             <div className="flex flex-wrap gap-1.5 mt-3.5">
               {project.tech.map((item) => (
                 <span
@@ -148,7 +146,6 @@ const FeaturedProjectCard = ({ project, index, isReversed }) => {
             </div>
           </div>
 
-          {/* Action Links */}
           {(hasGithub || hasDemo) && (
             <div className="flex items-center gap-5 pt-3.5 mt-4 border-t border-white/8">
               {hasGithub && (
@@ -183,173 +180,7 @@ const FeaturedProjectCard = ({ project, index, isReversed }) => {
   );
 };
 
-/* ── Compact Project Card (2-Column Grid for Remaining Projects) ── */
-const CompactProjectCard = ({ project, index }) => {
-  const cardRef = useRef(null);
-
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const glareX = useMotionValue(50);
-  const glareY = useMotionValue(50);
-  const glareOpacity = useMotionValue(0);
-
-  const springConfig = { damping: 24, stiffness: 200 };
-  const smoothGlareX = useSpring(glareX, springConfig);
-  const smoothGlareY = useSpring(glareY, springConfig);
-  const smoothGlareOpacity = useSpring(glareOpacity, springConfig);
-
-  const glareBg = useTransform(
-    [smoothGlareX, smoothGlareY],
-    ([gx, gy]) =>
-      `radial-gradient(circle at ${gx}% ${gy}%, rgba(212, 169, 55, 0.12) 0%, transparent 55%)`,
-  );
-
-  const [hovered, setHovered] = useState(false);
-
-  const handleMouseMove = useCallback(
-    (e) => {
-      if (!cardRef.current) return;
-      const rect = cardRef.current.getBoundingClientRect();
-      const relX = (e.clientX - rect.left) / rect.width - 0.5;
-      const relY = (e.clientY - rect.top) / rect.height - 0.5;
-      x.set(relX);
-      y.set(relY);
-      glareX.set(((e.clientX - rect.left) / rect.width) * 100);
-      glareY.set(((e.clientY - rect.top) / rect.height) * 100);
-      glareOpacity.set(1);
-    },
-    [x, y, glareX, glareY, glareOpacity],
-  );
-
-  const handleMouseLeave = useCallback(() => {
-    x.set(0);
-    y.set(0);
-    glareOpacity.set(0);
-    setHovered(false);
-  }, [x, y, glareOpacity]);
-
-  const hasGithub = Boolean(
-    project.links?.github &&
-      project.links.github.trim() !== "" &&
-      project.links.github !== "#",
-  );
-  const hasDemo = Boolean(
-    project.links?.demo &&
-      project.links.demo.trim() !== "" &&
-      project.links.demo !== "#",
-  );
-
-  return (
-    <motion.article
-      ref={cardRef}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      onMouseEnter={() => setHovered(true)}
-      initial={{ opacity: 0, y: 24, scale: 0.98 }}
-      whileInView={{ opacity: 1, y: 0, scale: 1 }}
-      viewport={{ once: true, amount: 0.1 }}
-      transition={{ duration: 0.55, ease: "easeOut", delay: index * 0.05 }}
-      whileHover={{ y: -4, transition: { duration: 0.22, ease: "easeOut" } }}
-      className="flex flex-col group relative rounded-2xl overflow-hidden bg-[#0a0a0a]/60 border border-white/8 hover:border-amber-400/35 transition-colors duration-400 backdrop-blur-md shadow-[0_4px_20px_rgba(0,0,0,0.35)] hover:shadow-[0_6px_28px_rgba(251,191,36,0.06)] h-full"
-    >
-      {/* Glare */}
-      <motion.div
-        style={{ background: glareBg, opacity: smoothGlareOpacity }}
-        className="absolute inset-0 pointer-events-none z-30 rounded-2xl"
-      />
-
-      {/* Project Image */}
-      <div className="w-full relative overflow-hidden border-b border-white/5 bg-black/40 h-44 sm:h-48 shrink-0">
-        <motion.img
-          src={project.image}
-          alt={`${project.title} preview`}
-          loading="lazy"
-          initial={{ scale: 1.05, opacity: 0.9 }}
-          whileInView={{ scale: 1, opacity: 1 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
-          animate={{ scale: hovered ? 1.03 : 1 }}
-          className="absolute inset-0 h-full w-full object-cover"
-        />
-
-        <div
-          className="absolute inset-0 z-10 transition-all duration-400"
-          style={{
-            background: hovered
-              ? "linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 60%)"
-              : "linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.25) 60%)",
-          }}
-        />
-      </div>
-
-      {/* Card Content */}
-      <div className="flex flex-col justify-between grow p-5 gap-3">
-        <div>
-          {/* Category */}
-          <span className="text-xs font-mono tracking-wide text-amber-400/80 font-medium block mb-1">
-            {project.category}
-          </span>
-
-          {/* Title */}
-          <h3 className="text-base sm:text-lg font-bold text-gray-100 group-hover:text-amber-300 transition-colors duration-300 leading-snug">
-            {project.title}
-          </h3>
-
-          {/* Short Summary (2 lines) */}
-          <p className="text-xs sm:text-sm leading-relaxed text-gray-400 font-light mt-1.5 line-clamp-2">
-            {project.description}
-          </p>
-
-          {/* Tech Stack */}
-          <div className="flex flex-wrap gap-1.5 mt-3">
-            {project.tech.map((item) => (
-              <span
-                key={item}
-                className="px-2.5 py-0.5 bg-white/4 rounded-full border border-white/5 text-xs font-mono text-gray-300 transition-colors group-hover:border-amber-400/20 group-hover:text-amber-200 cursor-default"
-              >
-                {item}
-              </span>
-            ))}
-          </div>
-        </div>
-
-        {/* Links */}
-        {(hasGithub || hasDemo) && (
-          <div className="flex items-center gap-4 pt-2.5 mt-2 border-t border-white/5">
-            {hasGithub && (
-              <a
-                href={project.links.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`View ${project.title} source code on GitHub (opens in a new tab)`}
-                className="flex items-center gap-1.5 text-gray-400 hover:text-amber-400 transition-colors duration-200 text-xs font-mono"
-              >
-                <FaGithub size={13} className="text-amber-400" />
-                <span>Source</span>
-              </a>
-            )}
-            {hasDemo && (
-              <a
-                href={project.links.demo}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`View ${project.title} live demo (opens in a new tab)`}
-                className="flex items-center gap-1.5 text-gray-400 hover:text-amber-400 transition-colors duration-200 text-xs font-mono"
-              >
-                <FaExternalLinkAlt size={11} className="text-amber-400" />
-                <span>Live Demo</span>
-              </a>
-            )}
-          </div>
-        )}
-      </div>
-    </motion.article>
-  );
-};
-
 const Projects = () => {
-  const [showAll, setShowAll] = useState(false);
-
   const featuredTitles = [
     "AI Predictive Maintenance System",
     "ShopSphere",
@@ -358,10 +189,6 @@ const Projects = () => {
   const featuredProjects = featuredTitles
     .map((title) => projects.find((p) => p.title === title))
     .filter(Boolean);
-
-  const remainingProjects = projects.filter(
-    (p) => !featuredTitles.includes(p.title),
-  );
 
   return (
     <section
@@ -385,7 +212,7 @@ const Projects = () => {
       >
         <SectionHeading title="Selected Works" subtitle="Engineering Projects" />
 
-        {/* 1. Featured Projects Showcase (Horizontal Cards with Alternating Layout) */}
+        {/* Featured horizontal cards */}
         <div className="flex flex-col gap-8 mt-12">
           {featuredProjects.map((project, index) => (
             <FeaturedProjectCard
@@ -397,48 +224,17 @@ const Projects = () => {
           ))}
         </div>
 
-        {/* 2. Collapsible Grid for Remaining 8 Projects */}
-        <AnimatePresence>
-          {showAll && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-              className="overflow-hidden"
-            >
-              <div className="pt-8">
-                <div className="flex items-center gap-3 mb-6">
-                  <span className="text-xs font-mono uppercase tracking-wider text-amber-400 font-semibold">
-                    More Engineering Projects
-                  </span>
-                  <div className="h-px grow bg-white/10" />
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {remainingProjects.map((project, index) => (
-                    <CompactProjectCard
-                      key={project.title}
-                      project={project}
-                      index={index}
-                    />
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* 3. View All / Show Less Toggle Button */}
+        {/* CTA to /projects page */}
         <div className="flex justify-center mt-12">
-          <motion.button
-            onClick={() => setShowAll((prev) => !prev)}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className="group relative inline-flex items-center gap-3 px-8 py-3.5 rounded-full border border-amber-400/40 bg-amber-400/10 hover:bg-amber-400 hover:text-black text-amber-300 font-mono text-xs sm:text-sm tracking-wider transition-all duration-300 shadow-[0_0_20px_rgba(251,191,36,0.08)] cursor-pointer"
-          >
-            <span>{showAll ? "Show Less ↑" : "View All Projects →"}</span>
-          </motion.button>
+          <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+            <Link
+              to="/projects"
+              className="inline-flex items-center gap-3 px-8 py-3.5 rounded-full border border-amber-400/40 bg-amber-400/10 hover:bg-amber-400 hover:text-black text-amber-300 font-mono text-xs sm:text-sm tracking-wider transition-all duration-300 shadow-[0_0_20px_rgba(251,191,36,0.08)]"
+              aria-label="View all 10 engineering projects"
+            >
+              View All Projects →
+            </Link>
+          </motion.div>
         </div>
       </motion.div>
     </section>
@@ -446,4 +242,3 @@ const Projects = () => {
 };
 
 export default Projects;
-
