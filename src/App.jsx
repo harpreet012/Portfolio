@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -23,6 +23,34 @@ gsap.registerPlugin(ScrollTrigger);
 
 /* ── Portfolio home page ── */
 function HomePage({ theme, toggleTheme, loading }) {
+  const location = useLocation();
+
+  // After the loader finishes, honour any #hash in the URL so that
+  // "← Back to Portfolio" (href="/#projects") lands at the right section.
+  useEffect(() => {
+    if (loading) return;
+    const hash = location.hash || window.location.hash;
+    if (!hash) return;
+
+    const id = hash.slice(1); // strip the leading #
+
+    const scrollToTarget = () => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "instant", block: "start" });
+      }
+    };
+
+    // Two rAFs: first lets React flush & paint, second lets the browser
+    // calculate layout so getBoundingClientRect is accurate.
+    requestAnimationFrame(() => {
+      requestAnimationFrame(scrollToTarget);
+    });
+
+    const timer = setTimeout(scrollToTarget, 100);
+    return () => clearTimeout(timer);
+  }, [loading, location.hash]);
+
   return (
     <>
       <Navbar theme={theme} onToggleTheme={toggleTheme} />

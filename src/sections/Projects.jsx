@@ -193,7 +193,7 @@ const Projects = () => {
   return (
     <section
       id="projects"
-      className="relative px-6 py-20 sm:px-10 overflow-hidden"
+      className="relative px-6 py-20 sm:px-10 overflow-hidden scroll-mt-24"
     >
       {/* Giant Background Number */}
       <div
