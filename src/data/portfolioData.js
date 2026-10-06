@@ -297,7 +297,7 @@ export const projects = [
       'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80',
     links: {
       github: 'https://github.com/harpreet012/HRMS--LITE',
-      demo: 'https://hrms-lite-xi-six.vercel.app',
+      demo: 'https://hrms-lite-blush.vercel.app/',
       documentation: '',
     },
   },
@@ -478,4 +478,4 @@ export const socialLinks = [
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/harpreet-jakhar-9b8398364' },
   { label: 'GitHub', href: 'https://github.com/harpreet012' },
   { label: 'Email', href: 'mailto:jakharharpreet93@gmail.com' },
-]
+]
